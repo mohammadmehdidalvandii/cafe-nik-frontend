@@ -1,1 +1,57 @@
 @import "tailwindcss";
+
+/* **** Font-Family **** */
+@font-face {
+    font-family:'IranSansMedium' ;
+    font-weight: 600;
+    src: url('/public//fonts/IRANSansX-Medium.ttf') format('ttf');
+}
+@font-face {
+    font-family: 'IranSansBold' ;
+    font-weight: bold;
+    src: url('/public//fonts/IRANSansX-Bold.ttf') format('ttf');
+}
+@font-face {
+    font-family: 'IranSansBlack' ;
+    font-weight: bolder;
+    src: url('/public//fonts/IRANSansX-Black.ttf') format('ttf');
+}
+/* **** Theme **** */
+@theme{
+    --font-sansMedium: 'IranSansMedium';
+    --font-sansBold: 'IranSansBold';
+    --font-sansBlack: 'IranSansBlack';
+
+    /* colors */
+    --color-primary: #a3491f;
+    --color-primary-foreground: #f7f7f7;
+    --color-secondary: #e5d8e5;
+    --color-secondary-foreground: #262626;
+    --color-success: #33cc66;
+    --color-danger: #ff4d4d;
+    --color-warning: #f4c959;
+    --color-info: #3399ff;
+    --color-light: #fdfdfd;
+    --color-coffee-dark: #663300;
+    --color-coffee-medium: #855c40;
+    --color-coffee-light: #b3a18c;
+    --color-cream: #ebebd0;
+    --color-copper: #cc9933;
+    --color-gold: #e6bf8c;
+    --color-bgk: #F9F7F5
+}
+/* **** Layer base **** */
+@layer base {
+    :root{
+        --gradient-hero: linear-gradient(135deg, #663300, #855c40, #b3a18c);
+        --gradient-card: linear-gradient(180deg, #fdfdfd, #f5f5f5);
+        --gradient-accent: linear-gradient(135deg, #cc9933, #e6bf8c);
+    }
+    body{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        @apply bg-bgk text-secondary-foreground font-sansMedium antialiased
+    }
+}
+/* ******** */
