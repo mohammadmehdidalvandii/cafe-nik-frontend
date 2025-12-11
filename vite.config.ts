@@ -18,7 +18,7 @@ export default defineConfig({
       '@components/UI':'/src/components/UI/',
       '@layouts':'/src/layouts/',
       '@models':'/src/models/',
-      '@providers':'/src/provider/',
+      '@providers':'/src/providers/',
       '@services':'/src/services/',
       '@store':'/src/services/',
       '@validation':'/src/validations/'
