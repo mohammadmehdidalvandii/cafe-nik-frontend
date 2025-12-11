@@ -9,4 +9,19 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  resolve:{
+    alias:{
+      '@pages':'/src/pages/',
+      '@components':'/src/components/',
+      '@components/modules':'/src/components/modules/',
+      '@components/templates':'/src/components/templates/',
+      '@components/UI':'/src/components/UI/',
+      '@layouts':'/src/layouts/',
+      '@models':'/src/models/',
+      '@providers':'/src/provider/',
+      '@services':'/src/services/',
+      '@store':'/src/services/',
+      '@validation':'/src/validations/'
+    }
+  }
 })
