@@ -32,10 +32,12 @@
     --color-warning: #f4c959;
     --color-info: #3399ff;
     --color-light: #fdfdfd;
+    --color-muted: #F2EFEB;
+    --color-muted-foreground: #7A6F63;
     --color-coffee-dark: #663300;
     --color-coffee-medium: #855c40;
     --color-coffee-light: #b3a18c;
-    --color-cream: #ebebd0;
+    --color-cream: #ebebd0;    
     --color-copper: #cc9933;
     --color-gold: #e6bf8c;
     --color-bgk: #F9F7F5;

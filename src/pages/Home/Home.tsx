@@ -1,8 +1,12 @@
 import React from 'react'
+import Navigation from '@components/modules/Navigation/Navigation'
+
 
 const Home:React.FC = ()=>{
   return (
-    <div>Home</div>
+    <>
+    <Navigation/>
+    </>
   )
 }
 
