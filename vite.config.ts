@@ -21,7 +21,8 @@ export default defineConfig({
       '@providers':'/src/providers/',
       '@services':'/src/services/',
       '@store':'/src/services/',
-      '@validation':'/src/validations/'
+      '@validation':'/src/validations/',
+      '@utils':'/src/utils/',
     }
   }
 })

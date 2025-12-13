@@ -9,16 +9,17 @@
     "baseUrl": "src",
     "paths": {
       "@pages/*":["pages/*"],
-      "@components/*":["compilerOptions/*"],
-      "@components/modules/*":["compilerOptions/modules/*"],
-      "@components/templates/*":["compilerOptions/templates/*"],
-      "@components/UI/*":["compilerOptions/UI/*"],
+      "@components/*":["components/*"],
+      "@components/modules/*":["components/modules/*"],
+      "@components/templates/*":["components/templates/*"],
+      "@components/UI/*":["components/UI/*"],
       "@layouts/*":["layouts/*"],
       "@models/*":["models/*"],
       "@providers/*":["providers/*"],
       "@services/*":["services/*"],
       "@store/*":["store/*"],
-      "@validation/*":["validation/*"]
+      "@validation/*":["validation/*"],
+      "@utils/*":["utils/*"],
     },
 
     /* Bundler mode */
