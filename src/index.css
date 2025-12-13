@@ -38,7 +38,8 @@
     --color-cream: #ebebd0;
     --color-copper: #cc9933;
     --color-gold: #e6bf8c;
-    --color-bgk: #F9F7F5
+    --color-bgk: #F9F7F5;
+    --color-border: #E6DFD8;
 }
 /* **** Layer base **** */
 @layer base {
@@ -51,7 +52,7 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        @apply bg-bgk text-secondary-foreground font-sansMedium antialiased
+        @apply bg-white text-secondary-foreground font-sansMedium antialiased
     }
 }
 /* ******** */
