@@ -39,7 +39,8 @@
     --color-copper: #cc9933;
     --color-gold: #e6bf8c;
     --color-bgk: #F9F7F5;
-    --color-border: #E6DFD8;
+    --color-border: #E6DFD8; 
+    --color-ring: #92562A;
 }
 /* **** Layer base **** */
 @layer base {
