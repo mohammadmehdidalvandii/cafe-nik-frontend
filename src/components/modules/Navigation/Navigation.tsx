@@ -7,7 +7,7 @@ const Navigation:React.FC  =()=>{
     const [totalItems, setTotalItems] = useState(1)
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-bgk/95 backdrop-blur">
-        <div className="container px-4 flex h-16 items-center justify-between">
+        <div className="container px-8 flex h-16 items-center justify-between">
             <NavLink to='/' className='flex items-center gap-2'>
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
                     <Coffee className='h-5 w-5 text-primary-foreground'/>

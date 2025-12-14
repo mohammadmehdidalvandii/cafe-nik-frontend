@@ -14,7 +14,7 @@ const Hero:React.FC = ()=> {
             />
             <div className="absolute inset-0 bg-linear-to-l from-coffee-dark/60 via-coffee-dark/50 to-transparent"></div>
         </div>
-        <div className="container px-4 relative flex min-h-[80vh] items-center">
+        <div className="container px-8 relative flex min-h-[80vh] items-center">
             <div className="max-w-xl animate-fade-in">
                 <h1 className="mb-6 text-4xl font-sansBlack font-black leading-tight text-cream md:text-5xl lg:text-6xl">
                     طعم واقعی قهوه
