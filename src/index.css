@@ -57,5 +57,11 @@
         box-sizing: border-box;
         @apply bg-white text-secondary-foreground font-sansMedium antialiased
     }
+
 }
-/* ******** */
+/**** Components ***** */
+@layer components{
+    .hero{
+        background: var(--gradient-hero);
+    }
+}
