@@ -2,17 +2,20 @@ import React, { lazy, Suspense } from 'react'
 import { QueryProvider } from '@providers/QueryProvider'
 import { ToasterProvider } from '@providers/ToasterProvider'
 import {BrowserRouter , Routes , Route} from 'react-router-dom'
+import { MainLayout } from '@layouts/MainLayout'
 
 const Home = lazy(()=>import('@pages/Home/Home'));
 
 const App:React.FC = ()=>{
   return (
     <QueryProvider>
-      <ToasterProvider/>
       <BrowserRouter>
+      <ToasterProvider/>
         <Suspense fallback={<h1>لطفا منتظر باشید</h1>}>
           <Routes>
-            <Route path='/' element={<Home/>}/>
+            <Route path='/' element={<MainLayout/>}>
+            <Route index element={<Home/>}/>
+            </Route>
           </Routes>
         </Suspense>
       </BrowserRouter>
