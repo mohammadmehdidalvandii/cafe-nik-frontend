@@ -55,7 +55,7 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        @apply bg-white text-secondary-foreground font-sansMedium antialiased
+        @apply bg-secondary/30 text-secondary-foreground font-sansMedium antialiased
     }
 
 }
