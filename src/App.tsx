@@ -5,6 +5,7 @@ import {BrowserRouter , Routes , Route} from 'react-router-dom'
 import { MainLayout } from '@layouts/MainLayout'
 
 const Home = lazy(()=>import('@pages/Home/Home'));
+const Menu = lazy(()=>import('@pages/Menu/Menu'));
 
 const App:React.FC = ()=>{
   return (
@@ -15,6 +16,7 @@ const App:React.FC = ()=>{
           <Routes>
             <Route path='/' element={<MainLayout/>}>
             <Route index element={<Home/>}/>
+            <Route path='Menu' element={<Menu/>}/>
             </Route>
           </Routes>
         </Suspense>
