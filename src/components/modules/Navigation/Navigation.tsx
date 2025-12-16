@@ -42,7 +42,7 @@ const Navigation:React.FC  =()=>{
                 خروج
                 </Button>
                 </div> */}
-            <NavLink to='/Login' className='md:block'>
+            <NavLink to='/Auth/Login' className='md:block'>
                 <Button variant='default' size='sm'>ورود</Button>
             </NavLink>
             </div>
