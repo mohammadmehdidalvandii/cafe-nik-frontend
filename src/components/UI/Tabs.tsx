@@ -12,7 +12,7 @@ React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
     <TabsPrimitive.List
     ref={ref}
     className={cn(
-        'inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground',className
+        'inline-flex h-12 items-center justify-center rounded-md bg-primary/10 px-2 text-muted-foreground',className
     )}
     {...props}
     />
@@ -27,7 +27,7 @@ React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
     <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-        'inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-sansBold ring-offset-bgk transition-all data-[state=active]:bg-bgk data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm focus-visible::outline-none focus-visible:ring-border focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+        'inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-sansBold cursor-pointer text-muted-foreground ring-offset-bgk transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm focus-visible::outline-none focus-visible:ring-border focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
         className
     )}
     {...props}
