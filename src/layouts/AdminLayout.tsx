@@ -1,82 +1,27 @@
 import AdminSidebar from '@components/templates/admin/AdminSidebar/AdminSidebar'
-import React, { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { adminPageMeta } from '@pages/Admin/adminPageMeta';
+import React from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
 
 const AdminLayout:React.FC = ()=>{
-  const [activeTab , setActiveTab] = useState('/Admin');
+  const {pathname} = useLocation();
 
-  const renderContent = ()=>{
-    switch(activeTab){
-      case '/Admin':
-        return(
-          <div className="space-y-4">
-              <div>
-                <h1 className="text-2xl font-bold font-sansBold">پیشخوان</h1>
-                <p className="text-muted-foreground">خوش آمدید</p>
-              </div>
-          </div>
-        );
-      case '/Admin/orders':
-        return(
-          <div className="space-y-4">
-              <div>
-                <h1 className="text-2xl font-bold font-sansBold">سفارشات</h1>
-                <p className="text-muted-foreground">خوش آمدید</p>
-              </div>
-          </div>
-        );
-      case '/Admin/Customer':
-        return(
-          <div className="space-y-4">
-              <div>
-                <h1 className="text-2xl font-bold font-sansBold">مشتریان</h1>
-                <p className="text-muted-foreground">خوش آمدید</p>
-              </div>
-          </div>
-        );
-      case '/Admin/Branches':
-        return(
-          <div className="space-y-4">
-              <div>
-                <h1 className="text-2xl font-bold font-sansBold">شعب</h1>
-                <p className="text-muted-foreground">خوش آمدید</p>
-              </div>
-          </div>
-        );
-      case '/Admin/Menu':
-        return(
-          <div className="space-y-4">
-              <div>
-                <h1 className="text-2xl font-bold font-sansBold">منو</h1>
-                <p className="text-muted-foreground">خوش آمدید</p>
-              </div>
-          </div>
-        );
-      case '/Admin/Settings':
-        return(
-          <div className="space-y-4">
-              <div>
-                <h1 className="text-2xl font-bold font-sansBold">تنظیمات</h1>
-                <p className="text-muted-foreground">خوش آمدید</p>
-              </div>
-          </div>
-        );
-        default: return null
-    }
-  }
-  
+  const pageMeta = adminPageMeta[pathname];
+
   return (
     <div className='min-h-screen'>
       {/* Desktop sidebar */}
         <div className="hidden lg:block">
           <AdminSidebar 
-            activeTab={activeTab}
           />
         </div>
       {/* Main Content */}
         <main className='min-h-screen pt-16 lg:mr-64 lg:pt-0'>
             <div className="p-4 lg:p-6">
-              {renderContent()}
+              <div>
+                <h1 className="text-2xl font-black font-sansBlack">{pageMeta.title}</h1>
+                <p className="text-muted-foreground">{pageMeta.description}</p>
+              </div>
             </div>
             <div className="p-4 lg:p-8">
               <Outlet/>
