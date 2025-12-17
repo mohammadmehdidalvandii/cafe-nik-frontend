@@ -14,6 +14,7 @@ const Register = lazy(()=>import('@pages/Auth/Register/Register'));
 const Login = lazy(()=>import('@pages/Auth/Login/Login'));
 // admin
 const Admin = lazy(()=>import('@pages/Admin/Admin'));
+const AdminOrders = lazy(()=>import('@pages/Admin/Orders/Orders'));
 
 const App:React.FC = ()=>{
   return (
@@ -35,6 +36,7 @@ const App:React.FC = ()=>{
             {/* Admin */}
             <Route path='/Admin' element={<AdminLayout/>}>
               <Route index element={<Admin/>}/>
+              <Route path='Orders' element={<AdminOrders/>}/>
             </Route>
           </Routes>
         </Suspense>
