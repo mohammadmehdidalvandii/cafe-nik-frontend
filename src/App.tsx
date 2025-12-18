@@ -17,6 +17,7 @@ const Admin = lazy(()=>import('@pages/Admin/Admin'));
 const AdminOrders = lazy(()=>import('@pages/Admin/Orders/Orders'));
 const AdminCustomers = lazy(()=>import('@pages/Admin/Customers/Customers'));
 const AdminBranches = lazy(()=>import('@pages/Admin/Branches/Branches'));
+const AdminMenu = lazy(()=>import('@pages/Admin/Menu/Menu'));
 
 const App:React.FC = ()=>{
   return (
@@ -41,6 +42,7 @@ const App:React.FC = ()=>{
               <Route path='Orders' element={<AdminOrders/>}/>
               <Route path='Customers' element={<AdminCustomers/>}/>
               <Route path='Branches' element={<AdminBranches/>}/>
+              <Route path='Menu' element={<AdminMenu/>}/>
             </Route>
           </Routes>
         </Suspense>
