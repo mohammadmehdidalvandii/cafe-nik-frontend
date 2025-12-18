@@ -1,5 +1,5 @@
 import AdminState from '@components/templates/admin/AdminState/AdminState'
-import OrdersTable from '@components/templates/admin/OrdersTable'
+import OrdersTable from '@components/templates/admin/OrdersTable/OrdersTable'
 import React from 'react'
 
 const Admin:React.FC = ()=>{

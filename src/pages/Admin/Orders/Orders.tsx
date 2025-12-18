@@ -1,4 +1,4 @@
-import OrdersTable from '@components/templates/admin/OrdersTable'
+import OrdersTable from '@components/templates/admin/OrdersTable/OrdersTable'
 import React from 'react'
 
 const Orders:React.FC = ()=>{
