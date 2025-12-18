@@ -26,7 +26,7 @@ const BranchesTable:React.FC = ()=>{
         <div className="rounded-xl bg-white p-4 shadow-md overflow-hidden">
             <Table>
                 <TableHeader>
-                    <TableRow>
+                    <TableRow className='bg-secondary/50'>
                         <TableHead className='text-right'>نام شعبه</TableHead>
                         <TableHead className='text-right'>شهر</TableHead>
                         <TableHead className='text-right'>آدرس</TableHead>

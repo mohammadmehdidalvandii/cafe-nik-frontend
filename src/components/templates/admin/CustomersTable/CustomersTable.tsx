@@ -21,7 +21,7 @@ const CustomersTable:React.FC = ()=>{
             </div>
         </div>
         {/* Table */}
-        <div className="rounded-xl bg-white shadow-md overflow-hidden">
+        <div className="rounded-xl bg-white shadow-md overflow-hidden p-4">
             <Table>
                 <TableHeader>
                     <TableRow className='bg-secondary/50'>
