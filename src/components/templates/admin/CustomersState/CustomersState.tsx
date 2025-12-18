@@ -18,7 +18,7 @@ const CustomersState:React.FC = ()=>{
             </div>
             <div className="rounded-xl bg-white p-5 shadow-md">
                 <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
                         <ShoppingBag className='h-6 w-6 text-green-600'/>
                     </div>
                     <div>
@@ -29,7 +29,7 @@ const CustomersState:React.FC = ()=>{
             </div>
             <div className="rounded-xl bg-white p-5 shadow-md">
                 <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-copper/10">
                         <Phone className='h-6 w-6 text-copper'/>
                     </div>
                     <div>
