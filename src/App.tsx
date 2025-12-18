@@ -12,6 +12,8 @@ const Cart = lazy(()=>import('@pages/Cart/Cart'));
 // auth
 const Register = lazy(()=>import('@pages/Auth/Register/Register'));
 const Login = lazy(()=>import('@pages/Auth/Login/Login'));
+// Not found
+const NotFound = lazy(()=>import('@pages/NotFound/NotFound'));
 // admin
 const Admin = lazy(()=>import('@pages/Admin/Admin'));
 const AdminOrders = lazy(()=>import('@pages/Admin/Orders/Orders'));
@@ -20,6 +22,8 @@ const AdminBranches = lazy(()=>import('@pages/Admin/Branches/Branches'));
 const AdminMenu = lazy(()=>import('@pages/Admin/Menu/Menu'));
 const AdminSettings = lazy(()=>import('@pages/Admin/Settings/Settings'));
 
+
+
 const App:React.FC = ()=>{
   return (
     <QueryProvider>
@@ -27,6 +31,8 @@ const App:React.FC = ()=>{
       <ToasterProvider/>
         <Suspense fallback={<h1>لطفا منتظر باشید</h1>}>
           <Routes>
+            {/* Public pages */}
+            <Route path='/*' element={<NotFound/>}/>
             {/* Login-Register */}
             <Route path='/Auth/Login' element={<Login/>}/>
             <Route path='/Auth/Register' element={<Register/>}/>
