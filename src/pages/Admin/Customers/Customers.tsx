@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Customers:React.FC = ()=>{
-  return (
+  return ( 
     <div>Customers</div>
   )
 }
