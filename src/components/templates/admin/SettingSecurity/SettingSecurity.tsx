@@ -7,11 +7,11 @@ import React from "react";
 const SettingSecurity: React.FC = () => {
   return (
     <div className="rounded-xl bg-white p-6 shadow-md">
-      <form action="#">
         <div className="mb-4 flex items-center gap-3">
           <Shield className="h-5 w-5 text-primary" />
           <h3 className="text-2xl font-bold">امنیت</h3>
         </div>
+      <form action="#">
         <div className="space-y-4">
           <div>
             <Label htmlFor="current-password" className="text-lg">رمز عبور فعلی</Label>
