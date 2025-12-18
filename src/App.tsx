@@ -4,6 +4,7 @@ import { ToasterProvider } from '@providers/ToasterProvider'
 import {BrowserRouter , Routes , Route} from 'react-router-dom'
 import { MainLayout } from '@layouts/MainLayout'
 import AdminLayout from '@layouts/AdminLayout'
+import BranchLayout from '@layouts/BranchLayout'
 // main
 const Home = lazy(()=>import('@pages/Home/Home'));
 const Menu = lazy(()=>import('@pages/Menu/Menu'));
@@ -21,8 +22,8 @@ const AdminCustomers = lazy(()=>import('@pages/Admin/Customers/Customers'));
 const AdminBranches = lazy(()=>import('@pages/Admin/Branches/Branches'));
 const AdminMenu = lazy(()=>import('@pages/Admin/Menu/Menu'));
 const AdminSettings = lazy(()=>import('@pages/Admin/Settings/Settings'));
-
-
+// Branch panel
+const Branch = lazy(()=>import('@pages/Branch/Branch'));
 
 const App:React.FC = ()=>{
   return (
@@ -51,6 +52,10 @@ const App:React.FC = ()=>{
               <Route path='Branches' element={<AdminBranches/>}/>
               <Route path='Menu' element={<AdminMenu/>}/>
               <Route path='Settings' element={<AdminSettings/>}/>
+            </Route>
+            {/* Branch */}
+            <Route path='/Branch' element={<BranchLayout/>}>
+              <Route index element={<Branch/>}/>
             </Route>
           </Routes>
         </Suspense>
