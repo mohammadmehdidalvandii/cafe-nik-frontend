@@ -1,3 +1,4 @@
+import BranchSidebar from '@components/templates/branchPanel/BranchSidebar/BranchSidebar'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
@@ -6,7 +7,7 @@ const BranchLayout:React.FC = ()=>{
     <div className="min-h-screen">
         {/* Desktop Sidebar */}
         <div className="hidden lg:block">
-            this is sidebar
+            <BranchSidebar/>
         </div>
         {/* Mobile Header */}
         <header className="fixed left-0 right-0 top-0 flex h-16 items-center justify-between border-b border-border bg-white px-4 lg:hidden"></header>
