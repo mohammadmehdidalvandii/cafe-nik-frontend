@@ -1,8 +1,11 @@
+import BranchSettingInfo from '@components/templates/branchPanel/BranchSettingInfo/BranchSettingInfo'
 import React from 'react'
 
 const Settings:React.FC = ()=>{
   return (
-    <div>Settings</div>
+    <>
+    <BranchSettingInfo/>
+    </>
   )
 }
 
