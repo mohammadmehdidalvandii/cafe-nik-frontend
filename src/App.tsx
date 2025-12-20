@@ -24,6 +24,7 @@ const AdminMenu = lazy(()=>import('@pages/Admin/Menu/Menu'));
 const AdminSettings = lazy(()=>import('@pages/Admin/Settings/Settings'));
 // Branch panel
 const Branch = lazy(()=>import('@pages/Branch/Branch'));
+const BranchOrders = lazy(()=>import('@pages/Branch/Orders/Orders'));
 
 const App:React.FC = ()=>{
   return (
@@ -56,6 +57,7 @@ const App:React.FC = ()=>{
             {/* Branch */}
             <Route path='/Branch' element={<BranchLayout/>}>
               <Route index element={<Branch/>}/>
+              <Route path='Orders' element={<BranchOrders/>}/>
             </Route>
           </Routes>
         </Suspense>
