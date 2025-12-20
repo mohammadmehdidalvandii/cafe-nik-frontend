@@ -1,10 +1,11 @@
-import React, { lazy, Suspense } from 'react'
-import { QueryProvider } from '@providers/QueryProvider'
-import { ToasterProvider } from '@providers/ToasterProvider'
-import {BrowserRouter , Routes , Route} from 'react-router-dom'
-import { MainLayout } from '@layouts/MainLayout'
-import AdminLayout from '@layouts/AdminLayout'
-import BranchLayout from '@layouts/BranchLayout'
+import React, { lazy, Suspense } from 'react';
+import { QueryProvider } from '@providers/QueryProvider';
+import { ToasterProvider } from '@providers/ToasterProvider';
+import {BrowserRouter , Routes , Route} from 'react-router-dom';
+import { MainLayout } from '@layouts/MainLayout';
+import AdminLayout from '@layouts/AdminLayout';
+import BranchLayout from '@layouts/BranchLayout';
+import CustomerLayout from '@layouts/CustomerLayout';
 // main
 const Home = lazy(()=>import('@pages/Home/Home'));
 const Menu = lazy(()=>import('@pages/Menu/Menu'));
@@ -27,6 +28,8 @@ const Branch = lazy(()=>import('@pages/Branch/Branch'));
 const BranchOrders = lazy(()=>import('@pages/Branch/Orders/Orders'));
 const BranchIncome = lazy(()=>import('@pages/Branch/Income/Income'));
 const BranchSettings = lazy(()=>import('@pages/Branch/Settings/Settings'));
+// Customer panel 
+const Customer = lazy(()=>import('@pages/Customer/Customer'));
 
 const App:React.FC = ()=>{
   return (
@@ -62,6 +65,10 @@ const App:React.FC = ()=>{
               <Route path='Orders' element={<BranchOrders/>}/>
               <Route path='Income' element={<BranchIncome/>}/>
               <Route path='Settings' element={<BranchSettings/>}/>
+            </Route>
+            {/* Customer */}
+            <Route path='/Customer' element={<CustomerLayout/>}>
+              <Route index element={<Customer/>}/>
             </Route>
           </Routes>
         </Suspense>
