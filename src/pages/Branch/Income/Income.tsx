@@ -1,8 +1,11 @@
+import BranchStateIncome from '@components/templates/branchPanel/BranchStateIncome/BranchStateIncome'
 import React from 'react'
 
 const Income:React.FC = ()=>{
   return (
-    <div>Income</div>
+    <>
+    <BranchStateIncome/>
+    </>
   )
 }
 
