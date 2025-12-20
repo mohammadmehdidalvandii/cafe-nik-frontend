@@ -26,6 +26,7 @@ const AdminSettings = lazy(()=>import('@pages/Admin/Settings/Settings'));
 const Branch = lazy(()=>import('@pages/Branch/Branch'));
 const BranchOrders = lazy(()=>import('@pages/Branch/Orders/Orders'));
 const BranchIncome = lazy(()=>import('@pages/Branch/Income/Income'));
+const BranchSettings = lazy(()=>import('@pages/Branch/Settings/Settings'));
 
 const App:React.FC = ()=>{
   return (
@@ -60,6 +61,7 @@ const App:React.FC = ()=>{
               <Route index element={<Branch/>}/>
               <Route path='Orders' element={<BranchOrders/>}/>
               <Route path='Income' element={<BranchIncome/>}/>
+              <Route path='Settings' element={<BranchSettings/>}/>
             </Route>
           </Routes>
         </Suspense>
