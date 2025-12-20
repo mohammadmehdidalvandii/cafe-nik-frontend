@@ -1,12 +1,15 @@
 import CustomerSidebar from '@components/templates/customerPanel/CustomerSidebar/CustomerSidebar'
 import { Button } from '@components/UI/Button'
 import { Sheet, SheetContent, SheetTrigger } from '@components/UI/Sheet'
+import { customerPageMeta } from '@pages/Customer/customerPageMeta'
 import { Menu } from 'lucide-react'
 import React, { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 
 const CustomerLayout:React.FC = ()=>{
     const [mobileMenu , setMobileMenu] = useState(false);
+    const {pathname} = useLocation();
+    const metaPage = customerPageMeta[pathname];
   return (
     <div className="min-h-screen">
         {/* Desktop Sidebar */}
@@ -31,8 +34,8 @@ const CustomerLayout:React.FC = ()=>{
         <div className="min-h-screen pt-16 lg:mr-64 lg:pt-0">
             <div className="p-4 lg:p-6">
                 <div>
-                    <h1 className="text-2xl font-black font-sansBlack"></h1>
-                    <p className="text-muted-foreground"></p>
+                    <h1 className="text-2xl font-black font-sansBlack">{metaPage.title}</h1>
+                    <p className="text-muted-foreground">{metaPage.description}</p>
                 </div>
             </div>
             <div className="p-4 lg:p-8">
