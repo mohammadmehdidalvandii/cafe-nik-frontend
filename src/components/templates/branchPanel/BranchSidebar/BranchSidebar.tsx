@@ -39,7 +39,7 @@ const BranchSidebar:React.FC =()=>{
             </ul>
         </nav>
         <div className="border-t border-border p-4">
-            <button className="flex w-full gap-3 rounded-lg px-4 py-4 text-right text-danger transition-all hover:bg-danger/10 font-black font-sansBold text-2xl cursor-pointer">
+            <button className="flex items-center w-full gap-3 rounded-lg px-4 py-4 text-right text-danger transition-all hover:bg-danger/10 font-black font-sansBold text-2xl cursor-pointer">
                 <LogOut className='h-5 w-5'/>
                 <span>خروج</span>
             </button>
