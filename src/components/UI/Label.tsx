@@ -10,7 +10,7 @@ React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
     <LabelPrimitive.Root
         ref={ref}
         className={cn(
-            'text-sm font-semibold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+            'text-lg font-semibold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
             className
         )}
         {...props}
