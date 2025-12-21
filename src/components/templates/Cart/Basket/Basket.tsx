@@ -1,6 +1,7 @@
 import { Button } from "@components/UI/Button";
 import { ArrowLeft, Coffee, Minus, Plus, Trash2 } from "lucide-react";
 import React from "react";
+import { NavLink } from "react-router-dom";
 // import CartEmpty from "../CartEmpty/CartEmpty";
 
 const Basket: React.FC = () => {
@@ -130,9 +131,11 @@ const Basket: React.FC = () => {
                     <span>مجموع :</span>
                     <span>{(98000 * 2).toLocaleString('fa-IR')}</span>
                 </div>
-                <Button className="w-full" size='lg'>
+                <Button className="w-full" size='lg' asChild>
+                  <NavLink to='/Order'>
                     ادامه و انتخاب شعبه
                     <ArrowLeft className="mr-2 h-5 w-5"/>
+                  </NavLink>
                 </Button>
             </div>
           </div>

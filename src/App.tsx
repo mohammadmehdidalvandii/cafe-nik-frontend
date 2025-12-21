@@ -11,6 +11,7 @@ const Home = lazy(()=>import('@pages/Home/Home'));
 const Menu = lazy(()=>import('@pages/Menu/Menu'));
 const Branches = lazy(()=>import('@pages/Branches/Branches'));
 const Cart = lazy(()=>import('@pages/Cart/Cart'));
+const Order = lazy(()=>import('@pages/Order/Order'));
 // auth
 const Register = lazy(()=>import('@pages/Auth/Register/Register'));
 const Login = lazy(()=>import('@pages/Auth/Login/Login'));
@@ -53,6 +54,7 @@ const App:React.FC = ()=>{
               <Route path='Menu' element={<Menu/>}/>
               <Route path='Branches' element={<Branches/>}/>
               <Route path='Cart' element={<Cart/>}/>
+              <Route path='Order' element={<Order/>}/>
             </Route>
             {/* Admin */}
             <Route path='/Admin' element={<AdminLayout/>}>
