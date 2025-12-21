@@ -1,3 +1,4 @@
+import CustomerSettingBranch from '@components/templates/customerPanel/CustomerSettingBranch/CustomerSettingBranch'
 import CustomerSettingInfo from '@components/templates/customerPanel/CustomerSettingInfo/CustomerSettingInfo'
 import CustomerSettingNotification from '@components/templates/customerPanel/CustomerSettingNotification/CustomerSettingNotification'
 import CustomerSettingSecurity from '@components/templates/customerPanel/CustomerSettingSecurity/CustomerSettingSecurity'
@@ -9,6 +10,7 @@ const Settings:React.FC = ()=>{
     <CustomerSettingInfo/>
     <CustomerSettingNotification/>
     <CustomerSettingSecurity/>
+    <CustomerSettingBranch/>
     </>
   )
 }
