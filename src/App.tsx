@@ -30,6 +30,7 @@ const BranchIncome = lazy(()=>import('@pages/Branch/Income/Income'));
 const BranchSettings = lazy(()=>import('@pages/Branch/Settings/Settings'));
 // Customer panel 
 const Customer = lazy(()=>import('@pages/Customer/Customer'));
+const CustomerOrders = lazy(()=>import('@pages/Customer/Orders/Orders'));
 
 const App:React.FC = ()=>{
   return (
@@ -69,6 +70,7 @@ const App:React.FC = ()=>{
             {/* Customer */}
             <Route path='/Customer' element={<CustomerLayout/>}>
               <Route index element={<Customer/>}/>
+              <Route path='Orders' element={<CustomerOrders/>}/>
             </Route>
           </Routes>
         </Suspense>
