@@ -32,6 +32,8 @@ const BranchSettings = lazy(()=>import('@pages/Branch/Settings/Settings'));
 const Customer = lazy(()=>import('@pages/Customer/Customer'));
 const CustomerOrders = lazy(()=>import('@pages/Customer/Orders/Orders'));
 const CustomerCost = lazy(()=>import('@pages/Customer/Cost/Cost'));
+const CustomerSettings = lazy(()=>import('@pages/Customer/Settings/Settings'));
+
 
 const App:React.FC = ()=>{
   return (
@@ -73,6 +75,7 @@ const App:React.FC = ()=>{
               <Route index element={<Customer/>}/>
               <Route path='Orders' element={<CustomerOrders/>}/>
               <Route path='Cost' element={<CustomerCost/>}/>
+              <Route path='Settings' element={<CustomerSettings/>}/>
             </Route>
           </Routes>
         </Suspense>
