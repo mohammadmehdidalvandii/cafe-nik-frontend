@@ -1,6 +1,8 @@
 import { Button } from '@components/UI/Button'
 import { Coffee, Plus } from 'lucide-react'
-import React from 'react'
+import React, { lazy } from 'react'
+
+const ModelAddProduct = lazy(()=>import('@models/ModelAddProduct'));
 
 const ProductCard:React.FC = ()=>{
   return (
@@ -20,10 +22,11 @@ const ProductCard:React.FC = ()=>{
                 <span className="mr-1 text-[0.9rem] text-muted-foreground">تومان</span>
                 <span className="mr-2 text-[0.9rem] text-muted-foreground">(پایه)</span>
             </div>
-            <Button variant='default' size='sm' className='font-black font-sansBold'>
+            <ModelAddProduct/>
+            {/* <Button variant='default' size='sm' className='font-black font-sansBold'>
                 <Plus className='ml-1 h-4 w-4'/>
                 افزودن
-            </Button>
+            </Button> */}
         </div>
     </div>
   )
