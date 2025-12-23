@@ -3,7 +3,8 @@ import { Input } from '@components/UI/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/UI/Select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@components/UI/Table';
 import { Eye, Filter, Package, Search } from 'lucide-react'
-import React from 'react'
+import React, { lazy } from 'react'
+const OrderDetailsModel = lazy(()=>import('@models/OrderDetailsModel'));
 
 
 
@@ -111,9 +112,7 @@ const OrdersTable:React.FC = ()=>{
                         </TableCell>
                         <TableCell>
                             <div className="flex items-center gap-1">
-                                <Button variant='ghost' size='icon' aria-label='Details'>
-                                    <Eye className='h-4 w-4'/>
-                                </Button>
+                                <OrderDetailsModel/>
                                 <Button variant='outline' size='sm' className='text-green-600 border-green-200 hover:bg-green-50 hover:text-green-900 hover:border-green-900'>
                                     <Package className='h-4 w-4 ml-1'/>
                                     تحویل
