@@ -2,7 +2,8 @@ import { Button } from '@components/UI/Button'
 import { Input } from '@components/UI/Input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@components/UI/Table'
 import { Eye, Search, User } from 'lucide-react'
-import React from 'react'
+import React, { lazy } from 'react'
+const CustomerDetailsModel = lazy(()=>import('@models/CustomerDetailsModel'));
 
 const CustomersTable:React.FC = ()=>{
   return (
@@ -60,13 +61,7 @@ const CustomersTable:React.FC = ()=>{
                             {new Date().toLocaleDateString('fa-IR')}
                         </TableCell>
                         <TableCell>
-                            <Button 
-                            variant='ghost'
-                            size='sm'
-                            >
-                                <Eye className='h-4 w-4 ml-1'/>
-                                جزئیات
-                            </Button>
+                            <CustomerDetailsModel/>
                         </TableCell>
                     </TableRow>
                 </TableBody>
