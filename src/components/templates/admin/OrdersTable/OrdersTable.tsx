@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Eye, Filter, Package, Search } from 'lucide-react'
 import React, { lazy } from 'react'
 const OrderDetailsModel = lazy(()=>import('@models/OrderDetailsModel'));
-
+const PickupCodeVerifyModel = lazy(()=>import('@models/PickupCodeVerifyModel'));
 
 
 // const statusLabels:Record<string,{label:string,color:string}> = {
@@ -113,10 +113,7 @@ const OrdersTable:React.FC = ()=>{
                         <TableCell>
                             <div className="flex items-center gap-1">
                                 <OrderDetailsModel/>
-                                <Button variant='outline' size='sm' className='text-green-600 border-green-200 hover:bg-green-50 hover:text-green-900 hover:border-green-900'>
-                                    <Package className='h-4 w-4 ml-1'/>
-                                    تحویل
-                                </Button>
+                                <PickupCodeVerifyModel/>
                             </div>
                         </TableCell>
                      </TableRow>   

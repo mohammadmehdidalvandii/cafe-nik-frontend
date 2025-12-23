@@ -1,0 +1,70 @@
+import { Button } from '@components/UI/Button';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@components/UI/Dialog'
+import { Input } from '@components/UI/Input';
+import { CheckCircle, Package } from 'lucide-react';
+import React, { useState } from 'react'
+
+const PickupCodeVerifyModel:React.FC = ()=>{
+    const [showModel , setShowModel] = useState<boolean>(false);
+  return (
+    <Dialog open={showModel} onOpenChange={setShowModel}>
+        <DialogTrigger asChild>
+            <Button variant='outline' size='sm' className='text-green-600 border-green-200 hover:bg-green-50 hover:text-green-900 hover:border-green-900'>
+                <Package className='h-4 w-4 ml-1'/>
+                    تحویل
+            </Button>
+        </DialogTrigger>
+        <DialogContent className='max-w-md'>
+            <DialogHeader>
+                <DialogTitle>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                        <Package className='h-6 w-6 text-primary'/>
+                    </div>
+                    تایید تحویل سفارش
+                </DialogTitle>
+            </DialogHeader>
+            <div className="space-y-6 py-4">
+                {/* OrderInfo */}
+                <div className="rounded-xl bg-secondary/30 p-4 space-y-2">
+                    <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">شماره سفارش :</span>
+                        <span className="font-medium">ORD-1766319903166</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">مشتری :</span>
+                        <span className="font-medium">محمدمهدی دالوندی</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">مبلغ :</span>
+                        <span className="font-medium">{(71500).toLocaleString('fa-IR')}</span>
+                    </div>
+                </div>
+                {/* code input */}
+                <div>
+                    <p className="mb-3 text-center text-lg text-muted-foreground">
+                        کد تحویل 6 رقمی مشتری را وارد کنید
+                    </p>
+                    <div className="flex justify-center gap-2">
+                        <Input
+                            type='text'
+                            inputMode='numeric'
+                            className={`h-12 w-full text-center text-2xl font-bold`}
+                        />
+                    </div>
+                </div>
+            </div>
+            <DialogFooter className='gap-2'>
+                <Button variant='destructive'>
+                    انصراف
+                </Button>
+                <Button className='bg-green-600 hover:bg-green-700'>
+                    <CheckCircle className='ml-2 h-4 w-4'/>
+                    برسی و تحویل سفارش
+                </Button>
+            </DialogFooter>
+        </DialogContent>
+    </Dialog>
+  )
+}
+
+export default PickupCodeVerifyModel
