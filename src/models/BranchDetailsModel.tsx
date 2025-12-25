@@ -1,10 +1,12 @@
+import BranchEditForm from '@components/templates/admin/BranchEditForm/BranchEditForm';
 import { Button } from '@components/UI/Button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@components/UI/Dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@components/UI/Dialog';
 import { Clock, Edit2, Eye, MapPin, Phone, ShoppingBag, TrendingUp } from 'lucide-react';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 const BranchDetailsModel:React.FC = ()=>{
     const [showModel , setShowModel] = useState<boolean>(false);
+    const [isEditing , setIsEditing] = useState<boolean>(false);
   return (
     <Dialog open={showModel} onOpenChange={setShowModel}>
         <DialogTrigger asChild>
@@ -20,15 +22,19 @@ const BranchDetailsModel:React.FC = ()=>{
                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
                             <MapPin className='h-6 w-6 text-primary'/>
                         </div>
-                        جزئیات شعبه
+                        {isEditing ? "ویراش شعبه":"جزئیات شعبه"}
                     </div>
-                    <Button variant='outline' size='sm'>
+                    {!isEditing && (
+                    <Button variant='outline' size='sm'
+                        onClick={()=>setIsEditing(true)}
+                    >
                         <Edit2 className='h-4 w-4 ml-2'/>
                         ویرایش
                     </Button>
+                    )}
                 </DialogTitle>
             </DialogHeader>
-            <div className="my-6">
+            <div className="my-4">
                 {/* stats */}
                 <div className="grid gap-4 sm:grid-cols-3">
                     <div className="rounded-xl bg-green-50 p-4 text-center">
@@ -47,8 +53,11 @@ const BranchDetailsModel:React.FC = ()=>{
                         <p className="font-bold text-lg text-yellow-700">{(15).toLocaleString('fa-IR')} تومان</p>
                     </div>
                 </div>
-                {/* Details */}
-                <div className="grid gap-4 sm:grid-cols-2 mt-4">
+                {isEditing ? (
+                    <BranchEditForm/>
+                ) : (
+                    <>
+                                        <div className="grid gap-4 sm:grid-cols-2 mt-4">
                     <div className="rounded-xl bg-secondary/30 p-4">
                         <div className="flex items-center gap-2 text-muted-foreground mb-1">
                             <MapPin className='h-4 w-4'/>
@@ -83,6 +92,8 @@ const BranchDetailsModel:React.FC = ()=>{
                         <p className="font-bold">۸ صبح تا ۱۱ شب</p>
                     </div>
                 </div>
+                    </>
+                )}
             </div>
         </DialogContent>
     </Dialog>
