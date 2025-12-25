@@ -8,9 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@components/UI/Table";
-import { Clock, Eye, MapPin, Plus, Search } from "lucide-react";
+import { Clock, Eye, MapPin, Search } from "lucide-react";
 import React, { lazy } from "react";
 const CreateBranchModel = lazy(()=>import('@models/CreateBranchModel'));
+const BranchDetailsModel = lazy(()=>import('@models/BranchDetailsModel'));
 
 const BranchesTable: React.FC = () => {
   return (
@@ -71,10 +72,7 @@ const BranchesTable: React.FC = () => {
                 {(0).toLocaleString("fa-IR")}
               </TableCell>
               <TableCell>
-                <Button variant="ghost" size="sm">
-                  <Eye className="h-4 w-4 ml-1" />
-                  جزئیات
-                </Button>
+                <BranchDetailsModel/>
               </TableCell>
             </TableRow>
           </TableBody>
