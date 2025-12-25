@@ -1,11 +1,11 @@
 import { Badge } from '@components/UI/Badge'
-import { Button } from '@components/UI/Button'
 import { Input } from '@components/UI/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/UI/Select'
 import { TableHead, TableHeader, TableRow , Table, TableBody, TableCell} from '@components/UI/Table'
-import { Coffee, Edit2, Filter, Search } from 'lucide-react'
+import { Coffee, Filter, Search } from 'lucide-react'
 import React, { lazy } from 'react';
 const CreateProductModel = lazy(()=>import('@models/CreateProductModel'));
+const EditProductModel = lazy(()=>import('@models/EditProductModel'));
 
 const MenuTable:React.FC = ()=>{
   return (
@@ -79,10 +79,7 @@ const MenuTable:React.FC = ()=>{
                             {/* <Badge variant='outline'>ندارد</Badge> */}
                         </TableCell>
                         <TableCell>
-                            <Button variant='ghost' size='sm'>
-                                <Edit2 className='h-4 w-4 ml-1'/>
-                                ویرایش
-                            </Button>
+                            <EditProductModel/>
                         </TableCell>
                     </TableRow>
                 </TableBody>
