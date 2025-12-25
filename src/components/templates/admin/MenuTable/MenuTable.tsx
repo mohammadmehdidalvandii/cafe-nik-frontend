@@ -3,8 +3,9 @@ import { Button } from '@components/UI/Button'
 import { Input } from '@components/UI/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/UI/Select'
 import { TableHead, TableHeader, TableRow , Table, TableBody, TableCell} from '@components/UI/Table'
-import { Coffee, Edit2, Filter, Plus, Search } from 'lucide-react'
-import React from 'react'
+import { Coffee, Edit2, Filter, Search } from 'lucide-react'
+import React, { lazy } from 'react';
+const CreateProductModel = lazy(()=>import('@models/CreateProductModel'));
 
 const MenuTable:React.FC = ()=>{
   return (
@@ -32,10 +33,7 @@ const MenuTable:React.FC = ()=>{
                     <SelectItem value='all'>دسر</SelectItem>
                 </SelectContent>
             </Select>
-                <Button>
-                    <Plus className='h-4 w-4 ml-2'/>
-                    افزودن محصول
-                </Button>
+                <CreateProductModel/>
             <div className="text-sm text-muted-foreground">
                 {(120).toLocaleString('fa-IR')} محصول
             </div>
