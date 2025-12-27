@@ -2,9 +2,11 @@ import { Badge } from '@components/UI/Badge'
 import { Button } from '@components/UI/Button'
 import { Input } from '@components/UI/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/UI/Select'
-import { ArrowLeft, Clock, Copy, Eye, MapPin, Package, Search } from 'lucide-react'
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { ArrowLeft, Clock, Copy, MapPin, Package, Search } from 'lucide-react'
+import React, { lazy } from 'react'
+import { NavLink } from 'react-router-dom';
+
+const CustomerOrderDetails = lazy(()=>import('@models/CustomerOrderDetails'));
 
 const statusOptions = [
   { value: "pending", label: "در انتظار تأیید" },
@@ -74,9 +76,7 @@ const CustomerOrdersTable:React.FC = ()=>{
                         <span className="text-lg font-bold text-copper">
                             {(169000).toLocaleString('fa-IR')} تومان
                         </span>
-                        <Button variant='ghost' size='sm' aria-label='details order'>
-                            <Eye className='h-4 w-4'/>
-                        </Button>
+                        <CustomerOrderDetails/>
                     </div>
                 </div>
                 {/* Code PickUp */}
