@@ -18,6 +18,8 @@ const Register = lazy(()=>import('@pages/Auth/Register/Register'));
 const Login = lazy(()=>import('@pages/Auth/Login/Login'));
 // Not found
 const NotFound = lazy(()=>import('@pages/NotFound/NotFound'));
+// Loading page
+const Loading = lazy(()=>import('@components/modules/Loading/Loading'));
 // admin
 const Admin = lazy(()=>import('@pages/Admin/Admin'));
 const AdminOrders = lazy(()=>import('@pages/Admin/Orders/Orders'));
@@ -42,7 +44,7 @@ const App:React.FC = ()=>{
     <QueryProvider>
       <BrowserRouter>
       <ToasterProvider/>
-        <Suspense fallback={<h1>لطفا منتظر باشید</h1>}>
+        <Suspense fallback={<Loading/>}>
           <Routes>
             {/* Public pages */}
             <Route path='/*' element={<NotFound/>}/>
