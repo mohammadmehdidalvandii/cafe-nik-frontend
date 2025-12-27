@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Eye, Search } from 'lucide-react'
 import React, { lazy } from 'react';
 const PickupCodeVerifyModel = lazy(()=>import('@models/PickupCodeVerifyModel'));
+const BranchOrderDetails = lazy(()=>import('@models/BranchOrderDetails'));
 
 const statusOptions = [
   { value: "pending", label: "در انتظار تأیید" },
@@ -83,9 +84,7 @@ const BranchOrdersTable:React.FC = ()=>{
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-1">
-                        <Button variant='ghost' size='sm' aria-label='details'>
-                          <Eye className='h-4 w-4'/>
-                        </Button>
+                        <BranchOrderDetails/>
                         <PickupCodeVerifyModel/>
                       </div>
                     </TableCell>
