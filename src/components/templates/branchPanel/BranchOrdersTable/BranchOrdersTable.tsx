@@ -1,8 +1,7 @@
-import { Button } from '@components/UI/Button'
 import { Input } from '@components/UI/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/UI/Select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@components/UI/Table'
-import { Eye, Search } from 'lucide-react'
+import {  Search } from 'lucide-react'
 import React, { lazy } from 'react';
 const PickupCodeVerifyModel = lazy(()=>import('@models/PickupCodeVerifyModel'));
 const BranchOrderDetails = lazy(()=>import('@models/BranchOrderDetails'));
