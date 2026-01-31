@@ -13,7 +13,7 @@ export const showSuccess = (message:string)=>{
     })
 }
 export const showError = (message:string)=>{
-    toast.success(message,{
+    toast.error(message,{
         duration:5000,
         style:{
             background:'#ef4444',
@@ -25,7 +25,7 @@ export const showError = (message:string)=>{
     })
 }
 export const showWarning = (message:string)=>{
-    toast.success(message,{
+    toast.warning(message,{
         duration:5000,
         style:{
             background:'#facc15',
@@ -37,7 +37,7 @@ export const showWarning = (message:string)=>{
     })
 }
 export const showInfo = (message:string)=>{
-    toast.success(message,{
+    toast.info(message,{
         duration:5000,
         style:{
             background:'#2563bb',
