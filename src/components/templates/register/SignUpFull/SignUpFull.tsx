@@ -1,52 +1,98 @@
 import { Button } from '@components/UI/Button'
 import { Input } from '@components/UI/Input'
 import { Label } from '@components/UI/Label'
+import { useRegisterMutation } from '@services/auth'
+import { showError, showSuccess } from '@utils/Toasts'
+import { Formik } from 'formik'
 import React from 'react'
+import { registerValues } from 'types/auth'
 
-const SignUpFull:React.FC = ()=>{
+const SignUpFull: React.FC = () => {
+    const registerMutation = useRegisterMutation();
   return (
-    <form action="#" className="space-y-4">
-        <div>
-            <Label htmlFor='full-info'>نام و نام خانوادگی </Label>
+    <Formik
+      initialValues={{
+        fullName: '',
+        email: '',
+        phone: '',
+        password: '',
+      }}
+      onSubmit={(values:registerValues) => {
+        registerMutation.mutate(values , {
+            onSuccess:(data)=>{
+                showSuccess('ثبت نام با موفقیت انجام شد . لطفا وارد شوید!')
+                values.fullName = "",
+                values.email = "",
+                values.phone = "",
+                values.password = ""
+            },
+            onError:(error)=>{
+                showError(error.message || 'ثبت نام ناموفق بود دوباره تلاش کنید')
+            }
+        })
+      }}
+    >
+      {({ values, handleChange, handleSubmit }) => (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <Label htmlFor="fullName">نام و نام خانوادگی</Label>
             <Input
-            id='full-info'
-            type='text'
-            placeholder='نام خود را وارد کنید'
-            className='mt-1'
+              id="fullName"
+              name="fullName"
+              type="text"
+              placeholder="نام خود را وارد کنید"
+              className="mt-1"
+              value={values.fullName}
+              onChange={handleChange}
             />
-        </div>
-        <div>
-            <Label htmlFor='email'>ایمیل</Label>
+          </div>
+
+          <div>
+            <Label htmlFor="email">ایمیل</Label>
             <Input
-            id='email'
-            type='email'
-            placeholder='cafeNil@gmail.com'
-            className='mt-1'
+              id="email"
+              name="email"
+              type="email"
+              placeholder="cafeNil@gmail.com"
+              className="mt-1"
+              value={values.email}
+              onChange={handleChange}
             />
-        </div>
-        <div>
-            <Label htmlFor='phone'>شماره تلفن</Label>
+          </div>
+
+          <div>
+            <Label htmlFor="phone">شماره تلفن</Label>
             <Input
-            id='phone'
-            type='tel'
-            placeholder='09123334455'
-            className='mt-1'
+              id="phone"
+              name="phone"
+              type="tel"
+              placeholder="09123334455"
+              className="mt-1"
+              value={values.phone}
+              onChange={handleChange}
             />
-        </div>
-        <div>
-            <Label htmlFor='password'>رمزعبور</Label>
+          </div>
+
+          <div>
+            <Label htmlFor="password">رمزعبور</Label>
             <Input
-            id='password'
-            type='password'
-            placeholder='********'
-            className='mt-1'
+              id="password"
+              name="password"
+              type="password"
+              placeholder="********"
+              className="mt-1"
+              value={values.password}
+              onChange={handleChange}
             />
-        </div>
-        <Button type='submit' className='w-full'>
+          </div>
+
+          <Button type="submit" className="w-full">
             ثبت نام
-        </Button>
-    </form>
-)
+          </Button>
+        </form>
+      )}
+    </Formik>
+  )
 }
 
 export default SignUpFull
