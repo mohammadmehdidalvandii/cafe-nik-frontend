@@ -3,9 +3,6 @@ import { registerValues } from "types/auth";
 const API_URL = 'http://localhost:3000/api/auth/';
 
 
-
-
-
 export const useRegisterMutation = ()=>{
     return useMutation({
         mutationFn: async(values:registerValues)=>{
