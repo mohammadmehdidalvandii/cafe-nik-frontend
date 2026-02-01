@@ -1,33 +1,63 @@
 import { Button } from '@components/UI/Button'
 import { Input } from '@components/UI/Input'
 import { Label } from '@components/UI/Label'
+import { useLoginWithPassword } from '@services/auth'
+import { showError, showSuccess } from '@utils/Toasts'
+import { Formik } from 'formik'
 import React from 'react'
+import { LoginWithPassword } from 'types/auth'
 
-const SignInEmailUsername:React.FC = ()=>{
+const SignInEmailUsername: React.FC = () => {
+    const loginPassword = useLoginWithPassword()
   return (
-    <form action="#" className='space-y-3'>
-        <div>
-            <Label htmlFor='email-username'>ایمیل یا نام کاربری</Label>
+    <Formik<LoginWithPassword>
+      initialValues={{ email: '', password: '' }}
+      onSubmit={(values:LoginWithPassword) => {
+        loginPassword.mutate(values, {
+            onSuccess:(data)=>{
+                console.log("data ==>", data);
+                showSuccess('ورود شما موفقیت آمیز بود')
+            },
+            onError:(error)=>{
+                showError(error.message || 'با شماره تلفن وارد شوید')
+            }
+        })
+      }}
+    >
+      {({ handleSubmit, handleChange, values }) => (
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div>
+            <Label htmlFor="email">ایمیل</Label>
             <Input
-            id='email-username'
-            type='text'
-            placeholder='ایمیل یا نام کاربری'
-            className='mt-1'
+              id="email"
+              name="email"
+              type="text"
+              placeholder="ایمیل یا نام کاربری"
+              className="mt-1"
+              value={values.email}
+              onChange={handleChange}
             />
-        </div>
-        <div>
-            <Label htmlFor='password'>رمزعبور</Label>
+          </div>
+
+          <div>
+            <Label htmlFor="password">رمزعبور</Label>
             <Input
-            id='password'
-            type='password'
-            className='mt-1'
-            placeholder='********'
+              id="password"
+              name="password"
+              type="password"
+              className="mt-1"
+              placeholder="********"
+              value={values.password}
+              onChange={handleChange}
             />
-        </div>
-        <Button type='submit' className='w-full'>
+          </div>
+
+          <Button type="submit" className="w-full">
             وارد شوید
-        </Button>
-    </form>
+          </Button>
+        </form>
+      )}
+    </Formik>
   )
 }
 

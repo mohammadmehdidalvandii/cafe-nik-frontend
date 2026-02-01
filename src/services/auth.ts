@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { RegisterPhoneCodePayload, RegisterPhonePayload, registerValues } from "types/auth";
+import { LoginWithPassword, RegisterPhoneCodePayload, RegisterPhonePayload, registerValues } from "types/auth";
 const API_URL = 'http://localhost:3000/api/auth/';
 
-
+// register full
 export const useRegisterMutation = ()=>{
     return useMutation({
         mutationFn: async(values:registerValues)=>{
@@ -20,7 +20,7 @@ export const useRegisterMutation = ()=>{
         }
     })
 }
-
+// register phone
 export const useRegisterWithPhone = ()=>{
     return useMutation({
         mutationFn: async (values:RegisterPhonePayload)=>{
@@ -38,7 +38,7 @@ export const useRegisterWithPhone = ()=>{
         }
     })
 };
-
+// register code
 export const useRegisterPhoneCode = ()=>{
     return useMutation({
         mutationFn: async (values:RegisterPhoneCodePayload)=>{
@@ -55,4 +55,26 @@ export const useRegisterPhoneCode = ()=>{
         }
     })
 }
+// login with password
+export const useLoginWithPassword = ()=>{
+    return useMutation({
+        mutationFn: async (values:LoginWithPassword)=>{
+            const res = await fetch(`${API_URL}loginPassword`,{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                credentials:'include',
+                body:JSON.stringify(values)
+            });
 
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'ایمیل یا رمز عبور معتبر نیست')
+            };
+            const data = await res.json();
+
+            console.log("data =>" , data);
+
+            return data
+        }
+    })
+}
