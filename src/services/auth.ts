@@ -8,6 +8,7 @@ const API_URL = 'http://localhost:3000/api/auth/';
 export const useRegisterMutation = ()=>{
     return useMutation({
         mutationFn: async(values:registerValues)=>{
+            console.log("values =>", values)
             const res = await fetch(`${API_URL}register`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},

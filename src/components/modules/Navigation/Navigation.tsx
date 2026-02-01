@@ -2,9 +2,23 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {Coffee, ShoppingCart, User} from 'lucide-react';
 import { Button } from '@components/UI/Button';
+import { useAuthStore } from '@store/authStore';
 
 const Navigation:React.FC  =()=>{
-    const [totalItems, setTotalItems] = useState(1)
+    const {user , isAuthenticated} = useAuthStore();
+    const [totalItems, setTotalItems] = useState(1);
+
+    const ROLE_CONFIG = {
+        "مدیریت":{
+            path:'/Admin'
+        },
+       "مدیر شعبه":{
+            path:'/Branch'
+        },
+        "مشتری":{
+            path:'/Customer'
+        } as any
+    }
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-bgk/95 backdrop-blur">
         <div className="container px-8 flex h-16 items-center justify-between">
@@ -31,20 +45,24 @@ const Navigation:React.FC  =()=>{
                     </Button>
                 </NavLink>
             {/* isAuthenticated */}
-            {/* <div className="md:flex items-center gap-2 ">
-                <NavLink to='/'>
-                <Button variant='outline' size='sm'>
-                <User className='ml-2 h-4 w-4'/>
-                علی محمدی
-                </Button>
-                </NavLink>
+            {isAuthenticated && user ? (
+            <div className="md:flex items-center gap-2 ">
+                     <NavLink to={`${ROLE_CONFIG[user.roles].path}`}>
+                    <Button variant='outline' size='sm'>
+                    <User className='ml-2 h-4 w-4'/>
+                        {user?.username}
+                    </Button>
+                    </NavLink>
+            
                 <Button variant='ghost' size='sm'>
                 خروج
                 </Button>
-                </div> */}
+                </div>
+            ):(
             <NavLink to='/Auth/Login' className='md:block'>
                 <Button variant='default' size='sm'>ورود</Button>
             </NavLink>
+            )}
             </div>
         </div>
     </nav>

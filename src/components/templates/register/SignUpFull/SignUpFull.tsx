@@ -12,7 +12,7 @@ const SignUpFull: React.FC = () => {
   return (
     <Formik
       initialValues={{
-        fullName: '',
+        username: '',
         email: '',
         phone: '',
         password: '',
@@ -21,7 +21,7 @@ const SignUpFull: React.FC = () => {
         registerMutation.mutate(values , {
             onSuccess:(data)=>{
                 showSuccess('ثبت نام با موفقیت انجام شد . لطفا وارد شوید!')
-                values.fullName = "",
+                values.username = "",
                 values.email = "",
                 values.phone = "",
                 values.password = ""
@@ -35,14 +35,14 @@ const SignUpFull: React.FC = () => {
       {({ values, handleChange, handleSubmit }) => (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label htmlFor="fullName">نام و نام خانوادگی</Label>
+            <Label htmlFor="username">نام و نام خانوادگی</Label>
             <Input
-              id="fullName"
-              name="fullName"
+              id="username"
+              name="username"
               type="text"
               placeholder="نام خود را وارد کنید"
               className="mt-1"
-              value={values.fullName}
+              value={values.username}
               onChange={handleChange}
             />
           </div>

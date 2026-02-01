@@ -1,5 +1,5 @@
 export interface registerValues {
-    fullName:string,
+    username:string,
     email:string,
     phone:string,
     password:string
