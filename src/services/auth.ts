@@ -1,5 +1,6 @@
 import { useAuthStore } from "@store/authStore";
 import { useMutation } from "@tanstack/react-query";
+import { showSuccess } from "@utils/Toasts";
 import { LoginPhone , LoginPhoneCode , LoginWithPassword, RegisterPhoneCodePayload, RegisterPhonePayload, registerValues } from "types/auth";
 const API_URL = 'http://localhost:3000/api/auth/';
 
@@ -145,6 +146,27 @@ export const useLoginWithPhoneCode = ()=>{
             authStore.login(token , user.data)
 
             return data
+        }
+    })
+};
+
+// logout 
+export const useLogoutMutation = ()=>{
+    const {logout} = useAuthStore.getState();
+
+    return useMutation({
+        mutationFn:async()=>{
+            const res = await fetch(`${API_URL}logout`,{
+                method:'POST',
+                credentials:'include',
+            });
+            if(res.ok){
+                logout();
+                return true
+            }
+        },
+        onSuccess: ()=>{
+            showSuccess('شما با موفقیت خارج شدید')
         }
     })
 }

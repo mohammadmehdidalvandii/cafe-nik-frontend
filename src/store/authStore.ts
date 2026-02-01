@@ -16,7 +16,7 @@ interface AuthStateProps{
     user:UserProps | null;
     isAuthenticated:boolean;
     login:(token:string , user:UserProps)=>void;
-    // logout:()=>Promise<void>;
+    logout:()=>Promise<void>;
     updateUser:(data:UserProps)=>void;
 }
 
@@ -32,6 +32,11 @@ export const useAuthStore = create<AuthStateProps>((set)=>({
         localStorage.setItem('user', JSON.stringify(user));
         set({token , user , isAuthenticated:true})
     },
-    logout:()=>{},
+    logout:async()=>{
+        localStorage.removeItem('token');
+        localStorage.removeItem('accessTokenExpiry');
+        localStorage.removeItem('user');
+        set({token:null , user:null , isAuthenticated:false})
+    },
     updateUser:()=>{},
 }))
