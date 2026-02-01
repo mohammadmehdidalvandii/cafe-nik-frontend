@@ -169,4 +169,48 @@ export const useLogoutMutation = ()=>{
             showSuccess('شما با موفقیت خارج شدید')
         }
     })
-}
+};
+
+// Refresh-Token
+export const refreshToken = async ()=>{
+    const {logout , login} = useAuthStore.getState()
+    const res = await fetch(`${API_URL}refreshToken`,{
+        method:'POST',
+        credentials:'include',
+    });
+    if(!res.ok){
+        logout();
+        return null
+    };
+
+    const data = await res.json();
+    const token = data.data.accessToken;
+    localStorage.setItem("token", token)
+    localStorage.setItem("accessTokenExpiry",(Date.now() + 15 * 60 * 1000).toString());
+
+    const userRes = await fetch(`${API_URL}profile`,{
+        headers:{Authorization:`Bearer ${token}`}
+    });
+
+    if(!userRes.ok){
+        const errorData = await userRes.json();
+        throw new Error(errorData.message)
+    };
+
+    const user = await userRes.json();
+    if(user){
+        login(token , user.data)
+    };
+
+    return token
+    
+};
+
+// check valid token;
+export const getValidToken = async ()=>{
+    let {token} = useAuthStore.getState();
+    if(token) return token;
+
+    token = await refreshToken();
+    return token
+};

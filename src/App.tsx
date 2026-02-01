@@ -6,6 +6,7 @@ import { MainLayout } from '@layouts/MainLayout';
 import AdminLayout from '@layouts/AdminLayout';
 import BranchLayout from '@layouts/BranchLayout';
 import CustomerLayout from '@layouts/CustomerLayout';
+import RefreshTokenProvider from '@providers/RefreshTokenProvider';
 // main
 const Home = lazy(()=>import('@pages/Home/Home'));
 const Menu = lazy(()=>import('@pages/Menu/Menu'));
@@ -44,6 +45,7 @@ const App:React.FC = ()=>{
     <QueryProvider>
       <BrowserRouter>
       <ToasterProvider/>
+      <RefreshTokenProvider/>
         <Suspense fallback={<Loading/>}>
           <Routes>
             {/* Public pages */}
