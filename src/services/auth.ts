@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { LoginWithPassword, RegisterPhoneCodePayload, RegisterPhonePayload, registerValues } from "types/auth";
+import { LoginPhone , LoginPhoneCode , LoginWithPassword, RegisterPhoneCodePayload, RegisterPhonePayload, registerValues } from "types/auth";
 const API_URL = 'http://localhost:3000/api/auth/';
 
 // register full
@@ -73,6 +73,48 @@ export const useLoginWithPassword = ()=>{
             const data = await res.json();
 
             console.log("data =>" , data);
+
+            return data
+        }
+    })
+}
+// login with password phone
+export  const useLoginWithPhone = ()=>{
+    return useMutation({
+        mutationFn: async (values:LoginPhone)=>{
+            console.log("va =>", values)
+            const res = await fetch(`${API_URL}sendCode`,{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify(values),
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'شماره تلفن وجود ندار یا معتبر نیست');
+            };
+            return res.json()
+        }
+    })
+}
+// login with password code
+export const useLoginWithPhoneCode = ()=>{
+    return useMutation({
+        mutationFn: async (values:LoginPhoneCode)=>{
+            const res = await fetch(`${API_URL}verify-code`,{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                credentials:'include',
+                body:JSON.stringify(values),
+            });
+
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'کد نامعتبر است')
+            };
+
+            const data = await res.json();
+
+            console.log("data =>", data);
 
             return data
         }

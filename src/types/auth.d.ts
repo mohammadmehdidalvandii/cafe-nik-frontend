@@ -19,3 +19,15 @@ export type RegisterPhoneCodePayload = {
   phone: string
   code: string
 }
+
+export type LoginWithPassword = {
+  email:string,
+  password:string
+}
+
+
+export interface LoginWithOTP extends SignUpOTPFormValues{};
+
+export interface LoginPhone extends RegisterPhonePayload{};
+
+export interface LoginPhoneCode extends RegisterPhoneCodePayload{};
