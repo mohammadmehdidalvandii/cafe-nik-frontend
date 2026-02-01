@@ -20,7 +20,7 @@ export default defineConfig({
       '@models':'/src/models/',
       '@providers':'/src/providers/',
       '@services':'/src/services/',
-      '@store':'/src/services/',
+      '@store':'/src/store/',
       '@validation':'/src/validations/',
       '@utils':'/src/utils/',
     }

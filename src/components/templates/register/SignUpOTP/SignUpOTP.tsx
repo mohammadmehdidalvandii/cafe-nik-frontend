@@ -36,7 +36,6 @@ const SignUpOTP: React.FC = () => {
             code:values.code
           },{
             onSuccess:(data)=>{
-              console.log("data =>", data)
               showSuccess('ثبت نام شما موفقیت آمیزبود')
               navigate('/')
             },

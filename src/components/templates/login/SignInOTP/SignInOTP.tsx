@@ -38,7 +38,7 @@ const SignInOTP: React.FC = () => {
             },{
               onSuccess:(data)=>{
                 showSuccess('ورود شما موفقیت آمیز بود');
-                // navigate('/')
+                navigate('/')
               },
               onError:(error)=>{
                 showError(error.message || 'ورود شما ناموفق بود دوباره تلاش کنید')

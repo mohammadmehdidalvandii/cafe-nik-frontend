@@ -5,9 +5,11 @@ import { useLoginWithPassword } from '@services/auth'
 import { showError, showSuccess } from '@utils/Toasts'
 import { Formik } from 'formik'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { LoginWithPassword } from 'types/auth'
 
 const SignInEmailUsername: React.FC = () => {
+    const navigate = useNavigate()
     const loginPassword = useLoginWithPassword()
   return (
     <Formik<LoginWithPassword>
@@ -15,8 +17,8 @@ const SignInEmailUsername: React.FC = () => {
       onSubmit={(values:LoginWithPassword) => {
         loginPassword.mutate(values, {
             onSuccess:(data)=>{
-                console.log("data ==>", data);
-                showSuccess('ورود شما موفقیت آمیز بود')
+                showSuccess('ورود شما موفقیت آمیز بود');
+                navigate('/')
             },
             onError:(error)=>{
                 showError(error.message || 'با شماره تلفن وارد شوید')
