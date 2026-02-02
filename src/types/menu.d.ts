@@ -2,10 +2,10 @@ export type ProductMenusProps = {
     id:string,
     name:string,
     description:string,
-    size:{
-        small:string,
-        medium:string,
-        large:string
+    size?:{
+        small:number,
+        medium:number,
+        large:number
     } | null,
     categoryProduct:{
         name:string

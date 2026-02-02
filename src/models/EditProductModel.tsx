@@ -7,10 +7,27 @@ import { Switch } from '@components/UI/Switch';
 import { Textarea } from '@components/UI/Textarea';
 import { Coffee, Edit2, Filter, Save } from 'lucide-react';
 import React, { useState } from 'react'
+import { ProductMenusProps } from 'types/menu';
 
-const EditProductModel:React.FC = ()=>{
+interface productData {
+    product:ProductMenusProps,
+}
+
+const EditProductModel:React.FC<productData> = ({product})=>{
     const [showModel, setShowModel] = useState<boolean>(false);
-    const [hasSize, setHasSize] = useState<boolean>(false);
+    const [hasSize, setHasSize] = useState<boolean>(product.size !== null ? true : false);
+    const [form , setForm] = useState({
+      name:product.name,
+      description:product.description,
+      base_price:product.base_price ,
+      size:product.size ? {
+        small: Number(product.size.small??""),
+        medium: Number(product.size.medium?? ""),
+        large: Number(product.size.large?? ""),
+      }:null,
+      category_product:product.categoryProduct.name,
+    })
+
   return (
        <Dialog open={showModel} onOpenChange={setShowModel}>
       <DialogTrigger asChild>
@@ -32,34 +49,39 @@ const EditProductModel:React.FC = ()=>{
           <div className="my-2">
             <div className="my-2">
               <Label>نام محصول *</Label>
-              <Input placeholder="مثال : اسپرسو دوبل" />
+              <Input placeholder="مثال : اسپرسو دوبل" 
+                value={form.name}
+              />
             </div>
             <div className={`grid gap-4 ${hasSize ? "" : "sm:grid-cols-2"}`}>
               <div className="my-2">
                 <Label>دسته بندی *</Label>
-                <Select>
+                <Select value={form.category_product}>
                   <SelectTrigger className="w-full">
                     <Filter className="ml-2 h-4 w-4" />
                     <SelectValue placeholder="فیلتر دسته بندی" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">همه دسته بندی</SelectItem>
-                    <SelectItem value="all">قهوه</SelectItem>
-                    <SelectItem value="all">چای و دمنوش</SelectItem>
-                    <SelectItem value="all">نوشیدنی سرد</SelectItem>
-                    <SelectItem value="all">غذا</SelectItem>
-                    <SelectItem value="all">دسر</SelectItem>
+                    <SelectItem value="قهوه ">قهوه</SelectItem>
+                    <SelectItem value="چای و دمنوش">چای و دمنوش</SelectItem>
+                    <SelectItem value="نوشیدنی سرد">نوشیدنی سرد</SelectItem>
+                    <SelectItem value="غذا">غذا</SelectItem>
+                    <SelectItem value="دسر">دسر</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
+              {!hasSize && 
               <div className="my-2">
                 <Label>قیمت پایه (تومان) *</Label>
-                <Input />
+                <Input value={form?.base_price} />
               </div>
+              }
             </div>
             <div className="my-2">
               <Label>توضیجات *</Label>
-              <Textarea placeholder="توضیحات محصول" />
+              <Textarea placeholder="توضیحات محصول" 
+                value={form.description} 
+              />
             </div>
             <div className="my-4">
               <div className="flex items-center justify-between rounded-xl bg-secondary/30 p-4">
@@ -83,15 +105,21 @@ const EditProductModel:React.FC = ()=>{
                 <div className="grid gap-4 sm:grid-cols-3">
                   <div className="my-2">
                     <Label>کوچک *</Label>
-                    <Input type="number" placeholder="25000" dir="ltr" />
+                    <Input type="number" placeholder="25000" dir="ltr"  
+                      value={form.size?.small}
+                    />
                   </div>
                   <div className="my-2">
                     <Label>متوسط *</Label>
-                    <Input type="number" placeholder="350000" dir="ltr" />
+                    <Input type="number" placeholder="350000" dir="ltr"  
+                      value={form.size?.medium}
+                    />
                   </div>
                   <div className="my-2">
                     <Label>بزرگ *</Label>
-                    <Input type="number" placeholder="45000" dir="ltr" />
+                    <Input type="number" placeholder="45000" dir="ltr"  
+                      value={form.size?.large}
+                    />
                   </div>
                 </div>
               </div>
@@ -101,10 +129,10 @@ const EditProductModel:React.FC = ()=>{
             <div className="flex items-center justify-between">
                 <Button variant="destructive">حذف</Button>
                 <div className="flex gap-4">
-                    <Button variant="outline">انصراف</Button>
+                    <Button variant="outline" onClick={()=>(setShowModel(false))}>انصراف</Button>
                     <Button variant="default">
                       <Save className="h-4 w-4 ml-2" />
-                      افزودن
+                      ویرایش
                     </Button>
                 </div>
             </div>

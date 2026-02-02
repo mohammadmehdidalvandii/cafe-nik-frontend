@@ -109,7 +109,7 @@ const MenuTable:React.FC<productData> = ({products = []})=>{
                             }
                         </TableCell>
                         <TableCell>
-                            <EditProductModel/>
+                            <EditProductModel product={menu}/>
                         </TableCell>
                     </TableRow>
                     ))}
