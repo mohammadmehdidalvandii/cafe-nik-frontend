@@ -3,8 +3,10 @@ import { NavLink } from 'react-router-dom';
 import {Coffee, ShoppingCart, User} from 'lucide-react';
 import { Button } from '@components/UI/Button';
 import { useAuthStore } from '@store/authStore';
+import { useLogoutMutation } from '@services/auth';
 
 const Navigation:React.FC  =()=>{
+    const logoutMutation = useLogoutMutation();
     const {user , isAuthenticated} = useAuthStore();
     const [totalItems, setTotalItems] = useState(1);
 
@@ -18,6 +20,10 @@ const Navigation:React.FC  =()=>{
         "مشتری":{
             path:'/Customer'
         } as any
+    };
+
+    const handlerLogout = ()=>{
+        logoutMutation.mutate()
     }
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-bgk/95 backdrop-blur">
@@ -54,7 +60,7 @@ const Navigation:React.FC  =()=>{
                     </Button>
                     </NavLink>
             
-                <Button variant='ghost' size='sm'>
+                <Button variant='ghost' size='sm' onClick={handlerLogout}>
                 خروج
                 </Button>
                 </div>
