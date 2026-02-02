@@ -2,14 +2,24 @@ import CustomerSidebar from '@components/templates/customerPanel/CustomerSidebar
 import { Button } from '@components/UI/Button'
 import { Sheet, SheetContent, SheetTrigger } from '@components/UI/Sheet'
 import { customerPageMeta } from '@pages/Customer/customerPageMeta'
+import { useAuthStore } from '@store/authStore'
+import { showError } from '@utils/Toasts'
 import { Menu } from 'lucide-react'
-import React, { useState } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 const CustomerLayout:React.FC = ()=>{
+    const {token , user} = useAuthStore();
+    const navigate = useNavigate()
     const [mobileMenu , setMobileMenu] = useState(false);
     const {pathname} = useLocation();
     const metaPage = customerPageMeta[pathname];
+        useEffect(()=>{
+          if(!token || user?.roles !== 'مدیر شعبه'){
+            showError('شما اجازه دسترسی به این صفحه ندارید اول وارد شوید');
+            navigate('/')
+          }
+        },[])
   return (
     <div className="min-h-screen">
         {/* Desktop Sidebar */}
