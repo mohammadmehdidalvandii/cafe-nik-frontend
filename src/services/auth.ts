@@ -37,7 +37,9 @@ export const useRegisterWithPhone = ()=>{
                 throw new Error(errorData.message || 'ثبت نام ناموفق بود چند دقیقه دیگر دوباره تلاش کنید ')
             };
 
-            return res.json();
+            const data = await res.json();
+
+            return data
         }
     })
 };
@@ -56,13 +58,16 @@ export const useRegisterPhoneCode = ()=>{
                 throw new Error(errorData.message || 'کد وارد شد نادرست میباشید  یا معتبر نیست ')
             };
             const data = await res.json();
-            
+            console.log("data =>" , data.data[0])
 
-            const token = data.data.accessToken;
+            const token = data.data[0];
+            console.log("token =>" , token)
             const userRes = await fetch(`${API_URL}profile`,{
                 headers:{Authorization : `Bearer ${token}`}
             })
             const user = await userRes.json();
+
+            console.log("user=>", user)
 
             authStore.login(token , user.data)
 
