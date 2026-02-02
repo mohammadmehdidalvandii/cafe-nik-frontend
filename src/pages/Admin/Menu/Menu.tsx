@@ -8,7 +8,7 @@ const Menu:React.FC = ()=>{
   return (
     <>
     <MenuCategories/>
-    <MenuTable products={data?.data}/>    
+    <MenuTable products={data}/>    
     </>
   )
 }

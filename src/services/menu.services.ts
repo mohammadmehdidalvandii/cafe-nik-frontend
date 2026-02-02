@@ -13,7 +13,7 @@ export const getAllProductMenu = ()=>{
                 throw new Error(errorData.message || 'دریافت منو با مشکل برخورد');
             };
             const data = await res.json();
-            return data
+            return data.data
         }
     })
 }
