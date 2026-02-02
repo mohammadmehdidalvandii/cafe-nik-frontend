@@ -15,7 +15,6 @@ interface productData {
 const MenuTable:React.FC<productData> = ({products = []})=>{
     const [search , setSearch] = useState('');
     const [category , setCategory]= useState('all');
-
     // Filter menus
     const filteredProducts = useMemo(()=>{
         return products.filter((menu)=>{
@@ -28,7 +27,6 @@ const MenuTable:React.FC<productData> = ({products = []})=>{
         })
     },[products , search , category])
 
-    console.log("Product", products)
   return (
     <section className="space-y-4 mt-8">
         {/* Filters */}
@@ -49,7 +47,7 @@ const MenuTable:React.FC<productData> = ({products = []})=>{
                 </SelectTrigger>
                 <SelectContent>
                     <SelectItem value='all'>همه دسته بندی</SelectItem>
-                    <SelectItem value='قهوه'>قهوه</SelectItem>
+                    <SelectItem value='قهوه '>قهوه</SelectItem>
                     <SelectItem value='چای و دمنوش'>چای و دمنوش</SelectItem>
                     <SelectItem value='نوشیدنی سرد'>نوشیدنی سرد</SelectItem>
                     <SelectItem value='غذا'>غذا</SelectItem>
@@ -100,9 +98,7 @@ const MenuTable:React.FC<productData> = ({products = []})=>{
                             {/* {menu.base_price.toLocaleString('fa-IR')} */}
                             {menu.base_price
                             ? menu.base_price.toLocaleString('fa-IR')
-                            : menu.size
-                            ? Number(Object.values(menu.size)[0]).toLocaleString('fa-IR')
-                            :'-'
+                            : Number(menu.size?.medium).toLocaleString('fa-IR')
                             }
                             
                         </TableCell>
