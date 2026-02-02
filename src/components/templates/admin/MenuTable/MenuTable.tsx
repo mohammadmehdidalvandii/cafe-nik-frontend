@@ -58,7 +58,7 @@ const MenuTable:React.FC<productData> = ({products = []})=>{
             </Select>
                 <CreateProductModel/>
             <div className="text-sm text-muted-foreground">
-               {/* {filteredProducts.length.toLocaleString('fa-IR')}محصول */}
+               {filteredProducts.length.toLocaleString('fa-IR')}محصول
             </div>
         </div>
         {/* Table */}
@@ -81,7 +81,7 @@ const MenuTable:React.FC<productData> = ({products = []})=>{
                         </TableRow> 
                     )}
                     {filteredProducts.map((menu)=>(
-                    <TableRow className='hover:bg-secondary/30'>
+                    <TableRow className='hover:bg-secondary/30' key={menu.id}>
                         <TableCell>
                             <div className="flex items-center gap-3">
                                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
