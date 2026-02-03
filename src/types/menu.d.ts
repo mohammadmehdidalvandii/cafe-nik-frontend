@@ -13,3 +13,15 @@ export type ProductMenusProps = {
     is_active:boolean,
     base_price:number
 }
+export type ProductFormProps ={
+    name:string,
+    description:string,
+    category_id:string,
+    base_price?:number | null,
+    size:{
+        small?:number,
+        medium?:number,
+        large?:number,
+    } | null,
+};
+
