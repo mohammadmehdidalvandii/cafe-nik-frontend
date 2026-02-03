@@ -64,7 +64,29 @@ export const useDeleteMenuProduct = ()=>{
         }
     })
 }
-
+// Update Menu Product
+export const useUpdateProductMenu = ()=>{
+        const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (form:Partial<ProductFormProps>)=>{
+            const res = await fetch(`${API_URL}update/${form.id}`,{
+                method:"PUT",
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify(form),
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'عملیات اپدیت محصول با خطا مواجه شد')
+            };
+            const data = await res.json();
+    
+            return data.data
+        },
+        onSuccess:()=>{
+            queryClient.invalidateQueries({queryKey:['menus']})
+        }
+    })
+}
 
 // Get Category List
 export const getAllCategories = ()=>{
