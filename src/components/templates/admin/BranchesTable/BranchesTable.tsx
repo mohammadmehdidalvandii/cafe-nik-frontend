@@ -11,6 +11,7 @@ import { Clock,MapPin, Search } from "lucide-react";
 import React, { lazy } from "react";
 const CreateBranchModel = lazy(()=>import('@models/CreateBranchModel'));
 const BranchDetailsModel = lazy(()=>import('@models/BranchDetailsModel'));
+const AddManagerBranchModel = lazy(()=>import('@models/AddManagerBranchModel'));
 
 const BranchesTable: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const BranchesTable: React.FC = () => {
           <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input placeholder="جستجو شعبه" className="pr-10" />
         </div>
+          <AddManagerBranchModel/>
           <CreateBranchModel/>
         <div className="text-sm text-muted-foreground">
           {(25).toLocaleString("fa-IR")} شعبه
