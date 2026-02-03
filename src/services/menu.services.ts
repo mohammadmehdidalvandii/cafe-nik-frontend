@@ -43,6 +43,27 @@ export const useCreateProductMenu = ()=>{
     })
 }
 
+// Delete Menu product 
+export const useDeleteMenuProduct = ()=>{
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn:async (id:string)=>{
+            const res = await fetch(`${API_URL}delete/${id}`,{
+                method:'DELETE',
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'عملیات حذف با مشکل برخورد')
+            };
+
+            const data = await res.json();
+            return data.data
+        },
+        onSuccess:()=>{
+            queryClient.invalidateQueries({queryKey:['menus']})
+        }
+    })
+}
 
 
 // Get Category List

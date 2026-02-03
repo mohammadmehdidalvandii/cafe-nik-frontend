@@ -5,18 +5,23 @@ import { Label } from '@components/UI/Label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/UI/Select';
 import { Switch } from '@components/UI/Switch';
 import { Textarea } from '@components/UI/Textarea';
+import { useDeleteMenuProduct } from '@services/menu.services';
 import { Coffee, Edit2, Filter, Save } from 'lucide-react';
 import React, { useState } from 'react'
 import { ProductMenusProps } from 'types/menu';
+import swal from 'sweetalert';
+import { showError, showSuccess } from '@utils/Toasts';
 
 interface productData {
     product:ProductMenusProps,
 }
 
 const EditProductModel:React.FC<productData> = ({product})=>{
+  const deleteMenuProduct = useDeleteMenuProduct();
     const [showModel, setShowModel] = useState<boolean>(false);
     const [hasSize, setHasSize] = useState<boolean>(product.size !== null ? true : false);
     const [form , setForm] = useState({
+      id:product.id,
       name:product.name,
       description:product.description,
       base_price:product.base_price ,
@@ -26,7 +31,26 @@ const EditProductModel:React.FC<productData> = ({product})=>{
         large: Number(product.size.large?? ""),
       }:null,
       category_product:product.categoryProduct.name,
-    })
+    });
+    // Delete menu Product
+    const handleDeleteMenu = (menuID:string)=>{
+        swal({
+          title:'آیا از حذف محصول اطمینان دارید ؟',
+          text:'درصورت حذف محصول غیرقابل بازگشت هست',
+          buttons:['نه','بله']
+        }).then((result)=>{
+          if(result){
+            deleteMenuProduct.mutate(menuID,{
+              onSuccess:()=>{
+                showSuccess('محصول مورد نظر با موفقیت حذف شد')
+              },
+              onError:(error)=>{
+                showError('حذف محصول با مشکل برخورد دوباره تلاش کنید')
+              }
+            })
+          }
+        })
+    }
 
   return (
        <Dialog open={showModel} onOpenChange={setShowModel}>
@@ -127,7 +151,7 @@ const EditProductModel:React.FC<productData> = ({product})=>{
           </div>
           <div className="mt-4">
             <div className="flex items-center justify-between">
-                <Button variant="destructive">حذف</Button>
+                <Button variant="destructive" type='button' onClick={()=>handleDeleteMenu(form.id)}>حذف</Button>
                 <div className="flex gap-4">
                     <Button variant="outline" onClick={()=>(setShowModel(false))}>انصراف</Button>
                     <Button variant="default">
