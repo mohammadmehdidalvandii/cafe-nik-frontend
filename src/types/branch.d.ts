@@ -6,3 +6,16 @@ export type BranchCreateProps={
     users_id:string | undefined,
     phone:string
 }
+
+export type BranchesProps = {
+    id:string,
+    name:string,
+    address:string,
+    phone:string,
+    city:{
+        name:string,
+    },
+    user:{
+        name:string
+    }
+}

@@ -43,6 +43,27 @@ export const UseGetAllCities = ()=>{
     })
 }
 
+// get all branches;
+
+export const useGetAllBranches = ()=>{
+    return useQuery({
+        queryKey:['branches'],
+        queryFn: async ()=>{
+            const res = await fetch(`${API_URL}`,{
+                method:'GET',
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'دریافت لیست شعبه با خطا مواجه شد');
+            };
+
+            const data = await res.json();
+
+            return data.data
+        }
+    })
+}
+
 // created branch 
 export const useCreateBranch = ()=>{
     const queryClient = useQueryClient();
@@ -62,7 +83,7 @@ export const useCreateBranch = ()=>{
             return data.data;
         },
         onSuccess:()=>{
-            queryClient.invalidateQueries({queryKey:[]})
+            // queryClient.invalidateQueries({queryKey:['branches']})
         }
     })
 }
