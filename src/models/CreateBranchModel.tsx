@@ -17,9 +17,10 @@ import {
   SelectValue,
   SelectItem
 } from "@components/UI/Select";
+import { UseGetAllUsersBranch } from "@services/branch.services";
 
 const CreateBranchModel: React.FC = () => {
-  
+  const {data} = UseGetAllUsersBranch();
   const [showModel, setShowModel] = useState<boolean>(false);
   return (
     <Dialog open={showModel} onOpenChange={setShowModel}>
@@ -69,7 +70,9 @@ const CreateBranchModel: React.FC = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="All">انتخاب مدیر</SelectItem>
-                    <SelectItem value="156165165">محمدی</SelectItem>
+                    {data?.map((user:any)=>(
+                      <SelectItem value={user.id} key={user.id}>{user.username}-{user.phone}</SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
             </div>
