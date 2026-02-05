@@ -8,10 +8,18 @@ import {
 } from "@components/UI/Dialog";
 import { Input } from "@components/UI/Input";
 import { Label } from "@radix-ui/react-label";
-import { MapPin, Plus } from "lucide-react";
+import { MapPin, Plus, User } from "lucide-react";
 import React, { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectTrigger,
+  SelectValue,
+  SelectItem
+} from "@components/UI/Select";
 
 const CreateBranchModel: React.FC = () => {
+  
   const [showModel, setShowModel] = useState<boolean>(false);
   return (
     <Dialog open={showModel} onOpenChange={setShowModel}>
@@ -51,6 +59,19 @@ const CreateBranchModel: React.FC = () => {
               <Input 
                 placeholder="آدرس کامل شعبه ..."
               />
+            </div>
+            <div className="space-y-2 mt-2">
+                <Select>
+              <Label> انتحاب مدیر شعبه *</Label>
+                  <SelectTrigger>
+                      <User className="ml-2 h-4 w-4"/>
+                      <SelectValue placeholder='مدیرشعبه '/>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="All">انتخاب مدیر</SelectItem>
+                    <SelectItem value="156165165">محمدی</SelectItem>
+                  </SelectContent>
+                </Select>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 mt-2">
               <div className="space-y-2">
