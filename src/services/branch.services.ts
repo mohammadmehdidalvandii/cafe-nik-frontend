@@ -23,3 +23,21 @@ export const UseGetAllUsersBranch = ()=>{
         }
     })
 }
+// get all cities
+export const UseGetAllCities = ()=>{
+    return useQuery ({
+        queryKey:['cities'],
+        queryFn: async ()=>{
+            const res = await fetch('http://localhost:3000/api/city',{
+                method:'GET',
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'دریافت لیست  شهر ها به مشکل خورد');
+            };
+
+            const data = await res.json();
+            return data.data
+        }
+    })
+}

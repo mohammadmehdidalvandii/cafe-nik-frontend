@@ -17,10 +17,11 @@ import {
   SelectValue,
   SelectItem
 } from "@components/UI/Select";
-import { UseGetAllUsersBranch } from "@services/branch.services";
+import { UseGetAllCities, UseGetAllUsersBranch } from "@services/branch.services";
 
 const CreateBranchModel: React.FC = () => {
   const {data} = UseGetAllUsersBranch();
+  const {data:cities} = UseGetAllCities();
   const [showModel, setShowModel] = useState<boolean>(false);
   return (
     <Dialog open={showModel} onOpenChange={setShowModel}>
@@ -50,9 +51,18 @@ const CreateBranchModel: React.FC = () => {
               </div>
               <div className="space-y-2">
                 <Label>شهر *</Label>
-                <Input 
-                    placeholder="مثال : تهران"
-                />
+                <Select>
+                  <SelectTrigger>
+                      <User className="ml-2 h-4 w-4"/>
+                      <SelectValue placeholder='اتخاب شهر '/>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="All">انتخاب شهر </SelectItem>
+                    {cities?.map((city:any)=>(
+                      <SelectItem value={city.id} key={city.id}>{city.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
             <div className="space-y-2 mt-2">
