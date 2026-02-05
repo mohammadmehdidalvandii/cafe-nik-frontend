@@ -87,9 +87,9 @@ const BranchesTable: React.FC = () => {
                   ۱۱ شب
                 </div>
               </TableCell>
-              <TableCell>{(0).toLocaleString("fa-IR")}</TableCell>
+              <TableCell>{branch.orders_count.toLocaleString("fa-IR")}</TableCell>
               <TableCell className="font-bold text-copper">
-                {(0).toLocaleString("fa-IR")}
+                {branch.total_revenue.toLocaleString("fa-IR")}
               </TableCell>
               <TableCell>
                 <BranchDetailsModel/>
