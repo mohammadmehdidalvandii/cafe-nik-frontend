@@ -1,6 +1,7 @@
 import { useAuthStore } from '@store/authStore';
-import {useMutation , useQuery} from '@tanstack/react-query';
-const API_URL = 'http://localhost:3000/api/branch';
+import {useMutation , useQuery, useQueryClient} from '@tanstack/react-query';
+import { BranchCreateProps } from 'types/branch';
+const API_URL = 'http://localhost:3000/api/branch/';
 
 
 // get users roles manger Branch
@@ -38,6 +39,30 @@ export const UseGetAllCities = ()=>{
 
             const data = await res.json();
             return data.data
+        }
+    })
+}
+
+// created branch 
+export const useCreateBranch = ()=>{
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (formData:BranchCreateProps)=>{
+            const res = await fetch(`${API_URL}create`,{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify(formData),
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw  new Error(errorData.message || 'ایجاد شعبه با خطا مواجه شد');
+            }
+            const data = await res.json();
+
+            return data.data;
+        },
+        onSuccess:()=>{
+            queryClient.invalidateQueries({queryKey:[]})
         }
     })
 }
