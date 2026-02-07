@@ -1,7 +1,25 @@
+import { useGetAllBranches } from '@services/branch.services'
 import { MapPin, ShoppingBag, TrendingUp } from 'lucide-react'
 import React from 'react'
 
 const BranchesState:React.FC = ()=>{
+    const {data} = useGetAllBranches();
+
+    const branchCount = data?.length ?? 0
+    const totalRevenue = data?.reduce(
+      (sum:any, branch:any) => sum + (branch.total_revenue || 0),
+      0
+    ) ?? 0;
+    const orderCount = data?.reduce(
+      (sum:any, branch:any) => sum + (branch.order_count || 0),
+      0
+    ) ?? 0;
+
+    const averageRevenue =
+        branchCount > 0
+        ? Math.floor(totalRevenue / branchCount)
+    : 0
+
   return (
     <section className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-4">
@@ -12,7 +30,7 @@ const BranchesState:React.FC = ()=>{
                     </div>
                     <div>
                         <p className="text-sm text-muted-foreground">تعداد شعب</p>
-                        <p className="text-2xl font-bold">{(25).toLocaleString('fa-IR')}</p>
+                        <p className="text-2xl font-bold">{branchCount.toLocaleString('fa-IR')}</p>
                     </div>
                 </div>
             </div>
@@ -22,8 +40,8 @@ const BranchesState:React.FC = ()=>{
                         <TrendingUp className='h-6 w-6 text-green-600'/>
                     </div>
                     <div>
-                        <p className="text-sm text-muted-foreground">درامد کل</p>
-                        <p className="text-2xl font-bold">{(2924567).toLocaleString('fa-IR')}</p>
+                        <p className="text-sm text-muted-foreground">درامد کل(تومان)</p>
+                        <p className="text-2xl font-bold">{totalRevenue.toLocaleString('fa-IR')}</p>
                     </div>
                 </div>
             </div>
@@ -34,7 +52,7 @@ const BranchesState:React.FC = ()=>{
                     </div>
                     <div>
                         <p className="text-sm text-muted-foreground">کل سفارش ها</p>
-                        <p className="text-2xl font-bold">{(198).toLocaleString('fa-IR')}</p>
+                        <p className="text-2xl font-bold">{orderCount.toLocaleString('fa-IR')}</p>
                     </div>
                 </div>
             </div>
@@ -45,7 +63,7 @@ const BranchesState:React.FC = ()=>{
                     </div>
                     <div>
                         <p className="text-sm text-muted-foreground">میانگین درآمد</p>
-                        <p className="text-2xl font-bold">{(12399).toLocaleString('fa-IR')}</p>
+                        <p className="text-2xl font-bold">{averageRevenue.toLocaleString('fa-IR')}</p>
                     </div>
                 </div>
             </div>
