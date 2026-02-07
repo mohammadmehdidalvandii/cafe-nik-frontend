@@ -31,7 +31,6 @@ const CustomersTable: React.FC = () => {
     });
   }, [data, search]);
 
-  console.log("f=>", filterCustomers);
 
   return (
     <div className="space-y-4 mt-8">
@@ -97,7 +96,7 @@ const CustomersTable: React.FC = () => {
                   </TableCell>
 
                   <TableCell>
-                    <CustomerDetailsModel/>
+                    <CustomerDetailsModel customer={customer}/>
                   </TableCell>
                 </TableRow>
               ))

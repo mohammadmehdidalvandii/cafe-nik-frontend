@@ -3,7 +3,9 @@ export type CustomerProps = {
     username:string,
     phone:string
     order:{
+        id:string
         total_price:number | 0,
+        status:string
         createdAt:date
         order_items:{
             quantity:number,
@@ -13,5 +15,8 @@ export type CustomerProps = {
                 size:string|null
             }[]
         }[]
+        branch:{
+            name:string
+        }
     }[]
 }
