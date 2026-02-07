@@ -18,7 +18,7 @@ const AddManagerBranchModel = lazy(()=>import('@models/AddManagerBranchModel'));
 const BranchesTable: React.FC = () => {
   const {data} = useGetAllBranches();
   const [search , setSearch] = useState('');
-  
+    
   const filteredBranches = useMemo(()=>{
     return data?.filter((branch:BranchesProps)=>{
       const matchSearch =  branch.name.includes(search)
@@ -92,7 +92,7 @@ const BranchesTable: React.FC = () => {
                 {branch.total_revenue.toLocaleString("fa-IR")}
               </TableCell>
               <TableCell>
-                <BranchDetailsModel/>
+                <BranchDetailsModel branch={branch}/>
               </TableCell>
             </TableRow>
             ))}

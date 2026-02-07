@@ -16,7 +16,7 @@ export type BranchesProps = {
         name:string,
     },
     user:{
-        name:string
+        username:string
     },
     orders_count:number,
     total_revenue:number
