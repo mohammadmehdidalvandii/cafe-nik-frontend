@@ -13,9 +13,6 @@ const BranchDetailsModel:React.FC<BranchDetailsProps> = ({branch})=>{
     const [showModel , setShowModel] = useState<boolean>(false);
     const [isEditing , setIsEditing] = useState<boolean>(false);
 
-
-    console.log("branch=>", branch)
-
   return (
     <Dialog open={showModel} onOpenChange={setShowModel}>
         <DialogTrigger asChild>
@@ -63,7 +60,7 @@ const BranchDetailsModel:React.FC<BranchDetailsProps> = ({branch})=>{
                     </div>
                 </div>
                 {isEditing ? (
-                    <BranchEditForm/>
+                    <BranchEditForm branch={branch}/>
                 ) : (
                     <>
                                         <div className="grid gap-4 sm:grid-cols-2 mt-4">

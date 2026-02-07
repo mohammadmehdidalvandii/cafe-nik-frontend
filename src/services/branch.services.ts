@@ -1,6 +1,6 @@
 import { useAuthStore } from '@store/authStore';
 import {useMutation , useQuery, useQueryClient} from '@tanstack/react-query';
-import { BranchCreateProps } from 'types/branch';
+import { BranchCreateProps, BranchesProps } from 'types/branch';
 const API_URL = 'http://localhost:3000/api/branch/';
 
 
@@ -81,6 +81,27 @@ export const useCreateBranch = ()=>{
             const data = await res.json();
 
             return data.data;
+        },
+        onSuccess:()=>{
+            queryClient.invalidateQueries({queryKey:['branches']})
+        }
+    })
+};
+
+// updated branch
+export const useUpdateBranch = ()=>{
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (formData:Partial<BranchesProps>)=>{
+            const res = await fetch(`${API_URL}update/${formData.id}`,{
+                method:"PUT",
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify(formData)
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'اپدیت اطلاعات شعبه به مشکل خورد')
+            }
         },
         onSuccess:()=>{
             queryClient.invalidateQueries({queryKey:['branches']})
