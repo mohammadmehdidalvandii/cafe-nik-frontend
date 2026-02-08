@@ -2,8 +2,12 @@ import { Button } from '@components/UI/Button';
 import { Input } from '@components/UI/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/UI/Select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@components/UI/Table';
+import { useGetAllBranches } from '@services/branch.services';
+import { useGetAllOrders } from '@services/orders.services';
 import { Eye, Filter, Package, Search } from 'lucide-react'
-import React, { lazy } from 'react'
+import React, { lazy, useMemo, useState } from 'react'
+import { BranchesProps } from 'types/branch';
+import { OrdersProps } from 'types/orders';
 const OrderDetailsModel = lazy(()=>import('@models/OrderDetailsModel'));
 const PickupCodeVerifyModel = lazy(()=>import('@models/PickupCodeVerifyModel'));
 
@@ -17,7 +21,7 @@ const PickupCodeVerifyModel = lazy(()=>import('@models/PickupCodeVerifyModel'));
 //     cancelled:{label:"لغو شد", color:"bg-red-100 text-red-800"},
 // };
 const statusOptions = [
-  { value: "pending", label: "در انتظار تأیید" },
+  { value: "pending", label: "در انتظار تایید" },
   { value: "confirmed", label: "تأیید شده" },
   { value: "preparing", label: "در حال آماده‌سازی" },
   { value: "ready", label: "آماده تحویل" },
@@ -26,6 +30,25 @@ const statusOptions = [
 ];
 
 const OrdersTable:React.FC = ()=>{
+    const {data} = useGetAllOrders();
+    const {data:branches} = useGetAllBranches();
+    const [categoryBranch ,  setCategoryBranch] = useState('all');
+    const [searchStatus , setSearchStatus] = useState('all');
+    const [searchItem , setSearchItem] = useState('');
+
+    const filteredOrders = useMemo(()=>{
+        return data?.filter((order:OrdersProps)=>{
+            const matchBranch = categoryBranch === 'all' || order.branch.name === categoryBranch;
+            const matchStatus = searchStatus === 'در انتظار تایید' || order.status === searchStatus;
+            const matchSearch = order.user.username.includes(searchItem) || order.id.includes(searchItem) ;
+
+            return matchBranch || matchSearch || matchStatus
+        })
+    },[data , categoryBranch , searchItem , searchStatus])
+
+    console.log("f=>", filteredOrders)
+
+
   return (
     <div className="space-y-4 mt-8">
         {/* Filter */}
@@ -43,8 +66,10 @@ const OrdersTable:React.FC = ()=>{
                     <SelectValue placeholder='فیلتر شعبه'/>
                 </SelectTrigger>
                 <SelectContent>
-                    {}
                     <SelectItem value='all'>وضعیت همه شعب</SelectItem>
+                    {branches?.map((branch:BranchesProps)=>(
+                        <SelectItem value={branch.id} key={branch.id}>{branch.name}</SelectItem>
+                    ))}
                 </SelectContent>
             </Select>
             <Select>
@@ -73,32 +98,34 @@ const OrdersTable:React.FC = ()=>{
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {/* <TableRow>
-                        <TableCell colSpan={7} className='text-center py-10 text-muted-foreground'>سفارش یافت نشد</TableCell>
-                    </TableRow> */}
-
-                     <TableRow className='hover:bg-secondary/30'>
-                        <TableCell>ORD-1765180716365</TableCell>
+                    {filteredOrders?.length === 0 ? (
+                         <TableRow>
+                            <TableCell colSpan={7} className='text-center py-10 text-muted-foreground'>سفارش یافت نشد</TableCell>
+                        </TableRow> 
+                    ):(
+                    filteredOrders?.map((order:OrdersProps)=>(
+                     <TableRow className='hover:bg-secondary/30' key={order.id}>
+                        <TableCell>ORD-{order.id}</TableCell>
                         <TableCell>
                             <div>
-                                <p className="font-medium">محمدمهدویان</p>
+                                <p className="font-medium">{order.user.username}</p>
                                 <p className="text-sm text-muted-foreground" dir='ltr'>
-                                    09392223355
+                                    {order.user.phone}
                                 </p>
                             </div>
                         </TableCell>
-                        <TableCell>شعبه ونک</TableCell>
+                        <TableCell>{order.branch.name}</TableCell>
                         <TableCell>
                             <div>
-                                <p>{new Date().toLocaleDateString('fa-IR')}</p>
-                                <p className="text-sm text-muted-foreground">13:00</p>
+                                <p>{order.delivery_date}</p>
+                                <p className="text-sm text-muted-foreground">{order.delivery_time}</p>
                             </div>
                         </TableCell>
                         <TableCell className='font-bold text-copper'>
-                            {(120000).toLocaleString('fa-IR')}
+                            {order.total_price.toLocaleString('fa-IR')}
                         </TableCell>
                         <TableCell>
-                        <Select>
+                        <Select value={order.status }>
                             <SelectTrigger className='w-[150px]'>
                                 <SelectValue placeholder='فیلتر وضعیت'/>
                             </SelectTrigger>
@@ -117,6 +144,9 @@ const OrdersTable:React.FC = ()=>{
                             </div>
                         </TableCell>
                      </TableRow>   
+                    ))
+                    )}
+
 
                 </TableBody>
             </Table>
