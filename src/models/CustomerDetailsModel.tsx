@@ -87,13 +87,13 @@ const CustomerDetailsModel:React.FC<CustomerDetailProps> = ({customer})=>{
                     </span>
                   </div>
 
-                  {/* شعبه */}
+                  {/* Branch */}
                   <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                     <MapPin className='h-4 w-4' />
                     شعبه: {od.branch.name}
                   </div>
 
-                  {/* آیتم‌های سفارش */}
+                  {/* items  orders*/}
                   <div className="space-y-1 border-t border-border pt-2">
                     {od.order_items.map((item:any) => (
                       <div className="flex justify-between text-sm text-muted-foreground" key={item.id}>
