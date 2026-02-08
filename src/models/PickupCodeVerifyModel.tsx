@@ -1,11 +1,39 @@
 import { Button } from '@components/UI/Button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@components/UI/Dialog'
 import { Input } from '@components/UI/Input';
+import { useGetPickUpCode } from '@services/orders.services';
+import { showError, showSuccess } from '@utils/Toasts';
 import { CheckCircle, Package } from 'lucide-react';
 import React, { useState } from 'react'
+import { OrdersProps } from 'types/orders';
 
-const PickupCodeVerifyModel:React.FC = ()=>{
+interface pickUpCodeProps{
+    order:OrdersProps
+}
+
+const PickupCodeVerifyModel:React.FC<pickUpCodeProps> = ({order})=>{
+    const getPickUpCode = useGetPickUpCode()
     const [showModel , setShowModel] = useState<boolean>(false);
+    const [pickupCode , SetPickupCode] = useState('')
+
+    const handleSendCode = (e:React.MouseEvent<HTMLButtonElement>)=>{
+        e.preventDefault();
+          if (!pickupCode.trim()) {
+      showError("ابتدا کد تحویل را وارد کنید");
+      return;
+    }
+
+        getPickUpCode.mutate(pickupCode,{
+            onSuccess:()=>{
+                showSuccess('کد شما تایید شد ');
+                setShowModel(false)
+            },
+            onError:(error)=>{
+                showError(error.message || 'کد تحویل نامعتبر است')
+            }
+        })
+    }
+
   return (
     <Dialog open={showModel} onOpenChange={setShowModel}>
         <DialogTrigger asChild>
@@ -28,15 +56,21 @@ const PickupCodeVerifyModel:React.FC = ()=>{
                 <div className="rounded-xl bg-secondary/30 p-4 space-y-2">
                     <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">شماره سفارش :</span>
-                        <span className="font-medium">ORD-1766319903166</span>
+                        <span className="font-medium">ORD-{order.id}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground"> محصول :</span>
+                        <span className="font-medium">{order.order_items.map((od)=>(
+                            od.menu.name
+                        ))}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">مشتری :</span>
-                        <span className="font-medium">محمدمهدی دالوندی</span>
+                        <span className="font-medium">{order.user.username}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">مبلغ :</span>
-                        <span className="font-medium">{(71500).toLocaleString('fa-IR')}</span>
+                        <span className="font-medium">{order.total_price.toLocaleString('fa-IR')}</span>
                     </div>
                 </div>
                 {/* code input */}
@@ -47,19 +81,20 @@ const PickupCodeVerifyModel:React.FC = ()=>{
                     <div className="flex justify-center gap-2">
                         <Input
                             type='text'
-                            inputMode='numeric'
                             className={`h-12 w-full text-center text-2xl font-bold`}
+                            value={pickupCode}
+                            onChange={e=>SetPickupCode(e.target.value)}
                         />
                     </div>
                 </div>
             </div>
             <DialogFooter className='gap-2'>
-                <Button variant='destructive'>
+                <Button variant='destructive' onClick={()=>setShowModel(false)}>
                     انصراف
                 </Button>
-                <Button className='bg-green-600 hover:bg-green-700'>
+                <Button className="bg-green-600 hover:bg-green-700" disabled={pickupCode === ''}  onClick={handleSendCode}>
                     <CheckCircle className='ml-2 h-4 w-4'/>
-                    برسی و تحویل سفارش
+                    {pickupCode === '' ? 'ابتدا کد وارد کنید':'برسی و تحویل سفارش'}
                 </Button>
             </DialogFooter>
         </DialogContent>

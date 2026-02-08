@@ -1,3 +1,4 @@
+import { Badge } from '@components/UI/Badge';
 import { Button } from '@components/UI/Button';
 import { Input } from '@components/UI/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/UI/Select';
@@ -139,7 +140,11 @@ const OrdersTable:React.FC = ()=>{
                         <TableCell>
                             <div className="flex items-center gap-1">
                                 <OrderDetailsModel order={order}/>
-                                <PickupCodeVerifyModel/>
+                                {order.status === 'تحویل داد شد' ? (
+                                <Badge variant='secondary'>{order.status}</Badge>
+                                ):
+                                <PickupCodeVerifyModel order={order}/>
+                                }
                             </div>
                         </TableCell>
                      </TableRow>   
