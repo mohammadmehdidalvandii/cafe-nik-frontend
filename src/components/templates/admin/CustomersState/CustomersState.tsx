@@ -1,8 +1,37 @@
+import { useGetAllCustomer } from '@services/customers.services'
 import { Phone, ShoppingBag, User } from 'lucide-react'
 import React from 'react'
 
 const CustomersState:React.FC = ()=>{
-  return (
+    const {data} = useGetAllCustomer();
+
+    const countCustomers = data?.length ?? 0;
+    
+    const totalOrders = data?.reduce(
+        (sum: number, customer: any) => {
+          const ordersCount = Array.isArray(customer.order)
+            ? customer.order.length
+            : 0;
+        
+          return sum + ordersCount;
+    },
+        0
+    ) ?? 0;
+    
+    const averageOrders =
+    countCustomers > 0
+    ? Math.round(totalOrders / countCustomers)
+    : 0;
+    
+    const customersWithOrders =
+  data?.filter(
+    (customer:any) =>
+      Array.isArray(customer.order) && customer.order.length > 0
+  ) ?? [];
+
+  const activeCustomers = customersWithOrders.length
+
+    return (
     <div className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-3">
             <div className="rounded-xl bg-white p-5 shadow-md">
@@ -12,7 +41,7 @@ const CustomersState:React.FC = ()=>{
                     </div>
                     <div>
                         <p className="text-sm text-muted-foreground">کل مشتریان</p>
-                        <p className="text-2xl font-bold">{(12).toLocaleString('fa-IR')}</p>
+                        <p className="text-2xl font-bold">{countCustomers.toLocaleString('fa-IR')}</p>
                     </div>
                 </div>
             </div>
@@ -23,7 +52,7 @@ const CustomersState:React.FC = ()=>{
                     </div>
                     <div>
                         <p className="text-sm text-muted-foreground">میانگین سفارش</p>
-                        <p className="text-2xl font-bold">{(0).toLocaleString('fa-IR')}</p>
+                        <p className="text-2xl font-bold">{averageOrders.toLocaleString('fa-IR')}</p>
                     </div>
                 </div>
             </div>
@@ -34,7 +63,7 @@ const CustomersState:React.FC = ()=>{
                     </div>
                     <div>
                         <p className="text-sm text-muted-foreground">مشتریان فعال</p>
-                        <p className="text-2xl font-bold">{(120).toLocaleString('fa-IR')}</p>
+                        <p className="text-2xl font-bold">{activeCustomers.toLocaleString('fa-IR')}</p>
                     </div>
                 </div>
             </div>
