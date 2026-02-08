@@ -10,6 +10,15 @@ export type OrdersProps ={
         username:string,
         phone:string
     },
+    order_items:{
+        id:string
+        quantity:number,
+        unit_price:number
+        menu:{
+            name:string,
+        }
+        size:string|'',
+    }[],
     updatedAt:date,
     status:string
 }

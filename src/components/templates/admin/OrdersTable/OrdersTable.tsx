@@ -46,7 +46,6 @@ const OrdersTable:React.FC = ()=>{
         })
     },[data , categoryBranch , searchItem , searchStatus])
 
-    console.log("f=>", filteredOrders)
 
 
   return (
@@ -139,7 +138,7 @@ const OrdersTable:React.FC = ()=>{
                         </TableCell>
                         <TableCell>
                             <div className="flex items-center gap-1">
-                                <OrderDetailsModel/>
+                                <OrderDetailsModel order={order}/>
                                 <PickupCodeVerifyModel/>
                             </div>
                         </TableCell>
