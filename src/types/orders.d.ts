@@ -4,6 +4,7 @@ export type OrdersProps ={
     delivery_time:date,
     total_price:number,
     branch:{
+        id:string,
         name:string,
     },
     user:{

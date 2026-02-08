@@ -22,12 +22,12 @@ const PickupCodeVerifyModel = lazy(()=>import('@models/PickupCodeVerifyModel'));
 //     cancelled:{label:"لغو شد", color:"bg-red-100 text-red-800"},
 // };
 const statusOptions = [
-  { value: "pending", label: "در انتظار تایید" },
-  { value: "confirmed", label: "تأیید شده" },
-  { value: "preparing", label: "در حال آماده‌سازی" },
-  { value: "ready", label: "آماده تحویل" },
-  { value: "completed", label: "تحویل داده شده" },
-  { value: "cancelled", label: "لغو شده" },
+  { label: "در انتظار تایید" },
+  {  label: "تأیید شد" },
+  {  label: "در حال آماده‌ سازی" },
+  {  label: "آماده تحویل" },
+  {  label: "تحویل داد شد" },
+  { label: "لغو شد" },
 ];
 
 const OrdersTable:React.FC = ()=>{
@@ -37,15 +37,16 @@ const OrdersTable:React.FC = ()=>{
     const [searchStatus , setSearchStatus] = useState('all');
     const [searchItem , setSearchItem] = useState('');
 
-    const filteredOrders = useMemo(()=>{
-        return data?.filter((order:OrdersProps)=>{
-            const matchBranch = categoryBranch === 'all' || order.branch.name === categoryBranch;
-            const matchStatus = searchStatus === 'در انتظار تایید' || order.status === searchStatus;
-            const matchSearch = order.user.username.includes(searchItem) || order.id.includes(searchItem) ;
-
-            return matchBranch || matchSearch || matchStatus
-        })
-    },[data , categoryBranch , searchItem , searchStatus])
+const filteredOrders = useMemo(() => {
+  return data?.filter((order: OrdersProps) => {
+    const matchBranch = categoryBranch === 'all' || order.branch.id === categoryBranch;
+    const matchStatus = searchStatus === 'all' || order.status === searchStatus;
+    const matchSearch = !searchItem || 
+      order.user.username.toLowerCase().includes(searchItem.toLowerCase()) || 
+      order.id.toLowerCase().includes(searchItem.toLowerCase());
+    return matchBranch && matchStatus && matchSearch;
+  });
+}, [data, categoryBranch, searchItem, searchStatus]);   
 
 
 
@@ -58,9 +59,11 @@ const OrdersTable:React.FC = ()=>{
                 <Input 
                 placeholder='جستجو در سفارش ها ...'
                 className='pr-10'
+                value={searchItem}
+                onChange={e=>setSearchItem(e.target.value)}
                 />
             </div>
-            <Select>
+            <Select value={categoryBranch} onValueChange={setCategoryBranch}>
                 <SelectTrigger className='w-[180px]'>
                     <Filter className='ml-2 h-4 w-4'/>
                     <SelectValue placeholder='فیلتر شعبه'/>
@@ -72,14 +75,14 @@ const OrdersTable:React.FC = ()=>{
                     ))}
                 </SelectContent>
             </Select>
-            <Select>
+            <Select value={searchStatus} onValueChange={setSearchStatus}>
                 <SelectTrigger className='w-[180px]'>
                     <SelectValue placeholder='فیلتر وضعیت'/>
                 </SelectTrigger>
                 <SelectContent>
                     <SelectItem value='all'>همه وضعیت ها</SelectItem>
                     {statusOptions.map((opt)=>(
-                        <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                        <SelectItem key={opt.label} value={opt.label}>{opt.label}</SelectItem>
                     ))}
                 </SelectContent>
             </Select>
@@ -132,7 +135,7 @@ const OrdersTable:React.FC = ()=>{
                             <SelectContent>
                                 <SelectItem value='all'>همه وضعیت ها</SelectItem>
                                 {statusOptions.map((opt)=>(
-                                    <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                                    <SelectItem key={opt.label} value={opt.label}>{opt.label}</SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
