@@ -2,8 +2,9 @@ import { toast } from "sonner";
 
 export const showSuccess = (message:string)=>{
     toast.success(message,{
-        duration:5000,
+        duration:3000,
         style:{
+            direction:'rtl',
             background:'#15803d',
             color:'#fff',
             fontSize:'bold',
@@ -14,8 +15,9 @@ export const showSuccess = (message:string)=>{
 }
 export const showError = (message:string)=>{
     toast.error(message,{
-        duration:5000,
+        duration:3000,
         style:{
+            direction:'rtl',
             background:'#ef4444',
             color:'#fff',
             fontSize:'bold',
@@ -26,8 +28,9 @@ export const showError = (message:string)=>{
 }
 export const showWarning = (message:string)=>{
     toast.warning(message,{
-        duration:5000,
+        duration:3000,
         style:{
+            direction:'rtl',
             background:'#facc15',
             color:'#fff',
             fontSize:'bold',
@@ -38,8 +41,9 @@ export const showWarning = (message:string)=>{
 }
 export const showInfo = (message:string)=>{
     toast.info(message,{
-        duration:5000,
+        duration:3000,
         style:{
+            direction:'rtl',
             background:'#2563bb',
             color:'#fff',
             fontSize:'bold',

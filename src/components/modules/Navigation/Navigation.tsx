@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {Coffee, ShoppingCart, User} from 'lucide-react';
 import { Button } from '@components/UI/Button';
 import { useAuthStore } from '@store/authStore';
 import { useLogoutMutation } from '@services/auth';
+import Swal from 'sweetalert2';
 
 const Navigation:React.FC  =()=>{
     const logoutMutation = useLogoutMutation();
     const {user , isAuthenticated} = useAuthStore();
+    const navigate = useNavigate();
     const [totalItems, setTotalItems] = useState(1);
 
     const ROLE_CONFIG = {
@@ -23,7 +25,21 @@ const Navigation:React.FC  =()=>{
     };
 
     const handlerLogout = ()=>{
-        logoutMutation.mutate()
+           Swal.fire({
+             icon:"warning",
+             title:`آیا ${user?.username} از خروج خود اطمینان دارید ؟`,
+             color:"#262626",
+             confirmButtonText:"بله",
+             confirmButtonColor:"#a3491f",
+             showCancelButton:true,
+             cancelButtonText:"نه",
+             cancelButtonColor:"red"
+           }).then((result)=>{
+             if(result.isConfirmed){
+               logoutMutation.mutate();
+               navigate('/' , {replace:true})
+             }
+           })
     }
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-bgk/95 backdrop-blur">
