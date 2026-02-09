@@ -56,21 +56,21 @@ const PickupCodeVerifyModel:React.FC<pickUpCodeProps> = ({order})=>{
                 <div className="rounded-xl bg-secondary/30 p-4 space-y-2">
                     <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">شماره سفارش :</span>
-                        <span className="font-medium">ORD-{order.id}</span>
+                        <span className="font-medium">ORD-{order?.id}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground"> محصول :</span>
-                        <span className="font-medium">{order.order_items.map((od)=>(
+                        <span className="font-medium">{order?.order_items?.map((od)=>(
                             od.menu.name
                         ))}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">مشتری :</span>
-                        <span className="font-medium">{order.user.username}</span>
+                        <span className="font-medium">{order?.user?.username}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">مبلغ :</span>
-                        <span className="font-medium">{order.total_price.toLocaleString('fa-IR')}</span>
+                        <span className="font-medium">{order?.total_price?.toLocaleString('fa-IR')}</span>
                     </div>
                 </div>
                 {/* code input */}
