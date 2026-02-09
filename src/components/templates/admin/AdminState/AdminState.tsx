@@ -8,7 +8,7 @@ const  AdminState:React.FC = ()=>{
     const {data:Customers} = useGetAllCustomer();
     const {data:Branches} = useGetAllBranches();
     const {data:Orders} = useGetAllOrders();
-    console.log("orders =>" , Orders)
+
     const customerCount = Customers?.length ?? 0;
     const branchesCount = Branches?.length ?? 0;
     const ordersCount = Orders?.length ?? 0;
