@@ -1,10 +1,35 @@
+import { useGetOrdersBranch } from '@services/branch.services'
+import { isLast7Days, isThisMonth, isToday } from '@utils/HelperDate';
 import { Calendar, DollarSign, ShoppingBag, TrendingUp } from 'lucide-react'
 import React from 'react'
 
-const states = [
+
+const BranchStateIncome:React.FC = ()=>{
+  const {data:Orders} = useGetOrdersBranch();
+
+  const orders = Orders?.order ||[];
+
+  const income = orders?.reduce((acc:any , order:any)=>{
+    const price = order.total_price || 0;
+    const date = new Date(order.createdAt);
+
+    if(isToday(date)){
+      acc.daily += price;
+    } 
+    if(isLast7Days(date)) acc.weekly += price;
+    if(isThisMonth(date)) acc.monthly += price;
+    return acc
+  },{
+    daily:0,
+    weekly:0,
+    monthly:0,
+  })
+
+
+  const states = [
   {
     label:"درآمد امروز",
-    value:0,
+    value:income.daily,
     count:0,
     icon:Calendar,
     bgColor:'bg-blue-50',
@@ -13,7 +38,7 @@ const states = [
   },
   {
     label:"درآمد هفته",
-    value:0,
+    value:income.weekly,
     count:0,
     icon:TrendingUp,
     bgColor:'bg-green-50',
@@ -22,7 +47,7 @@ const states = [
   },
   {
     label:"درآمدماه",
-    value:0,
+    value:income.monthly,
     count:0,
     icon:DollarSign,
     bgColor:'bg-purple-50',
@@ -31,17 +56,14 @@ const states = [
   },
   {
     label:"درآمدکل",
-    value:0,
-    count:0,
+    value:Orders?.total_revenue || 0,
+    count:Orders?.orders_count || 0,
     icon:ShoppingBag,
     bgColor:'bg-copper/10',
     textCOlor:'text-copper',
     iconColor:'text-copper',
   },
 ]
-
-
-const BranchStateIncome:React.FC = ()=>{
   return (
     <section className="space-y-6">
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -52,11 +74,11 @@ const BranchStateIncome:React.FC = ()=>{
               <state.icon className={`h-6 w-6 ${state.iconColor}`}/>
             </div>
             <p className={`text-2xl mt-1 ${state.textCOlor}`}>
-              {(0).toLocaleString('fa-IR')}تومان
+              {state.value.toLocaleString('fa-IR')} تومان
             </p>
-            <p className={`text-lg mt-1 ${state.textCOlor}`}>
-              {(0).toLocaleString('fa-IR')} سفارش تکمیل شده
-            </p>
+            {/* <p className={`text-lg mt-1 ${state.textCOlor}`}>
+              {state?.count.toLocaleString('fa-IR')} سفارش تکمیل شده
+            </p> */}
           </div>
         ))}
       </div>
