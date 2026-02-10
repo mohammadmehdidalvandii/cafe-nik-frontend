@@ -3,10 +3,9 @@ import { Input } from '@components/UI/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/UI/Select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@components/UI/Table'
 import { useGetOrdersBranch } from '@services/branch.services';
-import { useGetAllOrders } from '@services/orders.services';
 import {  Search } from 'lucide-react'
 import React, { lazy, useMemo, useState } from 'react';
-import { OrdersProps } from 'types/orders';
+import { BranchOrderProps } from 'types/branch';
 const PickupCodeVerifyModel = lazy(()=>import('@models/PickupCodeVerifyModel'));
 const BranchOrderDetails = lazy(()=>import('@models/BranchOrderDetails'));
 
@@ -25,7 +24,7 @@ const BranchOrdersTable:React.FC = ()=>{
   const [searchItem , SetSearchItem] = useState('');
 
   const filteredOrders = useMemo(()=>{
-    return Orders?.order?.filter((order:OrdersProps)=>{
+    return Orders?.order?.filter((order:BranchOrderProps)=>{
         const matchStatus = searchStatus === 'all' || order.status === searchStatus;
         const matchSearch = !searchItem || order.user.username.toLowerCase().includes(searchItem) ||
         order.user.phone.includes(searchItem) || order.id.includes(searchItem.toLowerCase());
@@ -80,7 +79,7 @@ const BranchOrdersTable:React.FC = ()=>{
                       <TableCell colSpan={7} className='text-center text-xl font-black py-10 text-muted-foreground'>سفارش یافت نشد</TableCell>
                     </TableRow> 
                   ):(
-                    filteredOrders?.map((order:OrdersProps)=>(
+                    filteredOrders?.map((order:BranchOrderProps)=>(
                   <TableRow key={order.id}>
                     <TableCell className='font-medium'>ORD-{order.id}</TableCell>
                     <TableCell>{order.user.username}</TableCell>
@@ -107,7 +106,7 @@ const BranchOrdersTable:React.FC = ()=>{
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-1">
-                        <BranchOrderDetails/>
+                        <BranchOrderDetails order={order}/>
                                                         {order.status === 'تحویل داد شد' ? (
                                 <Badge variant='secondary'>{order.status}</Badge>
                                 ):

@@ -26,8 +26,9 @@ export type BranchesProps = {
 
 export type BranchOrderProps ={
     id:string,
-    delivery_date:Date,
-    delivery_time:Date,
+    delivery_date:date,
+    delivery_time:date,
+    createdAt:date,
     status:string,
     total_price:number,
     order_items:{
@@ -35,14 +36,15 @@ export type BranchOrderProps ={
         menu:{
             id:string,
             name:string,
-            quantity:number,
             size:string|'',
-            total_price:number,
-            unit_price:number
-        }[]
+        },
+        total_price:number,
+        unit_price:number
+        quantity:number,
     }[],
     user:{
         id:string,
-        username:string
+        username:string,
+        phone:string,
     }
 }

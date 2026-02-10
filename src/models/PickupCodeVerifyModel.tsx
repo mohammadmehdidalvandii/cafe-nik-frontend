@@ -5,10 +5,10 @@ import { useGetPickUpCode } from '@services/orders.services';
 import { showError, showSuccess } from '@utils/Toasts';
 import { CheckCircle, Package } from 'lucide-react';
 import React, { useState } from 'react'
-import { OrdersProps } from 'types/orders';
+import { BranchOrderProps } from 'types/branch';
 
 interface pickUpCodeProps{
-    order:OrdersProps
+    order:BranchOrderProps
 }
 
 const PickupCodeVerifyModel:React.FC<pickUpCodeProps> = ({order})=>{
