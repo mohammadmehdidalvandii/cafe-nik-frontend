@@ -5,7 +5,7 @@ import { BranchOrderProps } from 'types/branch';
 const BranchTableIncome:React.FC = ()=>{
     const {data:Orders} = useGetOrdersBranch();
     const orderCompleted = Orders?.order?.filter((od:any)=>od.status === 'تحویل داد شد');
-    console.log(orderCompleted)
+ 
   return (
     <section className="rounded-xl bg-white p-6 shadow-md mt-8">
         <h3 className="text-lg font-bold mb-4">آخرین سفارشات تکمیل شده</h3>

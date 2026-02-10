@@ -1,7 +1,10 @@
+import { useLogoutMutation } from '@services/auth'
+import { useAuthStore } from '@store/authStore'
 import { cn } from '@utils/cn'
 import { LayoutDashboard, LogOut, Settings, ShoppingCart, TrendingUp } from 'lucide-react'
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const menuItems = [
     {link:"/Branch" , label:"پیشخوان", icon:LayoutDashboard},
@@ -11,6 +14,28 @@ const menuItems = [
 ]
 
 const BranchSidebar:React.FC =()=>{
+    const {user} = useAuthStore();
+    const logout = useLogoutMutation();
+    const navigate  = useNavigate();
+
+      const handleLogout = ()=>{
+        Swal.fire({
+          icon:"warning",
+          title:`آیا ${user?.username} از خروج خود اطمینان دارید ؟`,
+          color:"#262626",
+          confirmButtonText:"بله",
+          confirmButtonColor:"#a3491f",
+          showCancelButton:true,
+          cancelButtonText:"نه",
+          cancelButtonColor:"red"
+        }).then((result)=>{
+          if(result.isConfirmed){
+            logout.mutate();
+            navigate('/' , {replace:true})
+          }
+        })
+      }
+
   return (
     <aside className='fixed right-0 top-0 h-screen w-64 flex flex-col border-l border-border bg-white'>
         <div className="p-6 border-b border-border">
@@ -39,7 +64,7 @@ const BranchSidebar:React.FC =()=>{
             </ul>
         </nav>
         <div className="border-t border-border p-4">
-            <button className="flex items-center w-full gap-3 rounded-lg px-4 py-4 text-right text-danger transition-all hover:bg-danger/10 font-black font-sansBold text-2xl cursor-pointer">
+            <button className="flex items-center w-full gap-3 rounded-lg px-4 py-4 text-right text-danger transition-all hover:bg-danger/10 font-black font-sansBold text-2xl cursor-pointer" onClick={handleLogout}>
                 <LogOut className='h-5 w-5'/>
                 <span>خروج</span>
             </button>
