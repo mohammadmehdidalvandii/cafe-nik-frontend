@@ -15,7 +15,7 @@ const CustomerLayout:React.FC = ()=>{
     const {pathname} = useLocation();
     const metaPage = customerPageMeta[pathname];
         useEffect(()=>{
-          if(!token || user?.roles !== 'مدیر شعبه'){
+          if(!token || user?.roles !== 'مشتری'){
             showError('شما اجازه دسترسی به این صفحه ندارید اول وارد شوید');
             navigate('/')
           }
