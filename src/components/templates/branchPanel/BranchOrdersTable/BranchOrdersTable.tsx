@@ -2,6 +2,7 @@ import { Badge } from '@components/UI/Badge';
 import { Input } from '@components/UI/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/UI/Select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@components/UI/Table'
+import { useGetOrdersBranch } from '@services/branch.services';
 import { useGetAllOrders } from '@services/orders.services';
 import {  Search } from 'lucide-react'
 import React, { lazy, useMemo, useState } from 'react';
@@ -19,12 +20,12 @@ const statusOptions = [
 ]
 
 const BranchOrdersTable:React.FC = ()=>{
-  const {data:Orders} = useGetAllOrders();
+  const {data:Orders} = useGetOrdersBranch();
   const [searchStatus , setSearchStatus] = useState('all');
   const [searchItem , SetSearchItem] = useState('');
 
   const filteredOrders = useMemo(()=>{
-    return Orders?.filter((order:OrdersProps)=>{
+    return Orders?.order?.filter((order:OrdersProps)=>{
         const matchStatus = searchStatus === 'all' || order.status === searchStatus;
         const matchSearch = !searchItem || order.user.username.toLowerCase().includes(searchItem) ||
         order.user.phone.includes(searchItem) || order.id.includes(searchItem.toLowerCase());
@@ -33,7 +34,7 @@ const BranchOrdersTable:React.FC = ()=>{
     })
   },[Orders , searchItem , searchStatus])
 
-  console.log("orders =>" , Orders)
+  
   return (
     <section className="space-y-4 mt-8">
       <div className="rounded-xl bg-white p-6 shadow-md">

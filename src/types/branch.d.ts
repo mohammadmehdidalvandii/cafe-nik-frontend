@@ -22,3 +22,27 @@ export type BranchesProps = {
     orders_count:number,
     total_revenue:number
 }
+
+
+export type BranchOrderProps ={
+    id:string,
+    delivery_date:Date,
+    delivery_time:Date,
+    status:string,
+    total_price:number,
+    order_items:{
+        id:string,
+        menu:{
+            id:string,
+            name:string,
+            quantity:number,
+            size:string|'',
+            total_price:number,
+            unit_price:number
+        }[]
+    }[],
+    user:{
+        id:string,
+        username:string
+    }
+}

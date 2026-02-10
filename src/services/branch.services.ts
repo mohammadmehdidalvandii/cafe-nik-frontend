@@ -108,3 +108,23 @@ export const useUpdateBranch = ()=>{
         }
     })
 }
+// Get OrderBranchManagerId 
+export const useGetOrdersBranch = ()=>{
+    const {user} = useAuthStore();
+    return useQuery({
+        queryKey:['OrderBranch'],
+        queryFn: async ()=>{
+            const res = await fetch(`${API_URL}user/${user?.id}`,{
+                method:"GET"
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData || 'لیست سفارش شعبه به مشکل خورد');
+            };
+
+            const data = await res.json();
+
+            return data.data
+        }
+    })
+}
