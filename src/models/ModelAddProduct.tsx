@@ -5,10 +5,22 @@ import { Textarea } from '@components/UI/Textarea';
 import { cn } from '@utils/cn';
 import { Minus, Plus, ShoppingCart } from 'lucide-react';
 import React, { useState } from 'react'
+import { ProductMenusProps } from 'types/menu';
 
-const ModelAddProduct:React.FC = ()=>{
+interface MenuAddProductProps{
+    menu:ProductMenusProps
+}
+
+const ModelAddProduct:React.FC<MenuAddProductProps> = ({menu})=>{
+    console.log("menu =>", menu)
     const [showModel , setShowModel] = useState(false);
     const [selectedSize , setSelectedSize] = useState('medium');
+    const sizeLabels: Record<string, string> = {
+  small: "کوچک",
+  medium: "متوسط",
+  large: "بزرگ",
+};
+   
   return (
     <Dialog open={showModel} onOpenChange={setShowModel}>
         <DialogTrigger asChild >
@@ -19,34 +31,44 @@ const ModelAddProduct:React.FC = ()=>{
         </DialogTrigger>
         <DialogContent className='max-w-md'>
             <DialogHeader>
-                <DialogTitle className='text-xl'>اسپرسو</DialogTitle>
+                <DialogTitle className='block text-xl text-right'>{menu.name}</DialogTitle>
             </DialogHeader>
             <div className="space-y-6 py-4">
-                <p className="text-xl font-bold text-muted-foreground">قهوه تازه دم با عطر و طعم غلیظ</p>
+                <p className="text-xl font-bold text-muted-foreground">{menu.description}</p>
                 {/* Size Selection  Condition*/}
-                {/* <div className="space-y-3">
-                    <Label className='text-lg font-semibold'>انتخاب سایز</Label>
-                    <div className="grid grid-cols-3 gap-2 mt-2">
-                        <button
-                            className={cn(
-                                'flex flex-col items-center rounded-lg border-2 p-3 transition-all',
-                                selectedSize === 'medium' 
-                                ?'border-primary bg-primary/10'
-                                :'border-border hover:border-primary/50'
-                            )}
-                        >
-                            <span className={cn(
-                                'mt-1 font-medium',
-                                selectedSize === 'medium'&& 'text-primary'
-                            )}>
-                                کوچیک
-                            </span>
-                            <span className="text-lg text-muted-foreground">
-                                {(97000).toLocaleString('fa-IR')}
-                            </span>
-                        </button>
-                    </div>
-                </div> */}
+{menu.size && (
+  <div className="space-y-3">
+    <Label className='text-lg font-semibold'>انتخاب سایز</Label>
+
+    <div className="grid grid-cols-3 gap-2 mt-2">
+      {Object.entries(menu.size).map(([sizeName, price]) => (
+        <button
+          key={sizeName}
+          onClick={() => setSelectedSize(sizeName)}
+          className={cn(
+            'flex flex-col items-center rounded-lg border-2 p-3 transition-all',
+            selectedSize === sizeName
+              ? 'border-primary bg-primary/10'
+              : 'border-border hover:border-primary/50'
+          )}
+        >
+          <span
+            className={cn(
+              'mt-1 font-medium',
+              selectedSize === sizeName && 'text-primary'
+            )}
+          >
+            {sizeLabels[sizeName] ?? sizeName}
+          </span>
+
+          <span className="text-lg text-muted-foreground">
+            {Number(price).toLocaleString('fa-IR')}
+          </span>
+        </button>
+      ))}
+    </div>
+  </div>
+)}  
                 {/* Quantity */}
                 <div className="space-y-3 mt-4">
                     <Label className='text-lg font-semibold'>تعداد</Label>

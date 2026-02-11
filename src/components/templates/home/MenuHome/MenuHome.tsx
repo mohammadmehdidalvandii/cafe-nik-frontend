@@ -3,8 +3,12 @@ import ProductCard from '@components/modules/ProductCard/ProductCard';
 import { NavLink } from 'react-router-dom';
 import { Button } from '@components/UI/Button';
 import { ArrowLeft } from 'lucide-react';
+import { getAllProductMenu } from '@services/menu.services';
+import { ProductMenusProps } from 'types/menu';
 
 const MenuHome:React.FC = ()=>{
+    const {data:Menus} = getAllProductMenu();
+    console.log("menus =>" , Menus)
   return (
     <section className="py-16 bg-bgk ">
         <div className="container px-8">
@@ -13,12 +17,11 @@ const MenuHome:React.FC = ()=>{
                 <p className="text-lg text-muted-foreground">محبوب ترین نوشیدنی ها و دسرهای ما</p>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
+                {Menus?.length === 0 && <p>هیچ محصولی در منو وجود نداره</p>}
+                {Menus?.map((menu:ProductMenusProps)=>(
+                    <ProductCard menu={menu}/>
+                ))}
+
             </div>
             <div className="mt-10 text-center">
                 <NavLink to='/Menu'>
