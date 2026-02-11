@@ -8,7 +8,7 @@ import { ProductMenusProps } from 'types/menu';
 
 const MenuHome:React.FC = ()=>{
     const {data:Menus} = getAllProductMenu();
-    console.log("menus =>" , Menus)
+
   return (
     <section className="py-16 bg-bgk ">
         <div className="container px-8">

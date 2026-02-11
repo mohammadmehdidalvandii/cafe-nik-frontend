@@ -12,7 +12,6 @@ interface MenuAddProductProps{
 }
 
 const ModelAddProduct:React.FC<MenuAddProductProps> = ({menu})=>{
-    console.log("menu =>", menu)
     const [showModel , setShowModel] = useState(false);
     const [selectedSize , setSelectedSize] = useState('medium');
     const sizeLabels: Record<string, string> = {
