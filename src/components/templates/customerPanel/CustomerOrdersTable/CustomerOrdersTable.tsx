@@ -3,6 +3,7 @@ import { Button } from '@components/UI/Button'
 import { Input } from '@components/UI/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/UI/Select'
 import { useGetOrderUser } from '@services/orders.services'
+import { showInfo } from '@utils/Toasts'
 import { ArrowLeft, Clock, Copy, MapPin, Package, Search } from 'lucide-react'
 import React, { lazy, useMemo, useState } from 'react'
 import { NavLink } from 'react-router-dom';
@@ -106,7 +107,12 @@ const CustomerOrdersTable:React.FC = ()=>{
                     <span className="font-bold text-xl text-primary tracking-[0.2em]">
                         {order.pickup_code}
                     </span>
-                    <Button variant='ghost' size='icon' className='h-8 w-8 hover:bg-primary/20' aria-label='copy code'>
+                    <Button variant='ghost' size='icon' className='h-8 w-8 hover:bg-primary/20' aria-label='copy code'
+                        onClick={()=>{
+                            navigator.clipboard.writeText(order.pickup_code)
+                            showInfo('کد تحویل کپی شد')
+                        }}
+                    >
                         <Copy className='h-4 w-4'/>
                     </Button>
                 </div>
