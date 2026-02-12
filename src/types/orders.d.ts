@@ -21,5 +21,6 @@ export type OrdersProps ={
         size:string|'',
     }[],
     updatedAt:date,
-    status:string
+    status:string,
+    pickup_code:string
 }
