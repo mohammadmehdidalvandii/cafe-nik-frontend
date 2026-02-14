@@ -98,7 +98,7 @@ const CustomerOrdersTable:React.FC = ()=>{
                         <span className="text-lg font-bold text-copper">
                             {order.total_price.toLocaleString('fa-IR')} تومان
                         </span>
-                        <CustomerOrderDetails/>
+                        <CustomerOrderDetails order={order}/>
                     </div>
                 </div>
                 {/* Code PickUp */}
