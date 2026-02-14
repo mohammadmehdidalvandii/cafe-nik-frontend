@@ -17,7 +17,7 @@ const CustomerCostState: React.FC = () => {
   const costData: CostDataType = orders.reduce(
     (acc:any, order:any) => {
       const price = order.total_price || 0
-      const date = new Date(order.createdAt)
+      const date = new Date(order?.createdAt)
 
 
       if (isLast7Days(date)) {

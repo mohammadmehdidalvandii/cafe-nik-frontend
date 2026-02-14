@@ -20,7 +20,7 @@ export type OrdersProps ={
         }
         size:string|'',
     }[],
-    updatedAt:date,
+    createdAt:string,
     status:string,
     pickup_code:string
 }

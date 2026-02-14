@@ -91,7 +91,7 @@ const CustomerOrdersTable:React.FC = ()=>{
                             <span className="rounded-full px-3 py-1 text-sm bg-green-100">{order.status}</span>
                         </div>
                         <p className="mt-1 text-lg text-muted-foreground">
-                            {new Date(order.updatedAt).toLocaleDateString('fa-IR')}
+                            {new Date(order.createdAt).toLocaleDateString('fa-IR')}
                         </p>
                     </div>
                     <div className="flex items-center gap-2">
