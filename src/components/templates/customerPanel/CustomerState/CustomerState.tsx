@@ -1,10 +1,21 @@
+import { useGetOrderUser } from '@services/orders.services';
 import { CheckCircle, Clock, CreditCard, ShoppingBag } from 'lucide-react';
 import React from 'react';
 
-const states = [
+
+
+const CustomerState:React.FC = ()=>{
+    const {data:Orders} = useGetOrderUser();
+
+    const countOrder = Orders?.length ?? 0
+    const countWaiting = Orders?.filter((order:any)=>order.status === 'در انتظار تایید').length ?? 0;
+    const countCompleted = Orders?.filter((order:any)=> order.status === 'تحویل داد شد').length ?? 0;
+    const totalCost = Orders?.reduce((acc: number, order: any) => acc + (order.total_price ?? 0),0) ?? 0;
+
+    const states = [
     {
         label:"کل سفارشات",
-        value:0,
+        value:countOrder,
         icon:ShoppingBag,
         bgColor:"bg-blue-50",
         textColor:"text-blue-800",
@@ -12,7 +23,7 @@ const states = [
     },
     {
         label:"در حال پردازش",
-        value:0,
+        value:countWaiting,
         icon:Clock,
         bgColor:"bg-orange-50",
         textColor:"text-orange-800",
@@ -20,7 +31,7 @@ const states = [
     },
     {
         label:"تکمیل شده",
-        value:0,
+        value:countCompleted,
         icon:CheckCircle,
         bgColor:"bg-green-50",
         textColor:"text-green-800",
@@ -28,15 +39,13 @@ const states = [
     },
     {
         label:"مجموع هزنیه",
-        value:0,
+        value:totalCost,
         icon:CreditCard,
         bgColor:"bg-copper/10",
         textColor:"text-copper",
         iconColor:"text-copper",
     },
 ]
-
-const CustomerState:React.FC = ()=>{
   return (
     <section className="space-y-2">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
