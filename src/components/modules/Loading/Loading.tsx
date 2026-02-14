@@ -17,9 +17,9 @@ const Loading:React.FC =()=>{
                 </div>
                 {/* Steam animation */}
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex gap-1">
-                    {[...Array(3)].map((i)=>(
+                    {[...Array(3)].map((_ , index)=>(
                         <div
-                            key={i}
+                            key={index}
                             className='w-1.5 bg-liner-to-t from-primary/40 to-transparent rounded-full animate-steam'
                         />
                     ))}
@@ -32,11 +32,11 @@ const Loading:React.FC =()=>{
                 </div>
                 {/* Animated dots */}
                 <div className='flex justify-center gap-2 mt-8'>
-                    {[...Array(3)].map((i)=>(
+                    {[...Array(3)].map((_, index)=>(
                         <div
-                            key={i}
+                            key={index}
                             className='h-3 w-3 rounded-full bg-primary animate-bounce'
-                            style={{animationDelay:`${1 * 0.15}s`}}
+                            style={{animationDelay:`${index * 0.15}s`}}
                         />
                     ))}
                 </div>
