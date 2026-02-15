@@ -5,6 +5,7 @@ import { ArrowLeft, Coffee, Minus, Plus, Trash2 } from "lucide-react";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
+import CartEmpty from "../CartEmpty/CartEmpty";
 // import CartEmpty from "../CartEmpty/CartEmpty";
 
 const Basket: React.FC = () => {
@@ -35,7 +36,7 @@ const Basket: React.FC = () => {
           {/* Cart Items */}
           <div className="lg:col-span-2">
             <div className="space-y-4 gap-">
-              {cart.length === 0 && <p>سبد خرید شما خالی است</p>}
+              {cart.length === 0 && <CartEmpty/>}
               {cart?.map((order)=>(
               <div className="rounded-xl bg-white p-5 shadow-md" key={order.id}>
                 <div className="flex flex-wrap items-start justify-between gap-4">
