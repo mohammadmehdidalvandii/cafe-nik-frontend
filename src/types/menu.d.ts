@@ -28,3 +28,12 @@ export type ProductFormProps ={
     } | null,
 };
 
+export type ProductMenuCartProps = {
+    id:string,
+    name:string,
+    size:string,
+    base_price?:number,
+    quantity:number
+    categoryProduct:string,
+}
+

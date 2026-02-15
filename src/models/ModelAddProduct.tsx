@@ -2,7 +2,9 @@ import { Button } from '@components/UI/Button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@components/UI/Dialog';
 import { Label } from '@components/UI/Label';
 import { Textarea } from '@components/UI/Textarea';
+import { useCartStore } from '@store/cartStore';
 import { cn } from '@utils/cn';
+import { showSuccess } from '@utils/Toasts';
 import { Minus, Plus, ShoppingCart } from 'lucide-react';
 import React, { useState } from 'react'
 import { ProductMenusProps } from 'types/menu';
@@ -12,13 +14,31 @@ interface MenuAddProductProps{
 }
 
 const ModelAddProduct:React.FC<MenuAddProductProps> = ({menu})=>{
+    const addToCart = useCartStore((state)=>state.addToCart);
     const [showModel , setShowModel] = useState(false);
-    const [selectedSize , setSelectedSize] = useState('medium');
+    const [selectedSize , setSelectedSize] = useState<'medium'|'small'|'large'>('medium');
+    const [quantity , setQuantity] = useState(1)
     const sizeLabels: Record<string, string> = {
   small: "کوچک",
   medium: "متوسط",
   large: "بزرگ",
 };
+    // Price = size 
+    const selectPrice = menu.size && menu.size ? Number(menu.size[selectedSize]) : Number(menu.base_price) ?? 0
+
+    const handleAddToBasket = ()=>{
+
+        addToCart({
+            id:menu.id,
+            name:menu.name,
+            categoryProduct:menu.categoryProduct.name,
+            size:selectedSize,
+            base_price:selectPrice,
+            quantity:quantity
+        });
+        showSuccess('سفارش شما در سبد خرید اضافه شد')
+        setShowModel(false)
+    }
    
   return (
     <Dialog open={showModel} onOpenChange={setShowModel}>
@@ -43,7 +63,7 @@ const ModelAddProduct:React.FC<MenuAddProductProps> = ({menu})=>{
       {Object.entries(menu.size).map(([sizeName, price]) => (
         <button
           key={sizeName}
-          onClick={() => setSelectedSize(sizeName)}
+          onClick={() => setSelectedSize(sizeName as "small" | "medium" | "large")}
           className={cn(
             'flex flex-col items-center rounded-lg border-2 p-3 transition-all',
             selectedSize === sizeName
@@ -76,40 +96,42 @@ const ModelAddProduct:React.FC<MenuAddProductProps> = ({menu})=>{
                             variant='outline'
                             size='icon'
                             aria-label='Decrease'
+                            onClick={()=>setQuantity((prev)=>Math.max(prev - 1 , 1))}
                         >
                             <Minus className='w-4 h-4'/>
                         </Button>
                             <span className="w-10 text-center text-lg font-bold">
-                                {(1).toLocaleString('fa-IR')}
+                                {quantity.toLocaleString('fa-IR')}
                             </span>
                         <Button
                             variant='outline'
                             size='icon'
                             aria-label='Increase'
+                            onClick={()=>setQuantity((prev)=> prev + 1)}
                         >
                             <Plus className='h-4 w-4'/>
                         </Button>
                     </div>
                 </div>
                 {/* Notes */}
-                <div className="space-y-3 mt-4">
+                {/* <div className="space-y-3 mt-4">
                     <Label className='text-lg font-semibold'>یادداشت (اختیاری)</Label>
                     <Textarea
                         placeholder='مثلا : بدون شکر شیر کم چرب'
                         className='resize-none mt-2'
                         rows={2}
                     />
-                </div>
+                </div> */}
                 {/* Price summary */}
                 <div className="rounded-lg bg-secondary/50 p-4">
                     <div className="flex items-center justify-between">
                         <span className="font-bold">قیمت واحد :</span>
-                        <span>{(97000).toLocaleString('fa-IR')}</span>
+                        <span>{(selectPrice).toLocaleString('fa-IR')}</span>
                     </div>
                     <div className="mt-2 flex items-center justify-between border-t border-border pt-2">
                         <span className="font-black">جمع کل :</span>
                         <span className="text-lg font-bold text-copper">
-                            {(97000).toLocaleString('fa-IR')}
+                            {(quantity * selectPrice ).toLocaleString('fa-IR')}
                         </span>
                     </div>
                 </div>
@@ -117,6 +139,7 @@ const ModelAddProduct:React.FC<MenuAddProductProps> = ({menu})=>{
                     <Button
                         className='w-full'
                         size='lg'
+                        onClick={handleAddToBasket}
                     >
                         <ShoppingCart className='ml-2 h-5 w-5'/>
                         افزودن به سبد خرید
