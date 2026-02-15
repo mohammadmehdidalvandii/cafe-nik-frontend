@@ -5,12 +5,14 @@ import { Button } from '@components/UI/Button';
 import { useAuthStore } from '@store/authStore';
 import { useLogoutMutation } from '@services/auth';
 import Swal from 'sweetalert2';
+import { useCartStore } from '@store/cartStore';
 
 const Navigation:React.FC  =()=>{
+    const {cart} = useCartStore()
     const logoutMutation = useLogoutMutation();
     const {user , isAuthenticated} = useAuthStore();
     const navigate = useNavigate();
-    const [totalItems, setTotalItems] = useState(1);
+    const [totalItems, setTotalItems] = useState(cart.length ?? 0);
 
     const ROLE_CONFIG = {
         "مدیریت":{
