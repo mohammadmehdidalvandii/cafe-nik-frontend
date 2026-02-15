@@ -1,10 +1,31 @@
 import { Button } from "@components/UI/Button";
+import { useCartStore } from "@store/cartStore";
+import { showInfo, showSuccess } from "@utils/Toasts";
 import { ArrowLeft, Coffee, Minus, Plus, Trash2 } from "lucide-react";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
 // import CartEmpty from "../CartEmpty/CartEmpty";
 
 const Basket: React.FC = () => {
+  const {cart , decreaseQuantity , increaseQuantity , removeFormCart} = useCartStore();
+
+  const handleRemovedAllMenu = ()=>{
+    Swal.fire({
+      icon:'warning',
+      title:"آیا اطمینان دارید از حذف کلی سبد خرید ؟",
+      confirmButtonText:'بله',
+      confirmButtonColor:'green',
+      showCancelButton:true,
+      cancelButtonText:"نه",
+      cancelButtonColor:"red",
+    }).then((result)=>{
+      if(result.isConfirmed){
+        showSuccess('کل سبد خرید حذف شد')
+      }
+    })
+  }
+
   return (
         // <CartEmpty/>
     <section className="py-10">
@@ -14,7 +35,9 @@ const Basket: React.FC = () => {
           {/* Cart Items */}
           <div className="lg:col-span-2">
             <div className="space-y-4 gap-">
-              <div className="rounded-xl bg-white p-5 shadow-md">
+              {cart.length === 0 && <p>سبد خرید شما خالی است</p>}
+              {cart?.map((order)=>(
+              <div className="rounded-xl bg-white p-5 shadow-md" key={order.id}>
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   {/* Product info */}
                   <div className="flex items-start gap-4">
@@ -23,13 +46,13 @@ const Basket: React.FC = () => {
                     </div>
 
                     <div>
-                      <h3 className="font-bold">آمریکانو</h3>
+                      <h3 className="font-bold">{order.name}</h3>
                       <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                         <span className="rounded-full bg-secondary px-2 py-0.5 text-[0.9rem]">
-                          سایز: متوسط
+                          سایز: {order.size && order.size === 'large' ? 'بزرگ':order.size === 'medium'?'متوسط' : order.size === 'small' ? 'کوچیک  ':'ندارد'}
                         </span>
                         <span className="text-[0.9rem]">
-                          قیمت واحد: {(98000).toLocaleString("fa-IR")} تومان
+                          قیمت واحد: {Number(order.base_price).toLocaleString("fa-IR")} تومان
                         </span>
                       </div>
                     </div>
@@ -38,76 +61,50 @@ const Basket: React.FC = () => {
                   {/* Quantity */}
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">
-                        <Button variant="outline" size="icon" className="h-9 w-9" aria-label="minus">
+                        <Button variant="outline" size="icon" className="h-9 w-9" aria-label="minus"
+                          onClick={()=> decreaseQuantity(order.id)}
+                        >
                         <Minus className="h-4 w-4" />
                         </Button>
-                        <span className="w-8 text-center font-bold">1</span>
-                        <Button variant="outline" size="icon" className="h-9 w-9" aria-label="plus">
+                        <span className="w-8 text-center font-bold">{order.quantity}</span>
+                        <Button variant="outline" size="icon" className="h-9 w-9" aria-label="plus"
+                        onClick={()=>increaseQuantity(order.id)}
+                        >
                         <Plus className="h-4 w-4" />
                         </Button>
                     </div>
                     {/* Item Total */}
                     <span className="min-w-[100px] text-left font-black font-sansBold text-copper">
-                      {(98000).toLocaleString('fa-IR')} تومان
+                      {(Number(order.base_price) * order.quantity).toLocaleString('fa-IR')} تومان
                     </span>
                     {/* Delete Button */}
-                        <Button variant='ghost' size='icon' className="text-danger hover:bg-danger/10">
+                        <Button variant='ghost' size='icon' className="text-danger hover:bg-danger/10"
+                            onClick={
+                              ()=>{
+                                removeFormCart(order.id)
+                                showInfo('محصول مورد نظر از سبد خرید حذف شد')
+                              }
+                            }
+                          >
                             <Trash2 className="h-4 w-4"/>
                         </Button>
                   </div>
                 </div>
               </div>
-              <div className="rounded-xl bg-white p-5 shadow-md">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  {/* Product info */}
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                      <Coffee className="h-6 w-6 text-primary" />
-                    </div>
+              ))}
 
-                    <div>
-                      <h3 className="font-bold">آمریکانو</h3>
-                      <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                        <span className="rounded-full bg-secondary px-2 py-0.5 text-[0.9rem]">
-                          سایز: متوسط
-                        </span>
-                        <span className="text-[0.9rem]">
-                          قیمت واحد: {(98000).toLocaleString("fa-IR")} تومان
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Quantity */}
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2">
-                        <Button variant="outline" size="icon" className="h-9 w-9" aria-label="minus">
-                        <Minus className="h-4 w-4" />
-                        </Button>
-                        <span className="w-8 text-center font-bold">1</span>
-                        <Button variant="outline" size="icon" className="h-9 w-9" aria-label="plus">
-                        <Plus className="h-4 w-4" />
-                        </Button>
-                    </div>
-                    {/* Item Total */}
-                    <span className="min-w-[100px] text-left font-black font-sansBold text-copper">
-                      {(98000).toLocaleString('fa-IR')} تومان
-                    </span>
-                    {/* Delete Button */}
-                        <Button variant='ghost' size='icon' className="text-danger hover:bg-danger/10">
-                            <Trash2 className="h-4 w-4"/>
-                        </Button>
-                  </div>
-                </div>
-              </div>
             </div>
             {/* Deleted All  */}
+            {cart?.length !== 0 && (
           <div className="mt-4 flex justify-end">
-            <Button variant='outline' className="text-danger">
+            <Button variant='outline' className="text-danger" 
+            onClick={handleRemovedAllMenu}
+            >
                 <Trash2 className="ml-2 h-4 w-4"/>
                 پاک کردن سبد
             </Button>
           </div>
+            )}
           </div>
           {/* Orders summary */}
           <div>

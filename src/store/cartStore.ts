@@ -10,6 +10,7 @@ interface CartStateProps{
     removeFormCart:(id:string)=> void;
     increaseQuantity:(id:string)=> void;
     decreaseQuantity:(id:string)=> void;
+    clearCart: () => void;
 };
 
 export const useCartStore = create<CartStateProps>()(
@@ -21,12 +22,22 @@ export const useCartStore = create<CartStateProps>()(
         return {cart:[...state.cart , menu]};
       }),
 
-      removeFormCart: (id: string) => {
+      removeFormCart: (id: string) =>set((state)=>({
+        cart:state.cart.filter((p)=> p.id !== id)
+      })),
+
+      increaseQuantity: (id: string) => {
+        set((state)=>({
+          cart:state.cart.map((p)=> p.id === id ? {...p , quantity:(p.quantity || 1) + 1} : p)
+        }))
       },
 
-      increaseQuantity: (id: string) => {},
-
-      decreaseQuantity: (id: string) => {},
+      decreaseQuantity: (id: string) => {
+        set((state)=>({
+          cart:state.cart.map((p)=> p.id === id ? {...p , quantity:Math.max((p.quantity|| 1) -1, 1)}:p)
+        }))
+      },
+      clearCart:()=>set({cart:[]}),
     }),
     {
       name: "cart",

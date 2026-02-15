@@ -12,7 +12,6 @@ const Navigation:React.FC  =()=>{
     const logoutMutation = useLogoutMutation();
     const {user , isAuthenticated} = useAuthStore();
     const navigate = useNavigate();
-    const [totalItems, setTotalItems] = useState(cart.length ?? 0);
 
     const ROLE_CONFIG = {
         "مدیریت":{
@@ -63,8 +62,8 @@ const Navigation:React.FC  =()=>{
                 <NavLink to='/Cart' className='relative'>
                     <Button variant='ghost' size='icon' className='relative'>
                         <ShoppingCart className='h-5 w-5'/>
-                        {totalItems > 0 && (
-                            <span className="absolute -left-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-copper text-xs font-sansBold font-bold text-white">{totalItems}</span>
+                        {cart.length > 0 && (
+                            <span className="absolute -left-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-copper text-xs font-sansBold font-bold text-white">{cart.length.toLocaleString('fa-IR')}</span>
                         )}
                     </Button>
                 </NavLink>
