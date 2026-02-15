@@ -11,6 +11,9 @@ import CartEmpty from "../CartEmpty/CartEmpty";
 const Basket: React.FC = () => {
   const {cart , decreaseQuantity , increaseQuantity , removeFormCart} = useCartStore();
 
+  const totalCount = cart && cart?.reduce((od , item)=> od +item.quantity, 0);
+  const subTotal = cart && cart?.reduce((od , item)=> od + Number(item.base_price) * item.quantity, 0);
+
   const handleRemovedAllMenu = ()=>{
     Swal.fire({
       icon:'warning',
@@ -112,22 +115,24 @@ const Basket: React.FC = () => {
             <div className="sticky top-24 rounded-xl bg-white p-6 shadow-md">
                 <h3 className="mb-4 text-lg font-bold font-sansBold">خلاصه سفارش</h3>
                 <div className="mb-4 max-h-[250px] space-y-3 overflow-y-auto border-b border-border pb-4">
-                    <div className="flex justify-between">
+                 {cart.length === 0 ? 'هیج سفارش وجود ندارد': cart.map((order)=>(
+                    <div className="flex justify-between" key={order.id}>
                         <span>
-                            امریکانو(متوسط) * 2
+                            {order.name} ({order.size && order.size === 'large' ? 'بزرگ':order.size === 'medium'?'متوسط' : order.size === 'small' ? 'کوچیک  ':'ندارد'}) * {order.quantity}
                         </span>
                         <span>
-                            {(98000 * 2).toLocaleString('fa-IR')}
+                            {(Number(order.base_price) * order.quantity).toLocaleString('fa-IR')} تومان
                         </span>
                     </div>
+                  ))}
                 </div>
                 <div className="mb-2 flex justify-between text-lg">
                     <span>تعداد کل اقلام</span>
-                    <span>2</span>
+                    <span>{totalCount.toLocaleString('fa-IR')}</span>
                 </div>
                 <div className="mb-6 flex justify-between text-xl font-bold font-sansBold">
                     <span>مجموع :</span>
-                    <span>{(98000 * 2).toLocaleString('fa-IR')}</span>
+                    <span>{subTotal.toLocaleString('fa-IR')}</span>
                 </div>
                 <Button className="w-full" size='lg' asChild>
                   <NavLink to='/Order'>
