@@ -14,6 +14,7 @@ export type BranchesProps = {
     city_id:string
     phone:string,
     city:{
+        id:string
         name:string,
     },
     user:{
