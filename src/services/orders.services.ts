@@ -1,5 +1,6 @@
 import { useAuthStore } from '@store/authStore';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import { OrderCreateProps } from 'types/orders';
 const API_URL ='http://localhost:3000/api/order/';
 
 // Get All orders
@@ -58,5 +59,28 @@ export const useGetOrderUser = ()=>{
 
             return data.data
         },
+    })
+};
+
+export const useCreateOrder = ()=>{
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (value:OrderCreateProps)=>{
+            const res = await fetch(`${API_URL}create`,{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify(value)
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'سفارش شما ثبت نشد');
+            };
+
+            const data = await res.json();
+            return data
+        },
+        onSuccess:()=>{
+            queryClient.invalidateQueries({queryKey:['orders' , 'user_order']})
+        }
     })
 }

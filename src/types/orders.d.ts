@@ -23,4 +23,16 @@ export type OrdersProps ={
     createdAt:string,
     status:string,
     pickup_code:string
+};
+
+export type OrderCreateProps ={
+    user_id:string,
+    branch_id:string,    
+    delivery_date:string
+    delivery_time:string,
+    items:{
+        menu_id:string;
+        size:string | null,
+        quantity:number
+    }[]
 }

@@ -23,6 +23,34 @@ export const useRegisterMutation = ()=>{
         }
     })
 }
+// register guest
+export const useRegisterGuest = ()=>{
+        const authStore = useAuthStore();
+    return useMutation({
+        mutationFn: async ({username , phone}:{username:string , phone:string})=>{
+            const res = await fetch(`${API_URL}guest`,{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({username , phone})
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'ثبت نام نا موفق بود')
+            };
+            const data =  await res.json();
+        
+            const token = data.data;
+            const userRes = await fetch(`${API_URL}profile`,{
+                headers:{Authorization : `Bearer ${token}`}
+            })
+            const user = await userRes.json();
+
+            authStore.login(token , user.data)
+
+            return data
+        }
+    })
+}
 // register phone
 export const useRegisterWithPhone = ()=>{
     return useMutation({

@@ -6,7 +6,7 @@ interface ProductMenuCart extends ProductMenuCartProps {}
 
 interface CartStateProps{
     cart:ProductMenuCartProps[],
-    addToCart:(menu:ProductMenuCart)=>void;
+    addToCart:(menu:ProductMenuCart)=> void;
     removeFormCart:(id:string)=> void;
     increaseQuantity:(id:string)=> void;
     decreaseQuantity:(id:string)=> void;

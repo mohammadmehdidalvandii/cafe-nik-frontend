@@ -60,7 +60,7 @@ const App:React.FC = ()=>{
               <Route path='Branches' element={<Branches/>}/>
               <Route path='Cart' element={<Cart/>}/>
               <Route path='Order' element={<Order/>}/>
-              <Route path='OrderConfirm' element={<OrderConfirm/>}/>
+              <Route path='OrderConfirm/:id' element={<OrderConfirm/>}/>
             </Route>
             {/* Admin */}
             <Route path='/Admin' element={<AdminLayout/>}>

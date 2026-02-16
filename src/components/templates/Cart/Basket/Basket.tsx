@@ -9,7 +9,7 @@ import CartEmpty from "../CartEmpty/CartEmpty";
 // import CartEmpty from "../CartEmpty/CartEmpty";
 
 const Basket: React.FC = () => {
-  const {cart , decreaseQuantity , increaseQuantity , removeFormCart} = useCartStore();
+  const {cart , decreaseQuantity , increaseQuantity , removeFormCart ,clearCart} = useCartStore();
 
   const totalCount = cart && cart?.reduce((od , item)=> od +item.quantity, 0);
   const subTotal = cart && cart?.reduce((od , item)=> od + Number(item.base_price) * item.quantity, 0);
@@ -25,7 +25,8 @@ const Basket: React.FC = () => {
       cancelButtonColor:"red",
     }).then((result)=>{
       if(result.isConfirmed){
-        showSuccess('کل سبد خرید حذف شد')
+        showSuccess('کل سبد خرید حذف شد');
+        clearCart()
       }
     })
   }
