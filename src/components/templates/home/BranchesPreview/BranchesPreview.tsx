@@ -9,7 +9,7 @@ const BranchesPreview:React.FC = ()=>{
 
   return (
     <section className="bg-secondary/50 py-16">
-        <div className="container px-8">
+        <div className="container mx-auto px-8">
             <div className="mb-10 text-center">
                 <h2 className="mb-4 text-3xl font-sansBold font-bold">شعب ما در سراسر ایران</h2>
                 <p className="text-lg text-muted-foreground">در 18 شهر بزرگ ایران حضور داریم</p>

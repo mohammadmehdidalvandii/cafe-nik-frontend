@@ -11,7 +11,7 @@ const MenuHome:React.FC = ()=>{
 
   return (
     <section className="py-16 bg-bgk ">
-        <div className="container px-8">
+        <div className="container mx-auto px-8">
             <div className="mb-10 text-center">
                 <h2 className="mb-4 text-3xl font-sansBold font-bold">منو پرطرفدار</h2>
                 <p className="text-lg text-muted-foreground">محبوب ترین نوشیدنی ها و دسرهای ما</p>

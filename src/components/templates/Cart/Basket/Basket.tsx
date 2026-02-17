@@ -34,7 +34,7 @@ const Basket: React.FC = () => {
   return (
         // <CartEmpty/>
     <section className="py-10">
-      <div className="container px-16">
+      <div className="container mx-auto px-16">
         <h1 className="mb-8 text-3xl font-sansBold font-black">سبد خرید</h1>
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Cart Items */}

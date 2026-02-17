@@ -24,7 +24,7 @@ const MenuProducts:React.FC = ()=>{
 
   return (
     <section className="py-12">
-        <div className="container px-8 md:px-24">
+        <div className="container mx-auto px-8 md:px-24">
             <div className="mb-8 flex flex-wrap justify-center gap-2">
                 {categories.map(({key , icon:Icon , name})=>(
                     <button

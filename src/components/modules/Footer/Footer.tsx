@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 const Footer:React.FC = ()=>{
   return (
     <footer className='border-t border-border bg-secondary/30'>
-        <div className="container px-8 py-12">
+        <div className="container mx-auto px-8 py-12">
             <div className="grid gap-8 md:grid-cols-4">
                 <div>
                     <div className="mb-4 flex items-center gap-2">

@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 const CallToAction:React.FC = ()=>{
   return (
     <section className="hero py-20">
-        <div className="container px-8 text-center">
+        <div className="container mx-auto px-8 text-center">
             <h2 className="mb-6 text-3xl font-bold font-sansBold text-cream md:text-4xl">
                 همین الان سفارش خود را ثبت کنید
             </h2>
