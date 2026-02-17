@@ -7,7 +7,7 @@ import { useGetAllBranches } from '@services/branch.services';
 import { useGetAllOrders } from '@services/orders.services';
 import { Eye, Filter, Package, Search } from 'lucide-react'
 import React, { lazy, useMemo, useState } from 'react'
-import { BranchesProps } from 'types/branch';
+import { BranchesProps, BranchOrderProps } from 'types/branch';
 import { OrdersProps } from 'types/orders';
 const OrderDetailsModel = lazy(()=>import('@models/OrderDetailsModel'));
 const PickupCodeVerifyModel = lazy(()=>import('@models/PickupCodeVerifyModel'));
@@ -106,7 +106,7 @@ const filteredOrders = useMemo(() => {
                             <TableCell colSpan={7} className='text-center py-10 text-muted-foreground'>سفارش یافت نشد</TableCell>
                         </TableRow> 
                     ):(
-                    filteredOrders?.map((order:OrdersProps)=>(
+                    filteredOrders?.map((order:any)=>(
                      <TableRow className='hover:bg-secondary/30' key={order.id}>
                         <TableCell>ORD-{order.id}</TableCell>
                         <TableCell>

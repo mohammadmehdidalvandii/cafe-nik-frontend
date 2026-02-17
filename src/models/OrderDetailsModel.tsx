@@ -58,7 +58,7 @@ const OrderDetailsModel: React.FC<OrderDetailsProps> = ({ order }) => {
                 تاریخ ثبت
               </p>
               <p className="font-bold font-sansBold text-lg">
-                {new Date(order.updatedAt).toLocaleString("fa-IR")}
+                {new Date(order.createdAt).toLocaleString("fa-IR")}
               </p>
             </div>
           </div>
