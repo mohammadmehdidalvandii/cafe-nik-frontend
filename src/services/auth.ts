@@ -110,13 +110,13 @@ export const useLoginWithPassword = ()=>{
                 credentials:'include',
                 body:JSON.stringify(values)
             });
-
+        
             if(!res.ok){
                 const errorData = await res.json();
                 throw new Error(errorData.message || 'ایمیل یا رمز عبور معتبر نیست')
             };
             const data = await res.json();
-
+      
             const token = data.data.accessToken;
             const userRes = await fetch(`${API_URL}profile`,{
                 headers:{Authorization : `Bearer ${token}`}
@@ -265,6 +265,25 @@ export const useUpdateProfile = ()=>{
             const data = await res.json();
             updateUser(data.data.user)
             return data.data
+        }
+    })
+};
+
+export const useChangePassword = ()=>{
+    const user = useAuthStore((state)=>state.user)
+    return useMutation({
+        mutationFn: async ({currentPassword , newPassword}:{currentPassword:string , newPassword:string})=>{
+            const res = await fetch(`${API_URL}change-password/${user?.id}`,{
+                method:"PUT",
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({currentPassword , newPassword})
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'تغیر رمزعبور موفقیت آمیز نبود')
+            };
+            const data = await res.json();
+            return data
         }
     })
 }
