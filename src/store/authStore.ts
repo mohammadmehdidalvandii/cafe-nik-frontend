@@ -7,8 +7,14 @@ interface UserProps{
     email:string,
     roles:string,
     login_method:string,
-    is_guest:string,
+    is_guest:boolean,
 }
+
+type UpdateUserFields = {
+  email?: string;
+  username?: string;
+  is_guest?: boolean;
+};
 
 interface AuthStateProps{
     token:string | null;
@@ -38,5 +44,18 @@ export const useAuthStore = create<AuthStateProps>((set)=>({
         localStorage.removeItem('user');
         set({token:null , user:null , isAuthenticated:false})
     },
-    updateUser:()=>{},
+updateUser: (data: UpdateUserFields) => {
+  set((state) => {
+    if (!state.user) return state;
+
+    const updatedUser = {
+      ...state.user,
+      ...data,
+    };
+
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+
+    return { user: updatedUser };
+  });
+},
 }))

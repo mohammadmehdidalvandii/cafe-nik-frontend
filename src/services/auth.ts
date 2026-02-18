@@ -244,3 +244,27 @@ export const getValidToken = async ()=>{
     token = await refreshToken();
     return token
 };
+
+// update user 
+export const useUpdateProfile = ()=>{
+    const user = useAuthStore((state)=>state.user);
+    const updateUser = useAuthStore((state)=>state.updateUser);
+
+    return useMutation({
+        mutationFn: async ({email , password , username}:{email:string , password:string , username:string})=>{
+            const res = await fetch(`${API_URL}update-profile/${user?.id}`,{
+                method:"PUT",
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({email , password  , username})
+            })
+            if(!res.ok){
+            const errorData = await res.json();
+            throw new Error(errorData.message || 'اپدیت کاربر با مشکل برخورد')
+            };
+
+            const data = await res.json();
+            updateUser(data.data.user)
+            return data.data
+        }
+    })
+}
