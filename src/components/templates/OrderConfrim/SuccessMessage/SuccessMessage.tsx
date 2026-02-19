@@ -1,9 +1,18 @@
 import { Button } from '@components/UI/Button'
+import { useGetAllOrders } from '@services/orders.services'
+import { showInfo } from '@utils/Toasts'
 import { Calendar, CheckCircle, Clock, Coffee, Copy, Home, MapPin, Phone } from 'lucide-react'
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink , useParams } from 'react-router-dom'
+import { OrdersProps } from 'types/orders'
 
 const SuccessMessage:React.FC = ()=>{
+    const {id} = useParams();
+   const {data:Orders} = useGetAllOrders();
+
+    const findOrders = Orders?.find((order:OrdersProps)=>order?.id === id);
+    console.log("f=>", findOrders)
+
   return (
     <section>
         <div className="container flex min-h-[70dvh] flex-col items-center justify-center py-10 px-8">
@@ -24,9 +33,14 @@ const SuccessMessage:React.FC = ()=>{
                     <p className="mb-2 text-sm text-muted-foreground text-center">کد تحویل سفارش</p>
                     <div className="mb-4 flex items-center justify-center gap-3">
                         <span className="font-mono text-4xl font-bold tracking-widest text-primary">
-                            308094
+                            {findOrders?.pickup_code}
                         </span>
-                        <Button variant='ghost' size='icon' aria-label='copy code'>
+                        <Button variant='ghost' size='icon' aria-label='copy code'
+                            onClick={()=>{
+                                navigator.clipboard.writeText(findOrders?.pickup_code)
+                                showInfo('کد تحویل کپی شد')
+                            }}
+                        >
                             <Copy className='h-5 w-5'/>
                         </Button>
                     </div>
@@ -44,7 +58,7 @@ const SuccessMessage:React.FC = ()=>{
                         <div className="flex items-start gap-3 rounded-lg bg-secondary/30 p-3">
                             <MapPin className='mt-0.5 h-5 w-5 text-copper'/>
                             <div>
-                                <p className="text-xl font-bold text-black">شعبه زاینده‌رود</p>
+                                <p className="text-xl font-bold text-black">شعبه {findOrders?.branch?.name}</p>
                                 <p className="text-lg text-muted-foreground">خیابان شیخ بهایی، نبش پل خواجو</p>
                             </div>
                         </div>
@@ -52,27 +66,27 @@ const SuccessMessage:React.FC = ()=>{
                             <Phone className='mt-0.5 h-5 w-5 text-copper'/>
                             <div>
                                 <p className="text-xl font-bold text-black">تماس با شعبه</p>
-                                <p className="text-lg text-muted-foreground">031-32112233</p>
+                                <p className="text-lg text-muted-foreground">{findOrders?.branch?.phone}</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-3 rounded-lg bg-secondary/30 p-3">
                             <Calendar className='mt-0.5 h-5 w-5 text-copper'/>
                             <div>
                                 <p className="text-xl font-bold text-black">تاریخ تحویل</p>
-                                <p className="text-lg text-muted-foreground">فردا</p>
+                                <p className="text-lg text-muted-foreground">{new Date(findOrders?.delivery_date).toLocaleDateString('fa-IR')}</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-3 rounded-lg bg-secondary/30 p-3">
                             <Clock className='mt-0.5 h-5 w-5 text-copper'/>
                             <div>
                                 <p className="text-xl font-bold text-black">ساعت تحویل</p>
-                                <p className="text-lg text-muted-foreground">11:30</p>
+                                <p className="text-lg text-muted-foreground">{findOrders?.delivery_time}</p>
                             </div>
                         </div>
                         <div className="mt-4 flex justify-between border-t border-border pt-4 text-lg font-bold">
                             <span className='text-black'>مبلغ کل</span>
                              <span className="text-copper">
-                                {(71500).toLocaleString('fa-IR')} تومان
+                                {Number(findOrders?.total_price).toLocaleString('fa-IR')} تومان
                             </span>
                         </div>
                     </div>
