@@ -1,6 +1,8 @@
+import { useAuthStore } from '@store/authStore'
 import React from 'react'
 
 const SettingProfile:React.FC = ()=>{
+    const user = useAuthStore((state)=>state.user)
   return (
     <section className="space-y-4">
         <div className="rounded-xl bg-white p-6 shadow-md">
@@ -9,9 +11,9 @@ const SettingProfile:React.FC = ()=>{
                     م
                 </div>
                 <div>
-                    <h3 className="text-xl font-bold">مدیر کل</h3>
-                    <p className="text-muted-foreground">09123336655</p>
-                    <p className="text-sm text-copper">مدیرکل</p>
+                    <h3 className="text-xl font-bold">{user?.username}</h3>
+                    <p className="text-muted-foreground">{user?.phone}</p>
+                    <p className="text-sm text-copper">{user?.roles}</p>
                 </div>
             </div>
         </div>
