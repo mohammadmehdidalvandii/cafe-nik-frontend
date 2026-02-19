@@ -20,7 +20,10 @@ const CustomerSettingSecurity:React.FC = ()=>{
 
         changePassword.mutate({currentPassword , newPassword},{
             onSuccess:()=>{
-                showSuccess('رمز عبور با موفقیت تغییر کرد')
+                showSuccess('رمز عبور با موفقیت تغییر کرد');
+                setCurrentPassword('')
+                setNewPassword('')
+                setConfirmPassword('')
             },
             onError:(error)=>{
                 showError(error.message)
