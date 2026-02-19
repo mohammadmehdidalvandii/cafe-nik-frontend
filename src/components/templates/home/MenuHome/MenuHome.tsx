@@ -19,7 +19,7 @@ const MenuHome:React.FC = ()=>{
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {Menus?.length === 0 && <p>هیچ محصولی در منو وجود نداره</p>}
                 {Menus?.map((menu:ProductMenusProps)=>(
-                    <ProductCard menu={menu}/>
+                    <ProductCard menu={menu} key={menu.id}/>
                 ))}
 
             </div>

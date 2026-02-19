@@ -16,7 +16,9 @@ const BranchesPreview:React.FC = ()=>{
             </div>
             <div className="flex flex-wrap justify-center gap-3">
                 {Branches?.map((branch:any)=>(
-                <span className="rounded-full bg-primary px-6 py-2 text-sm font-medium font-sansMedium text-primary-foreground">
+                <span className="rounded-full bg-primary px-6 py-2 text-sm font-medium font-sansMedium text-primary-foreground"
+                key={branch.id}
+                >
                     {branch.city.name}
                 </span>
                 ))}
