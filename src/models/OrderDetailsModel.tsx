@@ -25,7 +25,7 @@ const OrderDetailsModel: React.FC<OrderDetailsProps> = ({ order }) => {
       </DialogTrigger>
       <DialogContent className="max-w-2xl">
         <DialogHeader className="flex items-center justify-end">
-          <DialogTitle>جزئیات سفارش : ORD-1765180716365</DialogTitle>
+          <DialogTitle>جزئیات سفارش : ORD-{order.id}</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
@@ -72,11 +72,11 @@ const OrderDetailsModel: React.FC<OrderDetailsProps> = ({ order }) => {
                   <div>
                     <p className="font-bold block">{od.menu.name}</p>
                     <Badge variant="secondary" className="mt-1">
-                      {od.size ? od.size : "-"}
+                      {od.size === 'large'? 'بزرگ':od.size === 'medium'?'متوسط':od.size === 'small'? 'کوچیک':''}
                     </Badge>
-                    <p className="mt-1 text-sm text-muted-foreground">
+                    {/* <p className="mt-1 text-sm text-muted-foreground">
                       یاداداشت : خالی خالی خالی{" "}
-                    </p>
+                    </p> */}
                   </div>
                   <div className="text-left">
                     <p className="font-bold font-sansBold">
