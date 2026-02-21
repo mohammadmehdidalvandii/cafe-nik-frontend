@@ -26,7 +26,7 @@ const BranchSettingInfo:React.FC = ()=>{
                 <div>
                     <Label>شهر</Label>
                     <Input
-                        value={Branch.city?.name}
+                        value={Branch?.city?.name}
                         readOnly
                         className='mt-2'
                     />

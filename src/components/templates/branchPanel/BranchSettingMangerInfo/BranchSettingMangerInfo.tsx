@@ -1,10 +1,13 @@
 import { Button } from '@components/UI/Button'
 import { Input } from '@components/UI/Input'
 import { Label } from '@components/UI/Label'
+import { useGetBranchUserId } from '@services/branch.services'
 import { Phone } from 'lucide-react'
 import React from 'react'
 
 const BranchSettingMangerInfo:React.FC = ()=>{
+        const {data:Branch} = useGetBranchUserId();
+     
   return (
     <section className="space-y-6 mt-8">
         <div className="rounded-xl bg-white p-6 shadow-md">
@@ -17,20 +20,22 @@ const BranchSettingMangerInfo:React.FC = ()=>{
                     <div>
                         <Label>اطلاعات مدیر</Label>
                         <Input
-                            value='مدیر شعبه ونک'
+                            value={Branch?.user?.username}
                             className='mt-2'
+                            readOnly
                         />
                     </div>
                     <div>
                         <Label>شماره تماس</Label>
                         <Input
-                            value='09123335566'
+                            value={Branch?.user?.phone}
                             className='mt-1'
                             dir='ltr'
+                            readOnly
                         />
                     </div>
                 </div>
-                <Button type='submit' className='mt-4'>ذخیره تغییرات</Button>
+                {/* <Button type='submit' className='mt-4'>ذخیره تغییرات</Button> */}
             </form>
         </div>
     </section>
