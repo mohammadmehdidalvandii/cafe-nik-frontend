@@ -63,6 +63,24 @@ export const useGetAllBranches = ()=>{
         }
     })
 }
+// get branch info user id
+export const useGetBranchUserId = ()=>{
+    const user = useAuthStore((state)=>state.user);
+    return useQuery({
+        queryKey:['branch'],
+        queryFn: async ()=>{
+            const res = await fetch(`${API_URL}user/${user?.id}`,{
+                method:'GET'
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message||'لیست اطلاعات شعبه با خطا مواجه شد')
+            }
+            const data = await res.json();
+            return data.data
+        }
+    })
+}
 
 // created branch 
 export const useCreateBranch = ()=>{
