@@ -126,7 +126,7 @@ const EditProductModel:React.FC<productData> = ({product})=>{
           title:'آیا از حذف محصول اطمینان دارید ؟',
           text:'درصورت حذف محصول غیرقابل بازگشت هست',
           buttons:['نه','بله']
-        }).then((result)=>{
+        }).then((result:any)=>{
           if(result){
             deleteMenuProduct.mutate(menuID,{
               onSuccess:()=>{
@@ -253,9 +253,10 @@ const EditProductModel:React.FC<productData> = ({product})=>{
                 <Button variant="destructive" type='button' onClick={()=>form.id && handleDeleteMenu(form.id)}>حذف</Button>
                 <div className="flex gap-4">
                     <Button variant="outline" onClick={()=>(setShowModel(false))}>انصراف</Button>
-                    <Button variant="default" type='submit'>
+                    <Button disabled={updateProductMenu.isPending} variant="default" type='submit'>
                       <Save className="h-4 w-4 ml-2" />
-                      ویرایش
+                      {updateProductMenu.isPending ? "درحال ویرایش ..." : "ویرایش"}
+                      
                     </Button>
                 </div>
             </div>

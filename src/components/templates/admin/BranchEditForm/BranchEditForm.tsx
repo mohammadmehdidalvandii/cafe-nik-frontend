@@ -104,9 +104,11 @@ const BranchEditForm:React.FC<BranchEditProps> = ({branch})=>{
             </div>
         </div>
         <div className="flex gap-3 mt-4">
-            <Button variant='default' type='submit'>
+            <Button variant='default' type='submit' 
+            disabled={updateBranch.isPending}
+            >
                 <Check className='h-4 w-4 ml-2'/>
-                ذخیره تغییرات
+                {updateBranch.isPending ? "در حال ذخیره ..." : "ذخیره تغییرات"}
             </Button>
         </div>
     </form>

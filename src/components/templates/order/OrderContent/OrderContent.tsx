@@ -349,8 +349,10 @@ const OrderContent: React.FC = () => {
                   className="w-full"
                   size="lg"
                   onClick={handleOrderUser}
+                  disabled={createOrder.isPending}
                 >
-                  ثبت سفارش
+                  {createOrder.isPending ? "در حال ثبت سفارش" : "ثبت سفارش"}
+                  
                   <ArrowLeft className="mr-2 h-5 w-5" />
                 </Button>
               </div>

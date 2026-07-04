@@ -1,6 +1,7 @@
 import { Button } from '@components/UI/Button'
 import { Input } from '@components/UI/Input'
 import { Label } from '@components/UI/Label'
+import { showInfo } from '@utils/Toasts'
 import { User } from 'lucide-react'
 import React from 'react'
 
@@ -29,7 +30,7 @@ const SettingInformation:React.FC = ()=>{
                         dir='ltr'
                     />
                 </div>
-                <Button className='w-full mt-8'>ذخیره تغییرات</Button>
+                <Button className='w-full mt-8' onClick={()=>showInfo('در حال حاضر در دسترس نیست')}>ذخیره تغییرات</Button>
             </form>
         </div>
     </div>

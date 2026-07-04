@@ -67,7 +67,11 @@ const SettingSecurity: React.FC = () => {
               onChange={e=>setConfirmPassword(e.target.value)}
             />
           </div>
-          <Button className="w-full mt-8" type="submit">تغییر رمز عبور</Button>
+          <Button className="w-full mt-8" type="submit"
+            disabled={changePassword.isPending}
+          >
+            {changePassword.isPending ? "در حال تغییر ..." : "تغییر رمز عبور"}
+          </Button>
         </form>
       </div>
     </div>

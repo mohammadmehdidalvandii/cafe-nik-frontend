@@ -74,7 +74,11 @@ const CustomerSettingInfo:React.FC = ()=>{
                         />
                     </div>
                 </div>
-                <Button className='mt-4' type='submit'>تکمیل اطلاعات</Button>
+                <Button className='mt-4' type='submit' 
+                disabled={updateProfile.isPending}> 
+                {updateProfile.isPending ? "در حال به روزرسانی ..." : "تکمیل اطلاعات"}
+                
+                </Button>
             </form>
         </div>
     </div>

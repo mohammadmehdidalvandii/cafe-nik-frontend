@@ -92,9 +92,16 @@ const PickupCodeVerifyModel:React.FC<pickUpCodeProps> = ({order})=>{
                 <Button variant='destructive' onClick={()=>setShowModel(false)}>
                     انصراف
                 </Button>
-                <Button className="bg-green-600 hover:bg-green-700" disabled={pickupCode === ''}  onClick={handleSendCode}>
+                <Button
+                    disabled={pickupCode === '' || getPickUpCode.isPending}
+                className="bg-green-600 hover:bg-green-700"   onClick={handleSendCode}>
                     <CheckCircle className='ml-2 h-4 w-4'/>
-                    {pickupCode === '' ? 'ابتدا کد وارد کنید':'برسی و تحویل سفارش'}
+                      {getPickUpCode.isPending
+                          ? "در حال بررسی..."
+                          : pickupCode === ''
+                          ? 'ابتدا کد وارد کنید'
+                          : 'بررسی و تحویل سفارش'
+                    }
                 </Button>
             </DialogFooter>
         </DialogContent>

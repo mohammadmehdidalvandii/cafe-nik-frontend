@@ -68,7 +68,9 @@ const CustomerSettingSecurity:React.FC = ()=>{
                         />
                     </div>
                 </div>
-                <Button className='mt-4' type='submit'>تغییر رمزعبور</Button>
+                <Button className='mt-4' type='submit' disabled={changePassword.isPending}>
+                    {changePassword.isPending ? "در حال تغییر ..." : "تغییر رمزعبور"}
+                    </Button>
             </form>
         </div>
     </section>

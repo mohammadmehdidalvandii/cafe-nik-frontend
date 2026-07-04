@@ -64,8 +64,11 @@ const SignUpOTP: React.FC = () => {
                 />
               </div>
 
-              <Button type="submit" className="w-full">
-                ارسال شماره تلفن
+              <Button type="submit" className="w-full"
+                disabled={registerWithPhone.isPending}
+              >
+                {registerWithPhone.isPending ? "در حال ارسال ..." : " ارسال شماره تلفن"}
+               
               </Button>
             </>
           ) : (
@@ -83,8 +86,11 @@ const SignUpOTP: React.FC = () => {
                 />
               </div>
 
-              <Button type="submit" className="w-full">
-                ارسال کد
+              <Button type="submit" className="w-full"
+                disabled={registerPhoneCode.isPending}
+              >
+                {registerPhoneCode.isPending ? "درحال برسی کد ..." : " ارسال کد"}
+               
               </Button>
             </>
           )}

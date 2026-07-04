@@ -54,8 +54,8 @@ const SignInEmailUsername: React.FC = () => {
             />
           </div>
 
-          <Button type="submit" className="w-full">
-            وارد شوید
+          <Button type="submit" className="w-full" disabled={loginPassword.isPending}>
+            {loginPassword.isPending ? "در حال برسی ..." : " وارد شوید"}
           </Button>
         </form>
       )}

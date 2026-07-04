@@ -197,9 +197,9 @@ const CreateProductModel: React.FC = () => {
           </div>
           <div className="mt-4">
             <div className="flex gap-4">
-              <Button variant="default" type="submit">
+              <Button disabled={createMenuProduct.isPending} variant="default" type="submit">
                 <Plus className="h-4 w-4 ml-2" />
-                افزودن
+                {createMenuProduct.isPending ? 'درحال ثبت ...' : 'افزودن'}
               </Button>
               <Button variant="outline" type="button" onClick={()=>{setShowModel(false)}}>انصراف</Button>
             </div>
