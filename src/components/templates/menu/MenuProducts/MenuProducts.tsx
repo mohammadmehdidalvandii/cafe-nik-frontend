@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 import { ProductMenusProps } from 'types/menu'
 
 const  categories = [
-    {key:"Coffee" , name:" قهوه" ,icon:Coffee},
+    {key:"Coffee" , name:"قهوه" ,icon:Coffee},
     {key:"Tea" , name:"چای و دمنوش" ,icon:Leaf},
     {key:"Cold" , name:"نوشیدنی سرد" ,icon:Snowflake},
     {key:"Food" , name:"غذا" ,icon:UtensilsCrossed},
@@ -15,7 +15,7 @@ const  categories = [
 
 const MenuProducts:React.FC = ()=>{
     const {data:Menus} = getAllProductMenu();
-    const [activeCategory , setActiveCategory] = useState<string>(' قهوه')
+    const [activeCategory , setActiveCategory] = useState<string>('قهوه')
     const filteredMenus = Menus?.filter(
       (menu: ProductMenusProps) => menu.categoryProduct.name === activeCategory
     );
