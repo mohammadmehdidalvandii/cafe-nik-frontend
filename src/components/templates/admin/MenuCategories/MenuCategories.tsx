@@ -7,7 +7,7 @@ const MenuCategories:React.FC = ()=>{
     const {data} = getAllProductMenu();
 
 
-    const coffeeCount =  data?.filter((item:any) => item.categoryProduct.name === 'قهوه ').length|| 0
+    const coffeeCount =  data?.filter((item:any) => item.categoryProduct.name === 'قهوه').length|| 0
     const teaCount =  data?.filter((item:any) => item.categoryProduct.name === 'چای و دمنوش').length|| 0
     const coldDrinkCount =  data?.filter((item:any) => item.categoryProduct.name === 'نوشیدنی سرد').length|| 0
     const foodCount =  data?.filter((item:any) => item.categoryProduct.name === 'غذا').length|| 0
