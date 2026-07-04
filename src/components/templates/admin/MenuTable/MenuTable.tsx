@@ -47,7 +47,7 @@ const MenuTable:React.FC<productData> = ({products = []})=>{
                 </SelectTrigger>
                 <SelectContent>
                     <SelectItem value='all'>همه دسته بندی</SelectItem>
-                    <SelectItem value='قهوه '>قهوه</SelectItem>
+                    <SelectItem value='قهوه'>قهوه</SelectItem>
                     <SelectItem value='چای و دمنوش'>چای و دمنوش</SelectItem>
                     <SelectItem value='نوشیدنی سرد'>نوشیدنی سرد</SelectItem>
                     <SelectItem value='غذا'>غذا</SelectItem>
