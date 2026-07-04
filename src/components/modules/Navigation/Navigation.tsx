@@ -49,13 +49,13 @@ const Navigation:React.FC  =()=>{
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
                     <Coffee className='h-5 w-5 text-primary-foreground'/>
                 </div>
-                <span className="text-2xl font-sansBold font-bold text-secondary-foreground">کافی شاپ نیک</span>
+                <span className="text-sm md:text-2xl font-sansBold font-bold text-secondary-foreground">کافی شاپ نیک</span>
             </NavLink>
             {/* Desktop */}
             <div className="md:flex items-center gap-4">
-                <NavLink to='/Menu' className='text-muted-foreground text-lg font-sansBold font-bold transition-colors hover:text-secondary-foreground'>منو</NavLink>
-                <NavLink to='/Branches' className='text-muted-foreground text-lg font-sansBold font-bold transition-colors hover:text-secondary-foreground'>شعب</NavLink>
-                <NavLink to='/Orders' className='text-muted-foreground text-lg font-sansBold font-bold transition-colors hover:text-secondary-foreground'>ثبت سفارش</NavLink>
+                <NavLink to='/Menu' className='hidden md:block text-muted-foreground text-lg font-sansBold font-bold transition-colors hover:text-secondary-foreground'>منو</NavLink>
+                <NavLink to='/Branches' className='hidden md:block text-muted-foreground text-lg font-sansBold font-bold transition-colors hover:text-secondary-foreground'>شعب</NavLink>
+                {/* <NavLink to='/Orders' className='text-muted-foreground text-lg font-sansBold font-bold transition-colors hover:text-secondary-foreground'>ثبت سفارش</NavLink> */}
             </div>
 
             <div className="flex items-center gap-3">
@@ -73,7 +73,9 @@ const Navigation:React.FC  =()=>{
                      <NavLink to={`${ROLE_CONFIG[user.roles].path}`}>
                     <Button variant='outline' size='sm'>
                     <User className='ml-2 h-4 w-4'/>
+                    <span className="hidden md:block">
                         {user?.username}
+                    </span>
                     </Button>
                     </NavLink>
             
