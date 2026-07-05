@@ -335,7 +335,7 @@ const OrderContent: React.FC = () => {
                     <Label>ساعت</Label>
                     <Select value={selectTime} onValueChange={setSelectTime}>
                       <SelectTrigger className="mt-1">
-                        <SelectValue placeholder="انتخاب تاریخ" />
+                        <SelectValue placeholder="انتخاب ساعت" />
                       </SelectTrigger>
                       <SelectContent>
                         {times.map((time) => (
