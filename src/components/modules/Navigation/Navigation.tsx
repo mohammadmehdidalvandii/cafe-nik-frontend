@@ -70,7 +70,7 @@ const Navigation:React.FC  =()=>{
             {/* isAuthenticated */}
             {isAuthenticated && user ? (
             <div className="md:flex items-center gap-2 ">
-                     <NavLink to={`${ROLE_CONFIG[user.roles].path}`}>
+                     <NavLink to={`${ROLE_CONFIG[user.roles].path}`}  target='_blank'>
                     <Button variant='outline' size='sm'>
                     <User className='ml-2 h-4 w-4'/>
                     <span className="hidden md:block">
