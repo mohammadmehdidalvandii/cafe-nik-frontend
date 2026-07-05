@@ -46,7 +46,7 @@ const CustomersTable: React.FC = () => {
           />
         </div>
         <div className="text-sm text-muted-foreground">
-          {(120).toLocaleString("fa-IR")} مشتری
+          {( data ? data.length : 0).toLocaleString("fa-IR")} مشتری
         </div>
       </div>
       {/* Table */}
