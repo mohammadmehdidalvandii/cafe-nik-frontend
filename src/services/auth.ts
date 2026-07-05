@@ -130,11 +130,33 @@ export const useLoginWithPassword = ()=>{
         }
     })
 }
+// register manager
+export const useRegisterManager = ()=>{
+    const authUser = useAuthStore()
+    return useMutation({
+        mutationFn: async(values:registerValues)=>{
+            const res = await  fetch(`${API_URL}register-manager`,{
+                method:'POST',
+                body:JSON.stringify(values),
+                headers:{
+                    'Content-Type':'application/json',
+                    Authorization : `Bearer ${authUser.token}`
+                }
+            });
+                if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'ثبت نام  ناموفق بود دوباره تلاش کنید')
+            }
+
+            return res.json();
+        }
+    })
+}
+
 // login with password phone
 export  const useLoginWithPhone = ()=>{
     return useMutation({
         mutationFn: async (values:LoginPhone)=>{
-            console.log("va =>", values)
             const res = await fetch(`${API_URL}sendCode`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
