@@ -45,22 +45,40 @@ export const generatePersianDates  = (days: number = 7)=>{
   return dates
 };
 
-export const generateTimeSlots = (startHour = 8 , endHour = 22 , intervalMinutes = 30) =>{
-  const times = [];
-  for(let hour = startHour; hour <= endHour ; hour++){
-    for(let minute = 0 ; minute < 60 ; minute += intervalMinutes){
-      if(hour === endHour && minute > 0)break;
-      const formatted = `${hour
-        .toString()
-        .padStart(2, "0")}:${minute
+export const generateTimeSlots = (
+  startHour = 8,
+  endHour = 22,
+  intervalMinutes = 30
+) => {
+  const times: { value: string; label: string }[] = [];
+
+  const now = new Date();
+
+  for (let hour = startHour; hour <= endHour; hour++) {
+    for (let minute = 0; minute < 60; minute += intervalMinutes) {
+      if (hour === endHour && minute > 0) break;
+
+      const slotDate = new Date();
+      slotDate.setHours(hour, minute, 0, 0);
+
+      const isPastTime =
+        slotDate.getFullYear() === now.getFullYear() &&
+        slotDate.getMonth() === now.getMonth() &&
+        slotDate.getDate() === now.getDate() &&
+        slotDate <= now;
+
+      if (isPastTime) continue;
+
+      const formatted = `${hour.toString().padStart(2, "0")}:${minute
         .toString()
         .padStart(2, "0")}`;
 
-        times.push({
-          value:formatted,
-          label:formatted,
-        })
+      times.push({
+        value: formatted,
+        label: formatted,
+      });
     }
-  };
-  return times
-}
+  }
+
+  return times;
+};
