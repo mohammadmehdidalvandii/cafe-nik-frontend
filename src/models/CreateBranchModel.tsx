@@ -18,7 +18,6 @@ import {
   SelectItem
 } from "@components/UI/Select";
 import { useCreateBranch, UseGetAllCities, UseGetAllUsersBranch } from "@services/branch.services";
-import { useAuthStore } from "@store/authStore";
 import { BranchCreateProps } from "types/branch";
 import { showError, showSuccess } from "@utils/Toasts";
 
@@ -157,9 +156,10 @@ const CreateBranchModel: React.FC = () => {
             </div>
             <div className="flex items-center gap-4 mt-4">
                 <Button variant='destructive' type="button" onClick={()=>setShowModel(false)}>انصراف</Button>
-                <Button type="submit">
+                <Button type="submit" disabled={createBranch.isPending}>
                     <Plus className="h-4 w-4 ml-1"/>
-                    ایجاد شعبه
+                    {createBranch.isPending ? " ثبت شعبه ..." : "ایجاد شعبه"}
+                    
                 </Button>
             </div>
           </form>
