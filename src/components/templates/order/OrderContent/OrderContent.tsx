@@ -27,6 +27,7 @@ import {
 import React, { useMemo, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { BranchesProps } from "types/branch";
+import Swal from "sweetalert2";
 
 const OrderContent: React.FC = () => {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ const OrderContent: React.FC = () => {
   const [phone, setPhone] = useState("");
   const [selectDate, setSelectDate] = useState("");
   const [selectTime, setSelectTime] = useState("");
+
 
   const filteredBranch = useMemo(() => {
     return Branches?.filter(
@@ -81,7 +83,7 @@ const OrderContent: React.FC = () => {
       },
       {
         onSuccess: (data) => {
-          showSuccess("سفارش با موفقیت ثبت شد");
+          Swal.close();
           navigate(`/OrderConfirm/${data.data.id}`);
           clearCart();
         },
@@ -92,18 +94,72 @@ const OrderContent: React.FC = () => {
     );
   };
 
+  const isLoading = registerGuest.isPending || createOrder.isPending;
+
+  const loadingText = registerGuest.isPending 
+  ? 'درحال ثبت نام کاربر مهمان ...' 
+  : createOrder.isPending
+  ? 'در حال ثبت سفارش ...'
+  : "ثبت سفارش";
+
+
+
   const handleOrderUser = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (!isAuthenticated) {
+      if (!username.trim()) {
+      showError("لطفا نام و نام خانوادگی را وارد کنید");
+      return;
+    }
+    if (!phone.trim()) {
+      showError("لطفا شماره تماس را وارد کنید");
+      return;
+    }
+    if (!/^09\d{9}$/.test(phone)) {
+      showError("شماره تماس معتبر نیست");
+      return;
+    }
+      if (cityID === "all") {
+    showError("لطفا شهر را انتخاب کنید");
+    return;
+  }
+  if (branchId === "all") {
+    showError("لطفا شعبه را انتخاب کنید");
+    return;
+  }
+  if (!selectDate) {
+    showError("لطفا تاریخ تحویل را انتخاب کنید");
+    return;
+  }
+  if (!selectTime) {
+    showError("لطفا ساعت تحویل را انتخاب کنید");
+    return;
+  }
+    Swal.fire({
+  title: "لطفاً صبر کنید",
+  text: "در حال ایجاد حساب کاربری...",
+  allowOutsideClick: false,
+  allowEscapeKey: false,
+  didOpen: () => {
+    Swal.showLoading();
+  },
+});
       registerGuest.mutate(
         { username, phone },
         {
           onSuccess: () => {
-            showSuccess("ثبت نام شما موفقیت آمیز بود");
+            Swal.update({
+              title: "در حال ثبت سفارش",
+              text: "لطفاً چند لحظه صبر کنید...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                  showConfirmButton: false,
+            });
             setTimeout(() => {
               const currentUser = useAuthStore.getState().user;
 
               if (!currentUser?.id) {
+               Swal.close();
                 showError("کاربر یافت نشد");
                 return;
               }
@@ -111,7 +167,12 @@ const OrderContent: React.FC = () => {
               submitOrder(currentUser.id);
             }, 2000);
           },
-          onError: (error) => {
+          onError: (error) => { 
+            Swal.close();
+            if(error.message === 'کاربر از قبل وجود دارد'){
+              showInfo('لطفا اول وارد شوید')
+              navigate('/Auth/Login')
+            }
             showError(error.message);
           },
         },
@@ -349,10 +410,9 @@ const OrderContent: React.FC = () => {
                   className="w-full"
                   size="lg"
                   onClick={handleOrderUser}
-                  disabled={createOrder.isPending}
+                  disabled={isLoading}
                 >
-                  {createOrder.isPending ? "در حال ثبت سفارش" : "ثبت سفارش"}
-                  
+                  {loadingText}
                   <ArrowLeft className="mr-2 h-5 w-5" />
                 </Button>
               </div>
