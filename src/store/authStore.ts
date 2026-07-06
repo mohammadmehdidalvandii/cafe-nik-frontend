@@ -1,11 +1,16 @@
 import {create} from 'zustand';
 
+export type Role =
+  | "مدیریت"
+  | "مدیر شعبه"
+  | "مشتری";
+
 interface UserProps{
     id:string,
     username:string,
     phone:string,
     email:string,
-    roles:string,
+    roles:Role,
     login_method:string,
     is_guest:boolean,
 }
