@@ -2,7 +2,7 @@ import { useAuthStore } from "@store/authStore";
 import { useMutation } from "@tanstack/react-query";
 import { showSuccess } from "@utils/Toasts";
 import { LoginPhone , LoginPhoneCode , LoginWithPassword, RegisterPhoneCodePayload, RegisterPhonePayload, registerValues } from "types/auth";
-const API_URL = 'http://localhost:3000/api/auth/';
+const API_URL = 'https://cafenik-api.chbkn.run/api/auth/';
 
 // register full
 export const useRegisterMutation = ()=>{

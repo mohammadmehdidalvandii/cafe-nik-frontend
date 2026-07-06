@@ -1,7 +1,7 @@
 import { useAuthStore } from '@store/authStore';
 import {useMutation , useQuery, useQueryClient} from '@tanstack/react-query';
 import { BranchCreateProps, BranchesProps } from 'types/branch';
-const API_URL = 'http://localhost:3000/api/branch/';
+const API_URL = 'https://cafenik-api.chbkn.run/api/branch/';
 
 
 // get users roles manger Branch
@@ -10,7 +10,7 @@ export const UseGetAllUsersBranch = ()=>{
     return useQuery ({
         queryKey:['user-branch'],
         queryFn: async ()=>{
-            const res = await fetch('http://localhost:3000/api/auth/users-branch',{
+            const res = await fetch('https://cafenik-api.chbkn.run/api/auth/users-branch',{
                 method:'GET',
                 headers:{Authorization:`Bearer ${token}`}
             });
@@ -29,7 +29,7 @@ export const UseGetAllCities = ()=>{
     return useQuery ({
         queryKey:['cities'],
         queryFn: async ()=>{
-            const res = await fetch('http://localhost:3000/api/city',{
+            const res = await fetch('https://cafenik-api.chbkn.run/api/city',{
                 method:'GET',
             });
             if(!res.ok){
