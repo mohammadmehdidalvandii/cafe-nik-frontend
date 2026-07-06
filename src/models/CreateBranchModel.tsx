@@ -55,7 +55,7 @@ const CreateBranchModel: React.FC = () => {
               });
               setShowModel(false)
             },
-            onError:(error)=>{
+            onError:(error)=>{ 
               showError(error.message || 'ایجاد شعبه با خطا مواجه شد')
             }
         })

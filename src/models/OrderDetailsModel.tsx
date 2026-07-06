@@ -25,7 +25,7 @@ const OrderDetailsModel: React.FC<OrderDetailsProps> = ({ order }) => {
       </DialogTrigger>
       <DialogContent className="max-w-2xl">
         <DialogHeader className="flex items-center justify-end">
-          <DialogTitle>جزئیات سفارش : ORD-{order.id}</DialogTitle>
+          <DialogTitle className="text-[8px]">جزئیات سفارش : ORD-{order.id}</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
