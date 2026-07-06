@@ -1,7 +1,7 @@
 import ProductCard from '@components/modules/ProductCard/ProductCard'
 import { getAllProductMenu } from '@services/menu.services'
 import { cn } from '@utils/cn'
-import { Cake, Coffee, Icon, Leaf, Snowflake, UtensilsCrossed } from 'lucide-react'
+import { Cake, Coffee, Leaf, Snowflake, UtensilsCrossed } from 'lucide-react'
 import React, { useState } from 'react'
 import { ProductMenusProps } from 'types/menu'
 

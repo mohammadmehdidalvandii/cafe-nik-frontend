@@ -1,4 +1,3 @@
-import { Button } from "@components/UI/Button";
 import { Input } from "@components/UI/Input";
 import {
   Table,
@@ -9,7 +8,7 @@ import {
   TableRow,
 } from "@components/UI/Table";
 import { useGetAllCustomer } from "@services/customers.services";
-import { Eye, Search, User } from "lucide-react";
+import { Search, User } from "lucide-react";
 import React, { lazy, useMemo, useState } from "react";
 import { CustomerProps } from "types/customer";
 const CustomerDetailsModel = lazy(() => import("@models/CustomerDetailsModel"));

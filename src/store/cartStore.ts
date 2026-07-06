@@ -15,7 +15,7 @@ interface CartStateProps{
 
 export const useCartStore = create<CartStateProps>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       cart: [],
 
       addToCart: (menu) => set((state)=>{

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {Coffee, ShoppingCart, User} from 'lucide-react';
 import { Button } from '@components/UI/Button';

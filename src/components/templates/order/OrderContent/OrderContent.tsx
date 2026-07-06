@@ -14,7 +14,7 @@ import { useCreateOrder } from "@services/orders.services";
 import { useAuthStore } from "@store/authStore";
 import { useCartStore } from "@store/cartStore";
 import { generatePersianDates, generateTimeSlots } from "@utils/HelperDate";
-import { showError, showInfo, showSuccess } from "@utils/Toasts";
+import { showError, showInfo } from "@utils/Toasts";
 import {
   ArrowLeft,
   Calendar,

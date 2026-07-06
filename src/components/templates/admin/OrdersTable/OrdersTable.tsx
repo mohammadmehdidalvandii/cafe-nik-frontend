@@ -1,13 +1,12 @@
 import { Badge } from '@components/UI/Badge';
-import { Button } from '@components/UI/Button';
 import { Input } from '@components/UI/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/UI/Select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@components/UI/Table';
 import { useGetAllBranches } from '@services/branch.services';
 import { useGetAllOrders } from '@services/orders.services';
-import { Eye, Filter, Package, Search } from 'lucide-react'
+import {  Filter, Search } from 'lucide-react'
 import React, { lazy, useMemo, useState } from 'react'
-import { BranchesProps, BranchOrderProps } from 'types/branch';
+import { BranchesProps } from 'types/branch';
 import { OrdersProps } from 'types/orders';
 const OrderDetailsModel = lazy(()=>import('@models/OrderDetailsModel'));
 const PickupCodeVerifyModel = lazy(()=>import('@models/PickupCodeVerifyModel'));

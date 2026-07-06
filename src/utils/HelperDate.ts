@@ -1,4 +1,3 @@
-import { data } from "react-router-dom";
 
 export const isToday = (date: Date) => {
   const today = new Date();

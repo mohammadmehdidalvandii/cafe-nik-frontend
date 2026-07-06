@@ -19,7 +19,7 @@ const SignUpFull: React.FC = () => {
       }}
       onSubmit={(values:registerValues) => {
         registerMutation.mutate(values , {
-            onSuccess:(data)=>{
+            onSuccess:()=>{
                 showSuccess('ثبت نام با موفقیت انجام شد . لطفا وارد شوید!')
                 values.username = "",
                 values.email = "",

@@ -1,7 +1,6 @@
 import { useLogoutMutation } from "@services/auth";
 import { useAuthStore } from "@store/authStore";
 import { cn } from "@utils/cn";
-import { showSuccess } from "@utils/Toasts";
 import {
   Coffee,
   LayoutDashboard,

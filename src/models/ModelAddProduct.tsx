@@ -1,7 +1,6 @@
 import { Button } from '@components/UI/Button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@components/UI/Dialog';
 import { Label } from '@components/UI/Label';
-import { Textarea } from '@components/UI/Textarea';
 import { useCartStore } from '@store/cartStore';
 import { cn } from '@utils/cn';
 import { showSuccess } from '@utils/Toasts';

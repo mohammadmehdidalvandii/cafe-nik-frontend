@@ -4,7 +4,7 @@ import { Label } from '@components/UI/Label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/UI/Select'
 import { UseGetAllCities, useUpdateBranch } from '@services/branch.services'
 import { showError, showSuccess } from '@utils/Toasts'
-import { Check, Home, X } from 'lucide-react'
+import { Check, Home } from 'lucide-react'
 import React, { useState } from 'react'
 import { BranchesProps } from 'types/branch'
 

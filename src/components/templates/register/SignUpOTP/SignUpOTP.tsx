@@ -22,7 +22,7 @@ const SignUpOTP: React.FC = () => {
       onSubmit={(values, { setFieldValue }) => {
         if (!values.sentCode) {
           registerWithPhone.mutate({phone:values.phone} ,{
-          onSuccess:(data)=>{
+          onSuccess:()=>{
             showSuccess('کد به شماره تلفن  شما ارسال شد ')
             setFieldValue("sentCode", true);
           },
@@ -35,7 +35,7 @@ const SignUpOTP: React.FC = () => {
             phone:values.phone,
             code:values.code
           },{
-            onSuccess:(data)=>{
+            onSuccess:()=>{
               showSuccess('ثبت نام شما موفقیت آمیزبود')
               navigate('/')
             },

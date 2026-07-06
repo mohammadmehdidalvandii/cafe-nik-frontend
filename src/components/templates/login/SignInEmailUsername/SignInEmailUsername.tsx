@@ -16,7 +16,7 @@ const SignInEmailUsername: React.FC = () => {
       initialValues={{ email: '', password: '' }}
       onSubmit={(values:LoginWithPassword) => {
         loginPassword.mutate(values, {
-            onSuccess:(data)=>{
+            onSuccess:()=>{
                 showSuccess('ورود شما موفقیت آمیز بود');
                 navigate('/')
             },
