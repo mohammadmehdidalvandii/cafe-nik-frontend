@@ -1,5 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
-const API_URL = 'https://cafenik-api.chbkn.run/api/auth/'
+const API_URL = 'https://cafenik-api.chbkn.dev/api/auth/'
 
 // get all customers
 export const useGetAllCustomer = ()=>{

@@ -1,6 +1,6 @@
 import {useMutation , useQuery, useQueryClient} from '@tanstack/react-query';
 import { ProductFormProps } from 'types/menu';
-const API_URL = 'https://cafenik-api.chbkn.run/api/menu/'
+const API_URL = 'https://cafenik-api.chbkn.dev/api/menu/'
 
 // Get All Menu
 export const getAllProductMenu = ()=>{

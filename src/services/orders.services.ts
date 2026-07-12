@@ -1,7 +1,7 @@
 import { useAuthStore } from '@store/authStore';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import { OrderCreateProps } from 'types/orders';
-const API_URL ='https://cafenik-api.chbkn.run/api/order/';
+const API_URL ='https://cafenik-api.chbkn.dev/api/order/';
 
 // Get All orders
 export const useGetAllOrders = ()=>{
