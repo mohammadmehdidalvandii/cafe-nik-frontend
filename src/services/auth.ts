@@ -1,15 +1,16 @@
+import { API_URL } from './api';
 import { useAuthStore } from "@store/authStore";
 import { useMutation } from "@tanstack/react-query";
 import { showSuccess } from "@utils/Toasts";
 import { LoginPhone , LoginPhoneCode , LoginWithPassword, RegisterPhoneCodePayload, RegisterPhonePayload, registerValues } from "types/auth";
-const API_URL = 'https://cafenik-api.chbkn.dev/api/auth/';
+const AUTH_API = `${API_URL}/auth/`;
 
 // register full
 export const useRegisterMutation = ()=>{
     return useMutation({
         mutationFn: async(values:registerValues)=>{
             console.log("values =>", values)
-            const res = await fetch(`${API_URL}register`,{
+            const res = await fetch(`${AUTH_API}register`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify(values),
@@ -28,7 +29,7 @@ export const useRegisterGuest = ()=>{
         const authStore = useAuthStore();
     return useMutation({
         mutationFn: async ({username , phone}:{username:string , phone:string})=>{
-            const res = await fetch(`${API_URL}guest`,{
+            const res = await fetch(`${AUTH_API}guest`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify({username , phone})
@@ -40,7 +41,7 @@ export const useRegisterGuest = ()=>{
             const data =  await res.json();
         
             const token = data.data;
-            const userRes = await fetch(`${API_URL}profile`,{
+            const userRes = await fetch(`${AUTH_API}profile`,{
                 headers:{Authorization : `Bearer ${token}`}
             })
             const user = await userRes.json();
@@ -55,7 +56,7 @@ export const useRegisterGuest = ()=>{
 export const useRegisterWithPhone = ()=>{
     return useMutation({
         mutationFn: async (values:RegisterPhonePayload)=>{
-            const res = await fetch(`${API_URL}registerPhone`,{
+            const res = await fetch(`${AUTH_API}registerPhone`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify(values)
@@ -76,7 +77,7 @@ export const useRegisterPhoneCode = ()=>{
     const authStore = useAuthStore();
     return useMutation({
         mutationFn: async (values:RegisterPhoneCodePayload)=>{
-            const res = await  fetch(`${API_URL}register-code`,{
+            const res = await  fetch(`${AUTH_API}register-code`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify(values)
@@ -88,7 +89,7 @@ export const useRegisterPhoneCode = ()=>{
             const data = await res.json();
 
             const token = data.data[0];
-            const userRes = await fetch(`${API_URL}profile`,{
+            const userRes = await fetch(`${AUTH_API}profile`,{
                 headers:{Authorization : `Bearer ${token}`}
             })
             const user = await userRes.json();
@@ -104,7 +105,7 @@ export const useLoginWithPassword = ()=>{
     const authStore = useAuthStore();
     return useMutation({
         mutationFn: async (values:LoginWithPassword)=>{
-            const res = await fetch(`${API_URL}loginPassword`,{
+            const res = await fetch(`${AUTH_API}loginPassword`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 credentials:'include',
@@ -118,7 +119,7 @@ export const useLoginWithPassword = ()=>{
             const data = await res.json();
       
             const token = data.data.accessToken;
-            const userRes = await fetch(`${API_URL}profile`,{
+            const userRes = await fetch(`${AUTH_API}profile`,{
                 headers:{Authorization : `Bearer ${token}`}
             })
 
@@ -135,7 +136,7 @@ export const useRegisterManager = ()=>{
     const authUser = useAuthStore()
     return useMutation({
         mutationFn: async(values:registerValues)=>{
-            const res = await  fetch(`${API_URL}register-manager`,{
+            const res = await  fetch(`${AUTH_API}register-manager`,{
                 method:'POST',
                 body:JSON.stringify(values),
                 headers:{
@@ -157,7 +158,7 @@ export const useRegisterManager = ()=>{
 export  const useLoginWithPhone = ()=>{
     return useMutation({
         mutationFn: async (values:LoginPhone)=>{
-            const res = await fetch(`${API_URL}sendCode`,{
+            const res = await fetch(`${AUTH_API}sendCode`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify(values),
@@ -175,7 +176,7 @@ export const useLoginWithPhoneCode = ()=>{
     const authStore = useAuthStore();
     return useMutation({
         mutationFn: async (values:LoginPhoneCode)=>{
-            const res = await fetch(`${API_URL}verify-code`,{
+            const res = await fetch(`${AUTH_API}verify-code`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 credentials:'include',
@@ -189,7 +190,7 @@ export const useLoginWithPhoneCode = ()=>{
             const data = await res.json();
 
             const token = data.data.accessToken;
-            const userRes = await fetch(`${API_URL}profile`,{
+            const userRes = await fetch(`${AUTH_API}profile`,{
                 headers:{Authorization : `Bearer ${token}`}
             })
 
@@ -208,7 +209,7 @@ export const useLogoutMutation = ()=>{
 
     return useMutation({
         mutationFn:async()=>{
-            const res = await fetch(`${API_URL}logout`,{
+            const res = await fetch(`${AUTH_API}logout`,{
                 method:'POST',
                 credentials:'include',
             });
@@ -226,7 +227,7 @@ export const useLogoutMutation = ()=>{
 // Refresh-Token
 export const refreshToken = async ()=>{
     const {logout , login} = useAuthStore.getState()
-    const res = await fetch(`${API_URL}refreshToken`,{
+    const res = await fetch(`${AUTH_API}refreshToken`,{
         method:'POST',
         credentials:'include',
     });
@@ -240,7 +241,7 @@ export const refreshToken = async ()=>{
     localStorage.setItem("token", token)
     localStorage.setItem("accessTokenExpiry",(Date.now() + 15 * 60 * 1000).toString());
 
-    const userRes = await fetch(`${API_URL}profile`,{
+    const userRes = await fetch(`${AUTH_API}profile`,{
         headers:{Authorization:`Bearer ${token}`}
     });
 
@@ -274,7 +275,7 @@ export const useUpdateProfile = ()=>{
 
     return useMutation({
         mutationFn: async ({email , password , username}:{email:string , password:string , username:string})=>{
-            const res = await fetch(`${API_URL}update-profile/${user?.id}`,{
+            const res = await fetch(`${AUTH_API}update-profile/${user?.id}`,{
                 method:"PUT",
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify({email , password  , username})
@@ -295,7 +296,7 @@ export const useChangePassword = ()=>{
     const user = useAuthStore((state)=>state.user)
     return useMutation({
         mutationFn: async ({currentPassword , newPassword}:{currentPassword:string , newPassword:string})=>{
-            const res = await fetch(`${API_URL}change-password/${user?.id}`,{
+            const res = await fetch(`${AUTH_API}change-password/${user?.id}`,{
                 method:"PUT",
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify({currentPassword , newPassword})

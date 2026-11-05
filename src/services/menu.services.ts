@@ -1,13 +1,14 @@
+import { API_URL } from './api';
 import {useMutation , useQuery, useQueryClient} from '@tanstack/react-query';
 import { ProductFormProps } from 'types/menu';
-const API_URL = 'https://cafenik-api.chbkn.dev/api/menu/'
+const MENU_API = `${API_URL}/menu/`
 
 // Get All Menu
 export const getAllProductMenu = ()=>{
     return useQuery({
         queryKey:['menus'],
         queryFn: async ()=>{
-            const res = await fetch(`${API_URL}`,{
+            const res = await fetch(`${MENU_API}`,{
                 method:'GET',
             });
             if(!res.ok){
@@ -24,7 +25,7 @@ export const useCreateProductMenu = ()=>{
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (formData:ProductFormProps)=>{
-            const res = await fetch(`${API_URL}create`,{
+            const res = await fetch(`${MENU_API}create`,{
                 method:"POST",
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify(formData)
@@ -48,7 +49,7 @@ export const useDeleteMenuProduct = ()=>{
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn:async (id:string)=>{
-            const res = await fetch(`${API_URL}delete/${id}`,{
+            const res = await fetch(`${MENU_API}delete/${id}`,{
                 method:'DELETE',
             });
             if(!res.ok){
@@ -69,7 +70,7 @@ export const useUpdateProductMenu = ()=>{
         const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (form:Partial<ProductFormProps>)=>{
-            const res = await fetch(`${API_URL}update/${form.id}`,{
+            const res = await fetch(`${MENU_API}update/${form.id}`,{
                 method:"PUT",
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify(form),
@@ -93,7 +94,7 @@ export const getAllCategories = ()=>{
     return useQuery ({
         queryKey:['category'],
         queryFn: async ()=>{
-            const res = await fetch(`http://localhost:3000/api/category-product`,{
+            const res = await fetch(`${API_URL}/category-product`,{
                 method:'GET',
             });
             if(!res.ok){

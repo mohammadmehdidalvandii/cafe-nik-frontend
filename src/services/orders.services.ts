@@ -1,14 +1,15 @@
+import { API_URL } from './api';
 import { useAuthStore } from '@store/authStore';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import { OrderCreateProps } from 'types/orders';
-const API_URL ='https://cafenik-api.chbkn.dev/api/order/';
+const ORDER_API = `${API_URL}/order/`;
 
 // Get All orders
 export const useGetAllOrders = ()=>{
     return useQuery({
         queryKey:['orders'],
         queryFn: async ()=>{
-            const res = await fetch(`${API_URL}`,{
+            const res = await fetch(`${ORDER_API}`,{
                 method:'GET',
             });
             if(!res.ok){
@@ -25,7 +26,7 @@ export const useGetPickUpCode = ()=>{
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (pickupCode:string)=>{
-            const res = await fetch(`${API_URL}deliver`,{
+            const res = await fetch(`${ORDER_API}deliver`,{
                 method:"POST",
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify({pickup_code:pickupCode})
@@ -48,7 +49,7 @@ export const useGetOrderUser = ()=>{
     return useQuery({
         queryKey:['user_order'],
         queryFn: async ()=>{
-            const res  = await fetch(`${API_URL}user/${user?.id}`,{
+            const res  = await fetch(`${ORDER_API}user/${user?.id}`,{
                 method:"GET",
             });
             if(!res.ok){
@@ -66,7 +67,7 @@ export const useCreateOrder = ()=>{
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (value:OrderCreateProps)=>{
-            const res = await fetch(`${API_URL}create`,{
+            const res = await fetch(`${ORDER_API}create`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify(value)

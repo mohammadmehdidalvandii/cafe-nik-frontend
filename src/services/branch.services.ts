@@ -1,7 +1,8 @@
+import { API_URL } from './api';
 import { useAuthStore } from '@store/authStore';
 import {useMutation , useQuery, useQueryClient} from '@tanstack/react-query';
 import { BranchCreateProps, BranchesProps } from 'types/branch';
-const API_URL = 'https://cafenik-api.chbkn.dev/api/branch/';
+const BRANCH_API = `${API_URL}/branch/`;
 
 
 // get users roles manger Branch
@@ -10,7 +11,7 @@ export const UseGetAllUsersBranch = ()=>{
     return useQuery ({
         queryKey:['user-branch'],
         queryFn: async ()=>{
-            const res = await fetch('https://cafenik-api.chbkn.dev/api/auth/users-branch',{
+            const res = await fetch(`${API_URL}/auth/users-branch`,{
                 method:'GET',
                 headers:{Authorization:`Bearer ${token}`}
             });
@@ -29,7 +30,7 @@ export const UseGetAllCities = ()=>{
     return useQuery ({
         queryKey:['cities'],
         queryFn: async ()=>{
-            const res = await fetch('https://cafenik-api.chbkn.dev/api/city',{
+            const res = await fetch(`${API_URL}/city`,{
                 method:'GET',
             });
             if(!res.ok){
@@ -49,7 +50,7 @@ export const useGetAllBranches = ()=>{
     return useQuery({
         queryKey:['branches'],
         queryFn: async ()=>{
-            const res = await fetch(`${API_URL}`,{
+            const res = await fetch(`${BRANCH_API}`,{
                 method:'GET',
             });
             if(!res.ok){
@@ -69,7 +70,7 @@ export const useGetBranchUserId = ()=>{
     return useQuery({
         queryKey:['branch'],
         queryFn: async ()=>{
-            const res = await fetch(`${API_URL}user/${user?.id}`,{
+            const res = await fetch(`${BRANCH_API}user/${user?.id}`,{
                 method:'GET'
             });
             if(!res.ok){
@@ -87,7 +88,7 @@ export const useCreateBranch = ()=>{
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (formData:BranchCreateProps)=>{
-            const res = await fetch(`${API_URL}create`,{
+            const res = await fetch(`${BRANCH_API}create`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify(formData),
@@ -111,7 +112,7 @@ export const useUpdateBranch = ()=>{
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (formData:Partial<BranchesProps>)=>{
-            const res = await fetch(`${API_URL}update/${formData.id}`,{
+            const res = await fetch(`${BRANCH_API}update/${formData.id}`,{
                 method:"PUT",
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify(formData)
@@ -132,7 +133,7 @@ export const useGetOrdersBranch = ()=>{
     return useQuery({
         queryKey:['OrderBranch'],
         queryFn: async ()=>{
-            const res = await fetch(`${API_URL}user/${user?.id}`,{
+            const res = await fetch(`${BRANCH_API}user/${user?.id}`,{
                 method:"GET"
             });
             if(!res.ok){
